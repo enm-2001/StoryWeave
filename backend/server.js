@@ -8,7 +8,7 @@ app.use(cors())
 
 
 app.get('/',(req, res) => {
-    res.send("Home")
+    res.send("Home Page")
 })
 
 app.listen(5000, () => {
