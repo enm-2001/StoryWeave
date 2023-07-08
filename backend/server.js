@@ -6,10 +6,11 @@ const cors = require("cors")
 const app = express();
 app.use(cors())
 
+app.use(express.json())
 
-app.get('/',(req, res) => {
-    res.send("Home Page")
-})
+app.use('/api', require('./routes/users.js'));
+app.use('/api', require('./routes/home.js'));
+app.use('/api', require('./routes/story.js'));
 
 app.listen(5000, () => {
     console.log("Server running on port 5000....");
