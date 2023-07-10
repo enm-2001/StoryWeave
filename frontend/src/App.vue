@@ -1,5 +1,5 @@
 <template>
-<SignIn />
+    <SignIn />
 </template>
 
 <script>
@@ -24,7 +24,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;*/
-    background-image: url('/home/hritika/Downloads/StoryWeave/frontend/src/assets/background.jpg');
+    background-image: url('./assets/background.jpg');
     background-size: cover;
     font-family: Tahoma;
     font-size: 1.6rem;

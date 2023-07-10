@@ -65,7 +65,7 @@ export default {
   /*  display: flex;
    /* justify-content: center;
     align-items: center;*/
-   /* background-image: url('/home/hritika/storytelling/src/assets/background.jpg');
+   /* background-image: url('../assets/background.jpg');
     background-size: cover;
     background-position: center;
     height:100%;
