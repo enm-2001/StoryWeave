@@ -1,21 +1,34 @@
 <template>
-    <SignIn />
+
+<!-- <SignIn /> --> 
+<DashBoard/>
+<hr style="width:90%">
+<DashboardBottom/>
 </template>
 
 <script>
-import SignIn from './components/SignIn.vue'
+// import SignIn from './components/SignIn.vue'  
+
+import DashBoard from './components/DashBoard.vue'
+import DashboardBottom from './components/DashboardBottom.vue'
 
 export default {
     name: 'App',
     components: {
-        SignIn
+        // SignIn
+        DashBoard,
+       DashboardBottom,
     }
 }
 </script>
 
 <style>
-#app {
-    /*font-family: Avenir, Helvetica, Arial, sans-serif;
+.rwcomp{
+    display:flex;
+}
+ /*
+ #app {
+   font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
@@ -24,7 +37,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;*/
-    background-image: url('./assets/background.jpg');
+   /* background-image: url('/home/hritika/Downloads/StoryWeave/frontend/src/assets/background.jpg');
     background-size: cover;
     font-family: Tahoma;
     font-size: 1.6rem;
@@ -34,5 +47,7 @@ export default {
     align-items: center;
     margin: 0;
     padding: 0;
-}
+}*/
+
+
 </style>
