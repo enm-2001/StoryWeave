@@ -10,6 +10,7 @@
     <div class="previous-line">
      <p> In the land of Astraladia, where dreams danced on moonbeams and stars whispered ancient secrets, a humble farm boy gazed at the night sky with wide-eyed wonder. A shooting star streaked across the heavens. The boy heard a faint, ethereal voice beckoning him to follow the star.
     </p></div>
+    
  
 
   </div>
@@ -34,14 +35,16 @@ export default {
 
 
 .card {
-  width: 40%;
-  margin: 50px auto;
+  width: 43%;
+  margin: 20px auto;
   background-color: F9F5F6;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   font-family: Avenir, Helvetica;
     color: #2c3e50;
      border-radius: 15px;
+   /*  margin:12px; */
+     padding:0px;
 }
 
 
@@ -69,6 +72,7 @@ export default {
 .previous-line p{
     font-family: Belanosima;
       font-size: 17px;
+      padding:0px;
 }
 
 

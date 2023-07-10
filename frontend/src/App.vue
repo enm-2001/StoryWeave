@@ -1,30 +1,31 @@
 <template>
-<div>
+
 <!-- <SignIn /> --> 
 <DashBoard/>
-<ReadComponent/>
-<WriteComponent/>
-</div>
+<hr style="width:90%">
+<DashboardBottom/>
 </template>
 
 <script>
 // import SignIn from './components/SignIn.vue'  
-import ReadComponent from './components/ReadComponent.vue'
-import WriteComponent from './components/WriteComponent.vue'
+
 import DashBoard from './components/DashBoard.vue'
+import DashboardBottom from './components/DashboardBottom.vue'
 
 export default {
     name: 'App',
     components: {
         // SignIn
         DashBoard,
-        ReadComponent,
-        WriteComponent
+       DashboardBottom,
     }
 }
 </script>
 
 <style>
+.rwcomp{
+    display:flex;
+}
  /*
  #app {
    font-family: Avenir, Helvetica, Arial, sans-serif;

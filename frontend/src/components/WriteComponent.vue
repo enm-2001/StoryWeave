@@ -47,14 +47,15 @@ export default {
 <style>
 
 .card {
-  width: 40%;
-  margin: 50px auto;
+  width: 43%;
+  margin: 20px auto;
   background-color: F9F5F6;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   font-family: Avenir, Helvetica;
     color: #2c3e50;
      border-radius: 15px;
+     padding:0px
 }
 
 .date{
