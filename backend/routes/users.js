@@ -35,20 +35,17 @@ router.post("/signup", (req, res) => {
   console.log(req.body);
   const { name, email, password } = req.body;
 
-  if (!err) {
     const query = `INSERT INTO users (name, email, password, coins)
     VALUES ('${name}', '${email}', '${password}', 0);
     `;
     client.query(query, (err, result1) => {
       if (!err) {
+        console.log("lllllll");
         res.send("insertion completed");
       } else {
         console.log("Error: ", err);
       }
     });
-  } else {
-    console.log("Errr===", err);
-  }
 });
 
 router.post("/login", (req, res) => {
@@ -56,7 +53,9 @@ router.post("/login", (req, res) => {
   const query = `select * from users where email = '${email}'`;
   client.query(query, (err, result) => {
     if (!err) {
+      console.log(result.rows[0]);
       if (result.rows[0].password === password) {
+        console.log("ppppppppp");
         const user = result.rows[0];
         res.send(user);
       } else {
