@@ -62,26 +62,16 @@ export default {
   width:20px;
 }
 .main-bg {
-  /*  display: flex;
-   /* justify-content: center;
-    align-items: center;*/
-   /* background-image: url('../assets/background.jpg');
+  display: flex;
+   justify-content: center;
+   align-items: center; 
+   background-image: url('../assets/background.jpg');
     background-size: cover;
     background-position: center;
-    height:100%;
-    width:100%;
-     background-repeat: no-repeat;
-    background-size: cover;*/
-   /* opacity: 2;
-    filter: blur(3px);
-    -webkit-filter: blur(3px); */
-     display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
-  width: 100vh;
-
-
+  width:100%;
+  
+  align-items: center; 
 
 }
 
@@ -91,6 +81,7 @@ export default {
     height: 480px;
     border-radius: 10px;
     overflow: hidden;
+    justify-content: center;
     box-shadow: 0 35px 60px rgba(0, 0, 0, .2),
         0 35px 50px rgba(0, 0, 0, .2);
     background: linear-gradient(to bottom, #efefef, #ccc);
@@ -121,6 +112,7 @@ export default {
     @mixin overlays($property) {
         position: absolute;
         top: 0;
+        bottom:0;
         display: flex;
         align-items: center;
         justify-content: space-around;
