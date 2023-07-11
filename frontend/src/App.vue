@@ -1,5 +1,7 @@
 <template>
-
+<div id="app">
+    <router-view></router-view>
+  </div>
 <!-- <SignIn />  -->
 <!-- <DashBoard/>
 <hr style="width:90%">

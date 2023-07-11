@@ -1,6 +1,6 @@
 <template>
-    <div class="header">
-    
+
+ <header>
     <div class="header-image">
     <div class="solidc">
       <!-- <img src="../assets/3.png" alt="Background Image" style="height:100%;width:100%"/> -->
@@ -19,6 +19,7 @@
     <nav>
       <!-- Navbar content here -->
     </nav>
+  </header>
 
 <!--      
         Navigation
@@ -86,22 +87,28 @@
 
    
     
+    
 
+<!-- 
+        -->
 
 
 </template>
 
 <script>
-    export default {
-        name: 'DashBoard'
+
+export default {
+    name: 'DashBoard',
+    data: () => {
+        return {
+           
+        }
     }
+    
+}
 </script>
 
-<style scoped>
-
-.header{
-    width: 100%;
-}
+<style>
 .solidc{
     background-color:#537188;
 }
@@ -172,3 +179,4 @@ button {
   object-fit: cover;
 }
 </style>
+
