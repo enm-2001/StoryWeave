@@ -1,23 +1,25 @@
 <template>
-
-<!-- <SignIn /> --> 
-<DashBoard/>
+<div id="app">
+    <router-view></router-view>
+  </div>
+<!-- <SignIn />  -->
+<!-- <DashBoard/>
 <hr style="width:90%">
-<DashboardBottom/>
+<DashboardBottom/> -->
 </template>
 
 <script>
 // import SignIn from './components/SignIn.vue'  
 
-import DashBoard from './components/DashBoard.vue'
-import DashboardBottom from './components/DashboardBottom.vue'
+// import DashBoard from './components/DashBoard.vue'
+// import DashboardBottom from './components/DashboardBottom.vue'
 
 export default {
     name: 'App',
     components: {
         // SignIn
-        DashBoard,
-       DashboardBottom,
+    //     DashBoard,
+    //    DashboardBottom,
     }
 }
 </script>
@@ -26,7 +28,7 @@ export default {
 .rwcomp{
     display:flex;
 }
- /*
+ 
  #app {
    font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -36,8 +38,8 @@ export default {
     margin-top: 60px;
     display: flex;
     justify-content: center;
-    align-items: center;*/
-   /* background-image: url('/home/hritika/Downloads/StoryWeave/frontend/src/assets/background.jpg');
+    align-items: center;
+   background-image: url('./assets/background.jpg');
     background-size: cover;
     font-family: Tahoma;
     font-size: 1.6rem;
@@ -47,7 +49,7 @@ export default {
     align-items: center;
     margin: 0;
     padding: 0;
-}*/
+}
 
 
 </style>
