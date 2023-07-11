@@ -50,8 +50,42 @@ router.delete("/story/delete", (req, res) => {
   });
 });
 
-router.put("/story/update", (req, res) => {
+router.post("/story/add", (req, res) => {
   const { story_id, des, user_id } = req.body;
+  const query = `insert into pending_contr(story_id, des, user_id) values($1, $2, $3)`;
+  const values = [story_id, des, user_id];
+  client.query(query, values, (err, result) => {
+    if (!err) {
+      res.send("inserted data");
+    }
+  });
+});
+
+//get pending stories for particular user
+router.get("/story/pstory/:user_id", (req, res) => {
+  const { user_id } = req.params;
+  const query = `select * from pending_contr where story_id in(select story_id from story where creator = ${user_id})`;
+  client.query(query, (err, result) => {
+    if (!err) {
+      res.send(result.rows);
+    }
+  });
+});
+
+//remove from pending list after rejection
+router.delete("/story/:pstory_id/delete", (req, res) => {
+  const { pstory_id } = req.params;
+  const query = `delete from pending_contr where id = ${pstory_id}`;
+  client.query(query, (err, result) => {
+    if (!err) {
+      res.send("deletion successful");
+    }
+  });
+});
+
+//update the story after acceptance
+router.put("/story/update", (req, res) => {
+  const { story_id, des, user_id, pstory_id } = req.body;
   const query1 = `SELECT description FROM story WHERE story_id = $1`;
   client.query(query1, [story_id], (err, result) => {
     if (err) {
@@ -92,6 +126,14 @@ router.put("/story/update", (req, res) => {
               return;
             }
 
+            const query5 = `delete from pending_contr where id = ${pstory_id}`;
+            client.query(query5, (err5, result5) => {
+              if (err5) {
+                console.log("Error in query5:", err5);
+                res.status(500).json({ error: "Internal server error" });
+                return;
+              }
+            });
             console.log(result4);
             res.status(200).json({ message: "Story updated successfully" });
           });
@@ -101,18 +143,17 @@ router.put("/story/update", (req, res) => {
   });
 });
 
-router.get("/story/contributions/:user_id",(req, res) => {
-    const {user_id} = req.params
-    const query = `select count(*) as contributions from contributions where user_id = ${user_id}`
-    client.query(query, (err, result) => {
-        if(!err){
-            // console.log(result.rows[0].contributions);
-            res.send(result.rows[0].contributions)
-        }
-        else{
-            console.log(err);
-        }
-    })
-})
+router.get("/story/contributions/:user_id", (req, res) => {
+  const { user_id } = req.params;
+  const query = `select count(*) as contributions from contributions where user_id = ${user_id}`;
+  client.query(query, (err, result) => {
+    if (!err) {
+      // console.log(result.rows[0].contributions);
+      res.send(result.rows[0].contributions);
+    } else {
+      console.log(err);
+    }
+  });
+});
 
 module.exports = router;
