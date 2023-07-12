@@ -193,13 +193,15 @@ export default {
 }
 
 .container {
-  position: relative;
-  width: 768px;
-  height: 480px;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 35px 60px rgba(0, 0, 0, 0.2), 0 35px 50px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(to bottom, #efefef, #ccc);
+    position: relative;
+    width: 768px;
+    height: 480px;
+    border-radius: 10px;
+    overflow: hidden;
+    justify-content: center;
+    box-shadow: 0 35px 60px rgba(0, 0, 0, .2),
+        0 35px 50px rgba(0, 0, 0, .2);
+    background: linear-gradient(to bottom, #efefef, #ccc);
 
   .overlay-container {
     position: absolute;
@@ -224,20 +226,21 @@ export default {
     transition: transform 0.5s ease-in-out;
   }
 
-  @mixin overlays($property) {
-    position: absolute;
-    top: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    flex-direction: column;
-    padding: 70px 40px;
-    width: calc(50% - 80px);
-    height: calc(100% - 140px);
-    text-align: center;
-    transform: translateX($property);
-    transition: transform 0.5s ease-in-out;
-  }
+    @mixin overlays($property) {
+        position: absolute;
+        top: 0;
+        bottom:0;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: column;
+        padding: 70px 40px;
+        width: calc(50% - 80px);
+        height: calc(100% - 140px);
+        text-align: center;
+        transform: translateX($property);
+        transition: transform .5s ease-in-out;
+    }
 
   .overlay-left {
     @include overlays(-20%);

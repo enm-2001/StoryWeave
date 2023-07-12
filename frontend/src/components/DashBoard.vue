@@ -15,16 +15,24 @@
         </div>
       </div>
     </div>
-    <nav>
-      <!-- Navbar content here -->
-    </nav>
+ 
 
-    </div>
+
+   </div>
+    
+
+
+<DashboardBottom/>
 </template>
 
 <script>
+import DashboardBottom from './DashboardBottom.vue';
+
     export default {
-        name: 'DashBoard'
+        name: 'DashBoard',
+        components:{
+          DashboardBottom,
+        }
     }
 </script>
 

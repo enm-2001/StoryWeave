@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import ReadComponent from "./ReadComponent.vue";
-import WriteComponent from "./WriteComponent.vue";
+import ReadComponent from './ReadComponent.vue';
+import WriteComponent from './WriteComponent.vue';
 
 export default {
   name: "DashboardBottom",
