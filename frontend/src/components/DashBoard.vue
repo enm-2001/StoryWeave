@@ -1,6 +1,5 @@
 <template>
     <div class="header">
-    
     <div class="header-image">
     <div class="solidc">
       <!-- <img src="../assets/3.png" alt="Background Image" style="height:100%;width:100%"/> -->
@@ -12,7 +11,7 @@
         <div class="text">
           <h1>A collaborative creative writing app where stories are built line by line. </h1>
           <h4>Contribute to multiplayer stories, seeing only what the previous author wrote. Modeled on the game exquisite corpse, each creation is gloriously unique</h4>
-          <button>Start Story</button>
+          <router-link to="/startstory"><button>Start Story</button></router-link>
         </div>
       </div>
     </div>
