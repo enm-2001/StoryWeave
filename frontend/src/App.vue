@@ -2,25 +2,31 @@
 <div id="app">
     <router-view></router-view>
   </div>
+ 
 <!-- <SignIn />  -->
 <!-- <DashBoard/>
 <hr style="width:90%">
 <DashboardBottom/> -->
+<!-- <ReadStory/> -->
 </template>
 
 <script>
+ 
 // import SignIn from './components/SignIn.vue'  
-
+// import ReadStory from './components/ReadStory.vue'
 // import DashBoard from './components/DashBoard.vue'
 // import DashboardBottom from './components/DashboardBottom.vue'
 
 export default {
     name: 'App',
     components: {
+        // SideBar,
+        // ReadStory,
         // SignIn
     //     DashBoard,
     //    DashboardBottom,
-    }
+    },
+  
 }
 </script>
 
@@ -30,7 +36,7 @@ export default {
 }
  
  #app {
-   font-family: Avenir, Helvetica, Arial, sans-serif;
+   /*font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
@@ -39,16 +45,13 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-   background-image: url('./assets/background.jpg');
+   /*background-image: url('/home/hritika/Downloads/StoryWeave/frontend/src/assets/background.jpg');
     background-size: cover;
-    font-family: Tahoma;
     font-size: 1.6rem;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  
     margin: 0;
-    padding: 0;
+    padding: 0; */
 }
 
 
