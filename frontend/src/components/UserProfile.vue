@@ -6,10 +6,10 @@
         StoryWeave
       </div>
       <ul class="nav-links">
-      <div class="tool">
+      
         <li>
         <a href="#"><i class='fas fa-bell' style='font-size:25px'></i></a></li>  
-        </div>
+      
         <li><a href="#">Hritika</a></li>
       
       </ul>
@@ -83,6 +83,14 @@
   <div class="col-4">
   
   <!-- <img src="../assets/illus2.png" alt="Italian Trulli" class="fixed-size-image"> -->
+  
+
+
+
+
+
+
+
 
   </div>
 </div>
@@ -126,6 +134,8 @@ export default {
 </script>
 
 <style scoped>
+
+
  .fixed-size-image {
       width: 100%; /* Set the desired width */
       height: 100%; /* Set the desired height */
