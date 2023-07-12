@@ -58,6 +58,14 @@ export default {
       }
     },
   },
+  mounted(){
+    if(this.$route.params){
+      const story_id = this.$route.params.id;
+    axios
+      .get(`http://localhost:5000/api/story/${story_id}`)
+      .then((res) => (this.story = res.data[0]));
+    }
+  }
 };
 </script>
 
@@ -91,6 +99,7 @@ export default {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   font-family: Avenir, Helvetica;
   color: #2c3e50;
+  font-size: 20px;
   border-radius: 15px;
   /*  margin:12px; */
   padding: 0px;
@@ -105,7 +114,7 @@ export default {
 
 .card-text {
   width: 100%;
-  height: 50%;
+  height: 60%;
   overflow-y: scroll;
 }
 
