@@ -2,27 +2,31 @@
 <div id="app">
     <router-view></router-view>
   </div>
+ 
 <!-- <SignIn />  -->
 <!-- <DashBoard/>
 <hr style="width:90%">
 <DashboardBottom/> -->
-<ReadStory/>
+<!-- <ReadStory/> -->
 </template>
 
 <script>
+ 
 // import SignIn from './components/SignIn.vue'  
-import ReadStory from './components/ReadStory.vue'
+// import ReadStory from './components/ReadStory.vue'
 // import DashBoard from './components/DashBoard.vue'
 // import DashboardBottom from './components/DashboardBottom.vue'
 
 export default {
     name: 'App',
     components: {
-        ReadStory,
+        // SideBar,
+        // ReadStory,
         // SignIn
     //     DashBoard,
     //    DashboardBottom,
-    }
+    },
+  
 }
 </script>
 

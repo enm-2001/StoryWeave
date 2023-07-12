@@ -1,6 +1,6 @@
 <template>
 
-<div class="card">
+<div class="cardc">
   <div id="write-section">
   <div class="heading">
    <p class="created-by">Created by @leyrelineasrectas</p>
@@ -34,9 +34,9 @@ export default {
 <style scoped>
 
 
-.card {
+.cardc {
   width: 43%;
-  margin: 20px auto;
+  margin: 10px auto;
   background-color: F9F5F6;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
