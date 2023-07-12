@@ -1,6 +1,5 @@
 <template>
     <div class="header">
-    
     <div class="header-image">
     <div class="solidc">
       <!-- <img src="../assets/3.png" alt="Background Image" style="height:100%;width:100%"/> -->

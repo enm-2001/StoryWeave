@@ -22,12 +22,13 @@
           </div>
         </div>
       </div>
-      <form class="sign-up">
+      <!-- <form class="sign-up">
         <h2>Create login</h2>
         <div>Use your email for registration</div>
-        <input type="text" v-model="formData.name" required />
+        <input type="text" placeholder="Name" v-model="formData.name" required />
         <input
           type="email"
+          placeholder="Email"
           v-model="formData.email"
           v-on:blur="checkUserforSignup(formData.email)"
           required
@@ -40,6 +41,21 @@
           required
         />
         <button @click="signup()">Sign Up</button>
+      </form> -->
+      <form class="sign-up" @submit.prevent="signup()">
+        <h2>Create Login</h2>
+        <div>Use your account</div>
+
+        <input type="text" placeholder="Name" v-model="formData.name" required>
+
+        <input type="email" placeholder="Email" v-model="formData.email" v-on:blur="checkUserforSignup(formData.email)" required/>
+        <input
+          type="password"
+          placeholder="Password"
+          v-model="formData.password"
+        />
+
+        <button type="submit">Sign In</button>
       </form>
       <form class="sign-in" @submit.prevent="checkUserforLogin">
         <h2>Sign In</h2>
@@ -56,7 +72,7 @@
         />
 
         <a href="#">Forgot your password?</a>
-        <button>Sign In</button>
+        <button type="submit">Sign In</button>
       </form>
     </div>
   </div>
@@ -87,15 +103,18 @@ export default {
   methods: {
     signup() {
       console.log(this.formData);
-      axios
+      if(!this.userExists){
+        axios
         .post("http://localhost:5000/api/signup", this.formData)
         .then((res) => {
           console.log(res);
           localStorage.setItem("user", JSON.stringify(this.formData));
-          router.push("/home");
+          router.push("/dashboard");
         })
         .catch((err) => console.log(err));
+      }
     },
+    
     checkUserforSignup(email) {
       axios
         .post("http://localhost:5000/api/checkUser", { email })
@@ -163,18 +182,14 @@ export default {
   background-image: url("../assets/background.jpg");
   background-size: cover;
   background-position: center;
-  height: 100%;
-  width: 100%;
+  // height: 100%;
+  // width: 100%;
   background-repeat: no-repeat;
-  background-size: cover;
   /* opacity: 2;
     filter: blur(3px);
     -webkit-filter: blur(3px); */
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
-  width: 100vh;
+  width: 200vh;
 }
 
 .container {
@@ -226,27 +241,33 @@ export default {
 
   .overlay-left {
     @include overlays(-20%);
+    height: 100%;
+    width: 50%
   }
 
   .overlay-right {
     @include overlays(0);
     right: 0;
+    height: 100%;
+    width: 50%
   }
 }
 
 h2 {
   margin: 0;
+  font-size: 30px;
 }
 
 p {
   margin: 20px 0 30px;
+  font-size: 20px;
 }
 
 a {
   color: #222;
   text-decoration: none;
   margin: 15px 0;
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 button {
@@ -254,7 +275,7 @@ button {
   border: 1px solid #316b83;
   background-color: #316b83;
   color: #fff;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: bold;
   padding: 10px 40px;
   letter-spacing: 1px;
@@ -291,7 +312,7 @@ form {
   transition: all 0.5s ease-in-out;
 
   div {
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
 
   input {
@@ -316,12 +337,16 @@ form {
 .sign-in {
   left: 0;
   z-index: 2;
+  height: 100%;
+  width: 50%;
 }
 
 .sign-up {
   left: 0;
   z-index: 1;
   opacity: 0;
+  height: 100%;
+  width: 50%;
 }
 
 .sign-up-active {

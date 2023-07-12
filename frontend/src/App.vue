@@ -30,7 +30,7 @@ export default {
 }
  
  #app {
-   font-family: Avenir, Helvetica, Arial, sans-serif;
+   /* font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
@@ -38,17 +38,17 @@ export default {
     margin-top: 60px;
     display: flex;
     justify-content: center;
-    align-items: center;
-   background-image: url('./assets/background.jpg');
+    align-items: center; */
+   /* background-image: url('./assets/background.jpg'); */
     background-size: cover;
     font-family: Tahoma;
     font-size: 1.6rem;
     height: 100vh;
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
     margin: 0;
-    padding: 0;
+    padding: 0; 
 }
 
 
