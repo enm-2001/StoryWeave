@@ -62,8 +62,8 @@
 </template>
 
 <script>
-// import router from "@/router/routes";
-// import axios from "axios";
+import router from "@/router/routes";
+import axios from "axios";
 
 
 export default {
@@ -107,7 +107,7 @@ export default {
 };
 </script>
 
-<style lang ="scss">
+<style lang ="scss" scoped>
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400');
 @import url('https://fonts.googleapis.com/css?family=Shadows+Into+Light');
 
