@@ -63,23 +63,16 @@
 </div>
 
 
-<div class="row">
+<!-- <div class="row">
   <div class="col-8"><chart-data></chart-data></div>
 
-  <div class="col-4">
+  <div class="col-4"> -->
   
   <!-- <img src="../assets/illus2.png" alt="Italian Trulli" class="fixed-size-image"> -->
-  
 
 
-
-
-
-
-
-
-  </div>
-</div>
+  <!-- </div> -->
+<!-- </div> -->
       
 
 
@@ -108,12 +101,12 @@
 
 <script>
 import ReadComponent from './ReadComponent.vue';
-import ChartData from './ChartData.vue';
+// import ChartData from './ChartData.vue';
 export default {
     name: 'UserProfile',
     components:{
       ReadComponent,
-      ChartData,
+      // ChartData,
     }
    
 }

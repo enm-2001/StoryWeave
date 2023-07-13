@@ -44,7 +44,7 @@ router.post("/story/create", async (req, res) => {
     const query = `INSERT INTO story (title, description, creator, date_created) VALUES ('${title}', '${description}', '${user_id}', '${date}')`;
     await client.query(query, (err1, result) => {
       if (err1) {
-        console.log(err);
+        console.log(err1);
         return res.send("Server error");
       }
     });
@@ -154,7 +154,12 @@ router.put("/story/update", (req, res) => {
           }
 
           const today = new Date();
-          const date = today.toLocaleDateString(0, 10);
+          const day = today.getDate();
+          const month = today.getMonth() + 1; 
+          const year = today.getFullYear();
+
+
+          const date = `${day}/${month}/${year}`;
           const query4 = `INSERT INTO contributions (user_id, story_id, date_contributed) VALUES ($1, $2, $3)`;
           const values = [user_id, story_id, date];
           client.query(query4, values, (err4, result4) => {
