@@ -30,7 +30,6 @@
   
   <form class="form__contact" action="">
     <fieldset>
-      <p>Hey, Friend!</p>
       <p>Title of the story is <span class="form__field field--name" data-placeholder="storytitle" tabindex="1" contenteditable></span></p>
       <p>Story starts like this -><span class="form__field field--story" data-placeholder="story" tabindex="3" contenteditable></span>.</p>
       <button type="submit" class="button button--xlarge" tabindex="4">Post it! &#187;</button>
