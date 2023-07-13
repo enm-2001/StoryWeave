@@ -11,7 +11,6 @@
      <p> In the land of Astraladia, where dreams danced on moonbeams and stars whispered ancient secrets, a humble farm boy gazed at the night sky with wide-eyed wonder. A shooting star streaked across the heavens. The boy heard a faint, ethereal voice beckoning him to follow the star.
     </p></div>
     
- 
 
   </div>
 </div>
@@ -24,9 +23,10 @@ export default {
     name: 'ReadComponent',
     data: () => {
         return {
-           
+
         }
-    }
+    },
+
     
 }
 </script>
