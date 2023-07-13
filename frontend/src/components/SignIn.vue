@@ -70,7 +70,6 @@
           placeholder="Password"
           v-model="loginData.password"
         />
-
         <a href="#">Forgot your password?</a>
         <button type="submit">Sign In</button>
       </form>

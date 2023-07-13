@@ -5,6 +5,8 @@ import HoMe from '../components/HoMe'
 import StartStory from '../components/StartStory'
 import UserProfile from '../components/UserProfile'
 import ReadStory from '../components/ReadStory'
+import NotiFication from '../components/NotiFication'
+
 
 const routes = [
     { path: '/login', component: SignIn },
@@ -14,6 +16,7 @@ const routes = [
     { path: '/startstory/:story_id', component: StartStory },
     { path: '/profile', component: UserProfile },
     { path: '/readstory', component: ReadStory },
+    { path: '/notification', component: NotiFication },
     // { path: '/login', component: SignIn },
 ];
 
