@@ -36,7 +36,7 @@ export default {
 
 .cardc {
   width: 43%;
-  margin: 10px auto;
+  margin: 20px auto;
   background-color: F9F5F6;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);

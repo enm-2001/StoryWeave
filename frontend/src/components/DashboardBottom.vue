@@ -1,13 +1,13 @@
 <template>
   <div class="rwcomp">
-    <ReadComponent />
-    <WriteComponent />
+    <ReadComponent class="rcomp"/>
+    <WriteComponent class="wcomp"/>
   </div>
 </template>
 
 <script>
 import ReadComponent from './ReadComponent.vue';
-import WriteComponent from './WriteComponent.vue';
+import WriteComponent from './WriteComponent.vue'
 
 export default {
   name: "DashboardBottom",
@@ -21,4 +21,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+</style>

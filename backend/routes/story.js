@@ -2,28 +2,66 @@ const express = require("express");
 const router = express.Router();
 const client = require("../config/connection");
 
-router.post("/story/create", (req, res) => {
-  const { user_id } = req.body;
-  const { title, description } = req.body.story;
-  // console.log(title);
-  const today = new Date();
-  const date = today.toLocaleDateString(0, 10);
-  console.log(date);
-  const query = `insert into story(title,description,creator,date_created) values('${title}','${description}','${user_id}','${date}');`;
-  client.query(query, (err, result) => {
-    if (!err) {
-      const query2 = `update users set coins = coins + 15 where user_id = ${user_id}`;
-      client.query(query2, (err, result2) => {
-        if (!err) {
-          res.send("insertion of story complete");
-        } else {
-          console.log(err);
-        }
-      });
-    } else {
-      console.log("err in story: ", err);
-    }
-  });
+// router.post("/story/create", (req, res) => {
+//   const { user_id } = req.body;
+//   const { title, description } = req.body.story;
+//   // console.log(title);
+//   const today = new Date();
+//   const date = today.getDate();
+//   console.log(date);
+//   const query = `insert into story(title,description,creator,date_created) values('${title}','${description}','${user_id}','${date}');`;
+//   client.query(query, (err, result) => {
+//     if (!err) {
+//       const query2 = `update users set coins = coins + 15 where user_id = ${user_id}`;
+//       client.query(query2, (err, result2) => {
+//         if (!err) {
+//           res.send("insertion of story complete");
+//         } else {
+//           console.log(err);
+//         }
+//       });
+//     } else {
+//       console.log("err in story: ", err);
+//     }
+//   });
+// });
+
+router.post("/story/create", async (req, res) => {
+  try {
+    const { user_id } = req.body;
+    const { title, description } = req.body.story;
+    // console.log(title);
+    const today = new Date();
+
+    const day = today.getDate();
+    const month = today.getMonth() + 1; 
+    const year = today.getFullYear();
+
+
+    const date = `${day}/${month}/${year}`;
+
+    console.log(date);
+    const query = `INSERT INTO story (title, description, creator, date_created) VALUES ('${title}', '${description}', '${user_id}', '${date}')`;
+    await client.query(query, (err1, result) => {
+      if (err1) {
+        console.log(err);
+        return res.send("Server error");
+      }
+    });
+
+    const query2 = `UPDATE users SET coins = coins + 15 WHERE user_id = ${user_id}`;
+    await client.query(query2, (err2, result2) => {
+      if (err2) {
+        console.log(err2);
+        return res.send("Server error");
+      }
+    });
+
+    res.send("Insertion of story complete");
+  } catch (err) {
+    console.log("Error in story creation: ", err);
+    res.status(500).send("An error occurred during story creation");
+  }
 });
 
 router.get("/story/:story_id", (req, res) => {
