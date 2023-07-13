@@ -7,7 +7,6 @@
       <div class="tool">
         <li>
          <router-link to="/notification"> <i class='fas fa-bell' style='font-size:25px'></i></router-link>
-       
         </li>  
         </div>
         <li><a href="#">Hritika</a></li>

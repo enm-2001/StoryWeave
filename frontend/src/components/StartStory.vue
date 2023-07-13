@@ -32,7 +32,7 @@
   <form class="form__contact" @submit.prevent="postStory">
     <fieldset>
       <p>Title of the story is <input class="form__field field--name" placeholder="storytitle" tabindex="1" v-model="story.title" ></p>
-      <p>Story starts like this -><input class="form__field field--story" placeholder="story" tabindex="3" v-model="story.description">.</p>
+      <p>Story starts like this -><textarea rows="8" cols="60" class="form__field field--story" placeholder="story" tabindex="3" v-model="story.description"></textarea>.</p>
       <button type="submit" class="button button--xlarge" tabindex="4">Post it! &#187;</button>
     </fieldset>
   </form>
@@ -170,7 +170,7 @@ h1 {
     color: #333;
 	}
 
-input{
+input,textarea{
   position: relative;
 		line-height: $line-height;
     border: none;
@@ -179,6 +179,15 @@ input{
   padding: 0;
   margin: 0;
   color: #7DB665;
+}
+
+textarea{
+ /* height: 50%;
+  width: 100%;
+  overflow-y: scroll; */
+   resize: vertical; 
+      overflow: auto;
+  
 }
 	/*span {
 		position: relative;
@@ -225,7 +234,7 @@ input{
   }
 }
 
-// Hide blur defs
+/*Hide blur defs*/
 svg {
   display: none;
 }
