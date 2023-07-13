@@ -23,24 +23,38 @@
     <div class="storyline">
      <p> In the land of Astraladia, where dreams danced on moonbeams and stars whispered ancient secrets, a humble farm boy gazed at the night sky with wide-eyed wonder. A shooting star streaked across the heavens. The boy heard a faint, ethereal voice beckoning him to follow the star.
     </p></div>
-    
- 
+
 
   </div>
 </div>
 </div>
+    
+{{ story_details }}
+      {{ story_others }}
 
 </div>
 </template>
 
 <script>
+  import axios from 'axios';
 export default {
   name: 'ReadStory',
   data() {
     return {
-      
+      story_details: {},
+           story_others: []
     };
-  }
+  },
+  mounted(){
+
+const storyId = this.$route.params.storyId;
+console.log(storyId);
+axios.get(`http://localhost:5000/api/readstory/${storyId}`)
+.then(res => {
+  this.story_details = res.data.story_details;
+  this.story_others = res.data.story_others
+})
+}
 }
 </script>
 

@@ -33,7 +33,7 @@ router.post("/story/create", async (req, res) => {
     // console.log(title);
     const today = new Date();
 
-    const day = today.getDate();
+    const day = today.getDate() + 1;
     const month = today.getMonth() + 1; 
     const year = today.getFullYear();
 
@@ -41,21 +41,26 @@ router.post("/story/create", async (req, res) => {
     const date = `${day}/${month}/${year}`;
 
     console.log(date);
-    const query = `INSERT INTO story (title, description, creator, date_created) VALUES ('${title}', '${description}', '${user_id}', '${date}')`;
-    await client.query(query, (err1, result) => {
-      if (err1) {
-        console.log(err1);
-        return res.send("Server error");
-      }
-    });
+    const query = `INSERT INTO story (title, description, creator, date_created) VALUES ('${title}', '${description}', '${user_id}', '${date}') returning story_id`;
+    
+    const result = await client.query(query);
+    const story_id = result.rows[0].story_id
 
     const query2 = `UPDATE users SET coins = coins + 15 WHERE user_id = ${user_id}`;
     await client.query(query2, (err2, result2) => {
       if (err2) {
         console.log(err2);
-        return res.send("Server error");
+        return res.send("Server error 2");
       }
     });
+
+    const query3 = `insert into contributions(user_id, story_id, date_contributed, description) values(${user_id}, ${story_id}, '${date}', '${description}')`
+    await client.query(query3, (err3, result3) => {
+      if(err3) {
+        console.log(err3);
+        return res.send("Server error 3");
+      }
+    })
 
     res.send("Insertion of story complete");
   } catch (err) {
@@ -154,14 +159,14 @@ router.put("/story/update", (req, res) => {
           }
 
           const today = new Date();
-          const day = today.getDate();
+          const day = today.getDate() + 1;
           const month = today.getMonth() + 1; 
           const year = today.getFullYear();
 
 
           const date = `${day}/${month}/${year}`;
-          const query4 = `INSERT INTO contributions (user_id, story_id, date_contributed) VALUES ($1, $2, $3)`;
-          const values = [user_id, story_id, date];
+          const query4 = `INSERT INTO contributions (user_id, story_id, date_contributed, description) VALUES ($1, $2, $3, $4)`;
+          const values = [user_id, story_id, date, des];
           client.query(query4, values, (err4, result4) => {
             if (err4) {
               console.log("Error in query4:", err4);
@@ -198,5 +203,30 @@ router.get("/story/contributions/:user_id", (req, res) => {
     }
   });
 });
+
+//read full story
+router.get("/readstory/:storyId", async (req, res) => {
+  const {storyId} = req.params
+
+  const query1 = `select s.title, s.creator from story s where story_id = ${storyId}`
+  const result1 = await client.query(query1)
+  const story_details = result1.rows[0]
+
+  const query2 = `select c.date_contributed, c.description, u.name from story s
+  join contributions c on s.story_id = c.story_id
+  join users u on c.user_id = u.user_id
+  where s.story_id = ${storyId}
+  order by c.contr_id asc`
+  
+  const result2 = await client.query(query2)
+  const story_others = result2.rows
+
+  const response = {
+    story_details,
+    story_others
+  }
+
+  res.send(response)
+})
 
 module.exports = router;
