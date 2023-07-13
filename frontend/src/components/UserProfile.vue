@@ -1,19 +1,5 @@
 <template>
   <div class="dashboard">
-    <!-- Navbar -->
-    <nav class="navbar">
-      <div class="navbar-logo">
-        StoryWeave
-      </div>
-      <ul class="nav-links">
-      <div class="tool">
-        <li>
-        <a href="#"><i class='fas fa-bell' style='font-size:25px'></i></a></li>  
-        </div>
-        <li><a href="#">Hritika</a></li>
-      
-      </ul>
-    </nav>
 
     <!-- Main content -->
     <div class="main-content">
@@ -155,49 +141,6 @@ background-color:#537188;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #537188;
-   font-family: Belanosima;
-  color: #fff;
-  padding: 20px;
-  font-size:18px;
-  height: 80px
-  /*justify-items:start;*/
-}
-
-.navbar-logo {
-  left:20px;
-  position: absolute;
-  width: 60px;
-  height: auto;
-  margin-left: 0px;
-  font-size:50px;
-}
-
-.nav-links {
-    right: 20px;
-  position: absolute;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  font-size:20px;
-}
-
-.nav-links li {
-  margin-left: 20px;
-  padding:10px;
-}
-
-.nav-links a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
 }
 
 .main-content {

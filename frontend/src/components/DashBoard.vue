@@ -39,6 +39,10 @@ import DashboardBottom from './DashboardBottom.vue';
 <style scoped>
 
 .header{
+  background-image: url("../assets/2.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
     width: 100%;
 }
 .solidc{

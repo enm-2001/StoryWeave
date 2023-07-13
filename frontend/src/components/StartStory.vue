@@ -10,7 +10,7 @@
           v-model="story.title"
           required
         /><br />
-        <span v-if="titleNotExist" style="color: red;">Please enter the title of your story..</span>
+        <span v-if="titleNotExist" style="color: red;">Please enter the details of your story..</span>
         <textarea
           class="card-text"
           placeholder="Start you story...."
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     postStory() {
-      if (this.story.title != "") {
+      if (this.story.title != "" || this.story.description != "") {
         const user_id = JSON.parse(localStorage.getItem("user")).user_id;
         axios
           .post("http://localhost:5000/api/story/create", {
@@ -59,11 +59,11 @@ export default {
     },
   },
   mounted(){
-    if(this.$route.params){
+    if(this.$route.params.id != null){
       const story_id = this.$route.params.id;
     axios
       .get(`http://localhost:5000/api/story/${story_id}`)
-      .then((res) => (this.story = res.data[0]));
+      .then((res) => (this.story = res.data));
     }
   }
 };
