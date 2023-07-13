@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import SignIn from '../components/SignIn'
 import DashBoard from '../components/DashBoard'
-import HoMe from '../components/HoMe'
 import StartStory from '../components/StartStory'
+import ContinueStory from '../components/ContinueStory'
 import UserProfile from '../components/UserProfile'
 import ReadStory from '../components/ReadStory'
 import NotiFication from '../components/NotiFication'
@@ -11,9 +11,8 @@ import NotiFication from '../components/NotiFication'
 const routes = [
     { path: '/login', component: SignIn },
     { path: '/dashboard', component: DashBoard },
-    { path: '/home', component: HoMe },
     { path: '/startstory', component: StartStory },
-    { path: '/startstory/:story_id', component: StartStory },
+    { path: '/startstory/:story_id', component: ContinueStory },
     { path: '/profile', component: UserProfile },
     { path: '/readstory', component: ReadStory },
     { path: '/notification', component: NotiFication },

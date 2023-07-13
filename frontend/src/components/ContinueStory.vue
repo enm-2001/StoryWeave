@@ -26,8 +26,8 @@
     </div> -->
     <div class="main-bg">
 <div class="wrapper">
-<h1>Start your story!!</h1>
 
+<h1>Continue this story</h1>
   
   <form class="form__contact" @submit.prevent="postStory">
     <fieldset>
@@ -71,8 +71,7 @@ export default {
   data() {
     return {
       story: {
-        title: "",
-        description: "",
+        
       },
       storyId: false,
       titleNotExist: false
@@ -81,11 +80,11 @@ export default {
   methods: {
     postStory() {
       console.log(this.story);
-      if (this.story.title != "" || this.story.description != "") {
         const user_id = JSON.parse(localStorage.getItem("user")).user_id;
         axios
-          .post("http://localhost:5000/api/story/create", {
-            story: this.story,
+          .post("http://localhost:5000/api/story/add", {
+            story_id: this.story.story_id,
+            des:this.story.description,
             user_id,
           })
           .then((res) => {
@@ -93,12 +92,16 @@ export default {
             router.push("/profile");
           })
           .catch((err) => console.log(err));
-      } else {
-        this.titleNotExist = true;
-      }
+    
     },
   },
-
+  mounted(){
+      const story_id = this.$route.params.story_id;
+    axios
+      .get(`http://localhost:5000/api/story/${story_id}`)
+      .then((res) => (this.story = res.data));
+    
+  }
 };
 </script>
 
@@ -262,50 +265,6 @@ svg {
 }
 
 
-
-.navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #537188;
-    font-family: Belanosima;
-    color: #fff;
-    padding: 20px;
-    font-size: 18px;
-    height: 80px;
-    margin:0px;
-        /*justify-items:start;*/
-}
-
-.navbar-logo {
-    left: 20px;
-    position: absolute;
-    width: 60px;
-    height: auto;
-    margin-left: 0px;
-    font-size: 50px;
-}
-
-.nav-links {
-    right: 20px;
-    position: absolute;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    font-size: 20px;
-}
-
-.nav-links li {
-    margin-left: 20px;
-    padding: 10px;
-}
-
-.nav-links a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-}
 
 
 </style>

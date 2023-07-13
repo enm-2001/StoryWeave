@@ -1,61 +1,111 @@
 <template>
-
 <div class="main">
 
+    <div class="notification-heading">
+        Notification
+    </div>
+    <main>
+        <ol class="gradient-list">
 
+            <li v-for="story in updated_stories" :key="story.story_id">
+                <div class="approval">
+                    <div class="left-side">
 
-<div class="notification-heading">
-    Notification
-</div>
-<main>
-    <ol class="gradient-list">
+                        {{story.des}}
+                    </div>
+                    <div class="right-side">
+                        <stronger><button @click="accept(story)"><i class="fa fa-check" style="font-size:35px;color:green;padding-right:15px;padding-top:10px;"></i></button></stronger>
+                        <stronger> <button @click="reject(story.id)"><i class="fa fa-close" style="font-size:35px; color:red; padding-left:15px;padding-top:10px;"></i></button></stronger>
+                    </div>
+                </div>
+            </li>
 
-        <li>
-        <div class="approval">
-            <div class="left-side">
-               qwertyuiosdfghjklcvvfctvtyg gydvyatwbdb eeeeeeeeee Contribute to multiplayer stories, seeing only what the previous author wrote. Modeled on the game exquisite corpse, each creation is gloriously unique
-            </div>
-            <div class="right-side">
-          <stronger>  <i class="fa fa-check" style="font-size:35px;color:green;padding-right:15px;padding-top:10px;"></i></stronger>
-         <stronger>   <i class="fa fa-close" style="font-size:35px; color:red; padding-left:15px;padding-top:10px;"></i></stronger>
-            </div>
-        </div>
-        </li>
-       
-       
- 
- 
-
-      
-    </ol>
-</main>
+        </ol>
+    </main>
 </div>
 </template>
 
 <script>
+import axios from 'axios';
 export default {
-    name: 'NotiFication'
+    name: 'NotiFication',
+    data() {
+        return {
+            updated_stories: [],
+        }
+    },
+    methods: {
+        accept(pstory) {
+
+            axios.put("http://localhost:5000/api/story/update", {
+                    story_id: pstory.story_id,
+                    des: pstory.des,
+                    user_id: pstory.user_id,
+                    pstory_id: pstory.id
+                })
+                .then(res => {
+                    if (!res.error) {
+                        this.updated_stories = this.updated_stories.filter(
+                            story => story.id !== pstory.id
+                        )
+                    }
+                }
+                )
+                .catch(err => console.log(err))
+        },
+        reject(pstory_id) {
+            axios.delete(`http://localhost:5000/api//story/${pstory_id}/delete`)
+                .then(res => {
+                    console.log(res.data);
+                    this.updated_stories = this.updated_stories.filter(
+                        story => story.id !== pstory_id
+                    )
+                })
+                .catch(err => console.log(err))
+        }
+    },
+    mounted() {
+        const user_id = JSON.parse(localStorage.getItem("user")).user_id;
+        axios.get(`http://localhost:5000/api/story/pstory/${user_id}`)
+            .then((res) => {
+                console.log(res.data);
+                this.updated_stories = res.data
+            })
+            .catch(err => console.log(err))
+
+    },
+
 }
 </script>
 
 <style lang="scss" scoped>
-.main{
+.main {
     background-image: url("../assets/background.jpg");
-  background-size: cover;
-  background-position: center;
+    background-size: cover;
+    background-position: center;
 
-  background-repeat: no-repeat;
+    background-repeat: no-repeat;
 
-  height: 100vh;
-  width: 200vh;
+    height: 100vh;
+    width: 200vh;
 }
-.right-side{
-    display:flex;
+
+.right-side {
+    display: flex;
     margin: auto;
 
-    justify-content:center;
+    justify-content: center;
 
 }
+
+button {
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+}
+
 .notification-heading {
     display: flex;
     align-items: center;
@@ -136,8 +186,8 @@ main {
     margin: 0 auto;
     padding: 1rem;
     width: 50%;
-      font-family: Belanosima;
-      
+    font-family: Belanosima;
+
 }
 
 ol.gradient-list {
@@ -145,7 +195,6 @@ ol.gradient-list {
     list-style: none;
     margin: 1.75rem 0;
     padding-left: 1rem;
-    
 
     >li {
         background: white;
@@ -157,8 +206,6 @@ ol.gradient-list {
         padding: 1rem 1rem 1rem 3rem;
         position: relative;
         font-size: 14px;
-
-         
 
         &::before,
         &::after {

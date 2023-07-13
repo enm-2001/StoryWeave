@@ -6,7 +6,9 @@
       <ul class="nav-links">
       <div class="tool">
         <li>
-        <a href="#"><i class='fas fa-bell' style='font-size:25px'></i></a></li>  
+         <router-link to="/notification"> <i class='fas fa-bell' style='font-size:25px'></i></router-link>
+       
+        </li>  
         </div>
         <li><a href="#">Hritika</a></li>
       
