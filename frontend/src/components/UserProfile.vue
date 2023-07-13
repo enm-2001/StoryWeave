@@ -123,8 +123,8 @@ export default {
 
 
  .fixed-size-image {
-      width: 100%; /* Set the desired width */
-      height: 100%; /* Set the desired height */
+      width: 100%; 
+      height: 100%; 
     }
 
 .col-text{
