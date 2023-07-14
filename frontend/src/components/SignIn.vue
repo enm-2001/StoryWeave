@@ -48,7 +48,10 @@
 
         <input type="text" placeholder="Name" v-model="formData.name" required>
 
-        <input type="email" placeholder="Email" v-model="formData.email" v-on:blur="checkUserforSignup(formData.email)" required/>
+        <input type="text" placeholder="Username" v-model="formData.username" v-on:blur="checkUserforSignup(formData.username)" required>
+        <span v-if="userExists">Username already exists</span>
+
+        <input type="email" placeholder="Email" v-model="formData.email" required/>
         <input
           type="password"
           placeholder="Password"
@@ -87,6 +90,7 @@ export default {
       signUp: false,
       formData: {
         name: "",
+        username: "",
         email: "",
         password: "",
       },
@@ -114,9 +118,9 @@ export default {
       }
     },
     
-    checkUserforSignup(email) {
+    checkUserforSignup(username) {
       axios
-        .post("http://localhost:5000/api/checkUser", { email })
+        .post("http://localhost:5000/api/checkUser", { username })
         .then((response) => {
           if (response.data.exists) {
             this.userExists = true;

@@ -14,10 +14,10 @@ router.get("/users", (req, res) => {
 });
 
 router.post("/checkUser", (req, res) => {
-  const email = req.body.email;
+  const username = req.body.username;
   client.query(
-    "select email from users where email = $1",
-    [email],
+    "select email from users where username = $1",
+    [username],
     (error, results) => {
       if (error) {
         res.status(500).send("Server error");
@@ -33,10 +33,10 @@ router.post("/checkUser", (req, res) => {
 
 router.post("/signup", (req, res) => {
   console.log(req.body);
-  const { name, email, password } = req.body;
+  const { name, username, email, password } = req.body;
 
-  const query = `INSERT INTO users (name, email, password, coins)
-    VALUES ('${name}', '${email}', '${password}', 0);
+  const query = `INSERT INTO users (name, username, email, password, coins)
+    VALUES ('${name}', '${username}','${email}', '${password}', 0);
     `;
   client.query(query, (err, result1) => {
     if (result1) {
