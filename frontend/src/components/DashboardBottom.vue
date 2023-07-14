@@ -1,7 +1,10 @@
 <template>
   <div class="rwcomp">
+
     <ReadComponent class="rcomp"/>
+   
     <WriteComponent class="wcomp"/>
+
   </div>
 </template>
 

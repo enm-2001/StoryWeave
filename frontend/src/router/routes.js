@@ -6,6 +6,7 @@ import ContinueStory from '../components/ContinueStory'
 import UserProfile from '../components/UserProfile'
 import ReadStory from '../components/ReadStory'
 import NotiFication from '../components/NotiFication'
+import DashboardBottom from '../components/DashboardBottom'
 
 
 const routes = [
@@ -16,6 +17,7 @@ const routes = [
     { path: '/profile', component: UserProfile },
     { path: '/readstory', component: ReadStory },
     { path: '/notification', component: NotiFication },
+    { path: '/dash', component: DashboardBottom},
     // { path: '/login', component: SignIn },
 ];
 
