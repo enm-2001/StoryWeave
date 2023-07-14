@@ -1,16 +1,36 @@
 const express = require("express");
 const router = express.Router();
 const client = require("../config/connection");
+const jwt = require('jsonwebtoken')
 
+function authenticateToken(req, res, next) {
 
-router.post("/story/create", async (req, res) => {
+  const authHeader = req.headers.authorization;
+  const token = authHeader && authHeader.split(' ')[1]
+
+  if (!token) {
+    return res.status(401).json({ message: 'No token provided' });
+  }
+
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) {
+      return res.status(401).json({ message: 'Invalid token' });
+    }
+
+    // Attach the decoded payload (user data) to the request for further processing
+    req.user = user;
+    next();
+  });
+}
+
+router.post("/story/create", authenticateToken ,async (req, res) => {
   try {
     const { user_id } = req.body;
     const { title, description } = req.body.story;
     // console.log(title);
     const today = new Date();
 
-    const day = today.getDate() + 1;
+    const day = today.getDate();
     const month = today.getMonth() + 1; 
     const year = today.getFullYear();
 

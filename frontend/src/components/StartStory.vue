@@ -78,16 +78,24 @@ export default {
       titleNotExist: false
     };
   },
+  
   methods: {
     postStory() {
       console.log(this.story);
       if (this.story.title != "" || this.story.description != "") {
-        const user_id = JSON.parse(localStorage.getItem("user")).user_id;
+        const user_id = JSON.parse(localStorage.getItem("user")).user.user_id;
+        console.log(JSON.parse(localStorage.getItem("user")).user);
+        const token = JSON.parse(localStorage.getItem('user')).accessToken;
         axios
           .post("http://localhost:5000/api/story/create", {
             story: this.story,
             user_id,
-          })
+          },{
+            headers: {
+    'Authorization': `Bearer ${token}`
+  }
+          }
+          )
           .then((res) => {
             console.log("Story posted..", res);
             router.push("/profile");

@@ -1,6 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const client = require("../config/connection");
+const jwt = require("jsonwebtoken");
+
+function generateAccessToken(user) {
+  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15m" });
+}
 
 router.get("/users", (req, res) => {
   client.query("select * from users", (err, result) => {
@@ -16,7 +21,7 @@ router.get("/users", (req, res) => {
 router.post("/checkUser", (req, res) => {
   const username = req.body.username;
   client.query(
-    "select email from users where username = $1",
+    "select username from users where username = $1",
     [username],
     (error, results) => {
       if (error) {
@@ -49,15 +54,22 @@ router.post("/signup", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-  const { email, password } = req.body;
-  const query = `select * from users where email = '${email}'`;
+  const { username, password } = req.body;
+
+  const query = `select * from users where username = '${username}'`;
   client.query(query, (err, result) => {
     if (!err) {
       console.log(result.rows[0]);
       if (result.rows[0].password === password) {
-        console.log("ppppppppp");
-        const user = result.rows[0];
-        res.send(user);
+        // console.log("ppppppppp");
+        // const user = result.rows[0];
+        // res.send(user);
+        const user = { name: username, user_id: result.rows[0].user_id};
+        const accessToken = generateAccessToken(user);
+        res.cookie('access_token', token, {
+          httpOnly: true
+        }).json({ accessToken: accessToken, user: user });
+
       } else {
         res.json({ pcheck: true });
       }

@@ -67,7 +67,7 @@
         <span v-if="!userExistsforLogin">User does not exist</span>
         <span v-if="incorrect">Incorrect Password</span>
 
-        <input type="email" placeholder="Email" v-model="loginData.email" />
+        <input type="text" placeholder="Username" v-model="loginData.username" />
         <input
           type="password"
           placeholder="Password"
@@ -95,7 +95,7 @@ export default {
         password: "",
       },
       loginData: {
-        email: "",
+        username: "",
         password: "",
       },
       incorrect: false,
@@ -135,7 +135,7 @@ export default {
     checkUserforLogin() {
       axios
         .post("http://localhost:5000/api/checkUser", {
-          email: this.loginData.email,
+          username: this.loginData.username,
         })
         .then((response) => {
           if (response.data.exists) {
