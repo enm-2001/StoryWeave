@@ -16,7 +16,7 @@
 
 <div class="input" type = "text">your contribution has been accepted by the creator</div>
 <div class="notification2">
-Congratulations. You have contributed to their story. You will be credited with coins whenever user accepts your recommendations.
+Congratulations. You have contributed to their story. You will be credited with coins whenever user accepts your recommendations.Go to the profile to see the changes
 </div>
 </template>
 

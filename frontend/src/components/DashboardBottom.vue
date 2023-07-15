@@ -1,11 +1,10 @@
 <template>
-  <div class="rwcomp">
+<div class="rwcomp">
 
-    <ReadComponent class="rcomp"/>
-   
-    <WriteComponent class="wcomp"/>
+    <ReadComponent class="rcomp" />
+    <WriteComponent class="wcomp" />
 
-  </div>
+</div>
 </template>
 
 <script>
@@ -13,14 +12,14 @@ import ReadComponent from './ReadComponent.vue';
 import WriteComponent from './WriteComponent.vue'
 
 export default {
-  name: "DashboardBottom",
-  data: () => {
-    return {};
-  },
-  components: {
-    ReadComponent,
-    WriteComponent,
-  },
+    name: "DashboardBottom",
+    data: () => {
+        return {};
+    },
+    components: {
+        ReadComponent,
+        WriteComponent,
+    },
 };
 </script>
 
