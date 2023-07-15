@@ -142,6 +142,8 @@ router.get("/users/:user_id", async (req, res) => {
   res.send(response)
 });
 
+router.get("/users/:user")
+
 router.get("/users/:user_id/stories", (req, res) => {
   const { user_id } = req.params;
   const query = `select * from story where creator = ${user_id}`;

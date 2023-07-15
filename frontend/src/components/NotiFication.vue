@@ -4,6 +4,12 @@
     <div class="notification-heading">
         Notification
     </div>
+
+    <div class="notification-sub">
+        Your stories
+    </div>
+
+<!-- Notification for your stories -->
     <main>
         <ol class="gradient-list">
 
@@ -22,9 +28,27 @@
 
         </ol>
     </main>
+
+    <div class="notification-sub">
+        Your contributed Stories
+    </div>
+
+<!-- Notification for contributed Story -->
+    <div class="notifications-2">
+        <ol class="gradient-list">
+            <li>
+                <div class="approval">
+                    <div class="left-side">
+                        Your contribution for story titled as "Who's on lunch duty is accepted" and you have been credited 5 coins for your contribution.
+                    </div>
+                </div>
+            </li>
+        </ol>
+    </div>
+
 </div>
 </template>
-
+    
 <script>
 import axios from 'axios';
 export default {
@@ -49,8 +73,7 @@ export default {
                             story => story.id !== pstory.id
                         )
                     }
-                }
-                )
+                })
                 .catch(err => console.log(err))
         },
         reject(pstory_id) {
@@ -79,6 +102,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.notifications-2 {
+    display: block;
+    margin: 0 auto;
+    padding: 1rem;
+    width: 50%;
+    font-family: Belanosima;
+}
+
 .main {
     background-image: url("../assets/background.jpg");
     background-size: cover;
@@ -110,6 +141,17 @@ button {
     display: flex;
     align-items: center;
     font-size: 50px;
+    font-family: Belanosima;
+    font-weight: bolder;
+    color: white;
+    justify-content: center;
+
+}
+
+.notification-sub {
+    display: flex;
+    /*   align-items: center; */
+    font-size: 30px;
     font-family: Belanosima;
     font-weight: bolder;
     color: white;

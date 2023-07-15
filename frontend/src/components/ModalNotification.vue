@@ -13,6 +13,11 @@
     <span class="close">×</button>
   </label> 
 </div> 
+
+<div class="input" type = "text">your contribution has been accepted by the creator</div>
+<div class="notification2">
+Congratulations. You have contributed to their story. You will be credited with coins whenever user accepts your recommendations.Go to the profile to see the changes
+</div>
 </template>
 
 <script>
@@ -20,11 +25,6 @@
         name: 'ModalNotification'
     }
 </script>
-
-
-
-
-
 <style scoped>
 
 .fa{
@@ -49,6 +49,8 @@ input[type=checkbox]:checked + label {
 .pointer-cursor{
    cursor: pointer; cursor: hand;
 }
+
+
 .close{
 
     float:right;

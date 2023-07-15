@@ -1,9 +1,6 @@
 <template>
 <div class="main">
 
-
-
-
     <!-- Story Title -->
 <div class="story-heading">
 <p>{{ story_details.title }}</p>
@@ -57,20 +54,19 @@ axios.get(`http://localhost:5000/api/readstory/${storyId}`)
 </script>
 
 <style scoped>
-
-
-.details{
-    display:flex;
+.details {
+    display: flex;
     align-items: center;
 }
+
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 10px;
-  background-color: #DBDFEA;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    background-color: #DBDFEA;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
 }
 .story-heading, .started-by{
     color:#537188;
@@ -91,87 +87,89 @@ axios.get(`http://localhost:5000/api/readstory/${storyId}`)
   padding: 0px 20px 0px 20px;
 }
 
+
 .logo {
-  width: 120px;
-  height:50px;
+    width: 120px;
+    height: 50px;
 }
-.icon{
+
+.icon {
     top: 20px;
     size: 20px;
 }
 
 .storycards {
-  display: flex;
-  align-items: center;
-  justify-items:center;
+    display: flex;
+    align-items: center;
+    justify-items: center;
 }
 
-.heading{
+.heading {
     display: flex;
     justify-content: space-between;
     width: 100%;
 }
+
 .avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #ddd; 
-  margin: 17px;
-  padding: 0px;
-    
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ddd;
+    margin: 17px;
+    padding: 0px;
+
     /*width:auto;*/
-    align-items:right
+    align-items: right
 }
 
 .card {
-  width: 43%;
-  margin: 20px auto;
-  background-color: F9F5F6;
-  border-radius: 5px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  font-family: Avenir, Helvetica;
+    width: 43%;
+    margin: 20px auto;
+    background-color: F9F5F6;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    font-family: Avenir, Helvetica;
     color: #2c3e50;
-     border-radius: 15px;
-   /*  margin:12px; */
-     padding:0px;
+    border-radius: 15px;
+    /*  margin:12px; */
+    padding: 0px;
 }
 
-
-.heading .story-title{
-    color:#537188;
+.heading .story-title {
+    color: #537188;
     font-weight: bolder;
     font-size: 19px;
 }
 
 #write-section {
-  padding: 15px;
-        font-family: Belanosima;
+    padding: 15px;
+    font-family: Belanosima;
 
 }
 
 .horizontal-line {
-  border: none;
-  border-top: 1px solid #ccc;
-  margin: 10px 0;
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
 }
 
-.date{
- font-size:14px;
- color:gray;
+.date {
+    font-size: 14px;
+    color: gray;
 }
-.storyline p{
+
+.storyline p {
     font-family: Belanosima;
-      font-size: 17px;
-      padding:0px;
+    font-size: 17px;
+    padding: 0px;
 }
 
 .created-by {
-  margin-top: 5px;
-  margin-bottom:5px;
-  color: gray;
-  font-weight: bolder;
-  font-size:16px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: gray;
+    font-weight: bolder;
+    font-size: 16px;
 
 }
-
 </style>

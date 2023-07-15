@@ -3,7 +3,7 @@
 
     <!-- Main content -->
     <div class="main-content">
-      <div class="card-row">
+      <div class="card-row" style="padding-bottom:0px">
         <!-- Card 1 -->
         <div class="card">
           <div class="content-row">
@@ -40,62 +40,31 @@
                   <div class="card-data"> <p>{{ details.pending_requests }}</p></div>
         </div>
       </div>
+     
 
- <div class="Stories">
+ <div class="stories">
 
-  <div class="row">
+
     <div class="col-6">
      <div class="col-text"> Stories Started</div>
     </div>
     <div class="col-6">
       <div class="col-text">Stories Contributed</div>
-    </div>
+ 
   </div>
 
-<div class="row">
+
     <div class="col-6" style="width:100%;">
      <div> <ReadComponent style="width:100%;"/></div>
     </div>
     <div class="col-6">
       <div><ReadComponent style="width:100%;"/></div>
-    </div>
+    
   </div>
 </div>
 
 
-<!-- <div class="row">
-  <div class="col-8"><chart-data></chart-data></div>
-
-  <div class="col-4"> -->
-  
-  <!-- <img src="../assets/illus2.png" alt="Italian Trulli" class="fixed-size-image"> -->
-
-
-  <!-- </div> -->
-<!-- </div> -->
-      
-
-
-      <!-- List View Builder 1 -->
-      <!-- <div class="list-view">
-        <h2 class="list-title">List View Builder 1</h2>
-        <ul class="list-items">
-          <li>Item 1</li>
-          <li>Item 2</li>
-          <li>Item 3</li>
-        </ul>
-      </div> -->
-
-      <!-- List View Builder 2 -->
-      <!-- <div class="list-view">
-        <h2 class="list-title">List View Builder 2</h2>
-        <ul class="list-items">
-          <li>Item A</li>
-          <li>Item B</li>
-          <li>Item C</li>
-        </ul>
-      </div> -->
-    </div>
+</div>
   </div> 
 </template>
 
@@ -133,6 +102,22 @@ export default {
 <style scoped>
 
 
+@media only screen and (max-width: 600px) {
+  .card {
+    width: 100%;
+  }
+
+  .story-card{
+    width:100%;
+  }
+}
+
+.stories{
+    display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
  .fixed-size-image {
       width: 100%; 
       height: 100%; 
@@ -167,6 +152,7 @@ background-color:#537188;
 .main-content {
   flex: 1;
   padding: 20px;
+  padding-bottom:0px;
 }
 
 .row{
@@ -179,7 +165,7 @@ background-color:#537188;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-bottom: 20px;
+
   
 }
 .content-row  {
@@ -195,7 +181,6 @@ padding:10px;
 }
 
 .card {
-  width: calc(23% - 20px);
   height:200px;
   background-color: #537188;
   border-radius: 10px;
@@ -277,5 +262,34 @@ justify-items:center;
   border-radius: 50%;
   background-color: #333;
 }
+
+@media only screen and (min-width: 992px) {
+.card {
+  width:35vh;
+  height:200px;
+  background-color: #537188;
+  border-radius: 10px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+  margin-bottom: 20px;
+  
+  vertical-align:center;
+  justify-items:center;
+ 
+  font-family: Belanosima;
+  color:white;
+  display:flex;
+}
+
+.story-card{
+    display:flex;
+  justify-content:space-between;
+  width:100%;
+}
+}
+
+
+
+
 
 </style>

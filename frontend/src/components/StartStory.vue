@@ -23,35 +23,19 @@
         <button @click="postStory()">Post</button>
       </div>
     </div> -->
-  <div class="main-bg">
-    <div class="wrapper">
-      <h1>Start your story!!</h1>
+    <div class="main-bg">
+<div class="wrapper">
+<h1>Start your story!!</h1>
 
-      <form class="form__contact" @submit.prevent="postStory">
-        <fieldset>
-          <p>
-            Title of the story is
-            <input
-              class="form__field field--name"
-              placeholder="storytitle"
-              tabindex="1"
-              v-model="story.title"
-            />
-          </p>
-          <p>
-            Story starts like this -><input
-              class="form__field field--story"
-              placeholder="story"
-              tabindex="3"
-              v-model="story.description"
-            />.
-          </p>
-          <button type="submit" class="button button--xlarge" tabindex="4">
-            Post it! &#187;
-          </button>
-        </fieldset>
-      </form>
-    </div>
+  
+  <form class="form__contact" @submit.prevent="postStory">
+    <fieldset>
+      <p>Title of the story is <input class="form__field field--name" placeholder="storytitle" tabindex="1" v-model="story.title" ></p>
+      <p>Story starts like this -><textarea rows="8" cols="60" class="form__field field--story" placeholder="story" tabindex="3" v-model="story.description"></textarea>.</p>
+      <button type="submit" class="button button--xlarge" tabindex="4">Post it! &#187;</button>
+    </fieldset>
+  </form>
+</div>
 
     <svg
       version="1.1"
@@ -216,17 +200,26 @@ h1 {
     color: #333;
   }
 
-  input {
-    position: relative;
-    line-height: $line-height;
+input,textarea{
+  position: relative;
+		line-height: $line-height;
     border: none;
-    outline: none;
-    background: none;
-    padding: 0;
-    margin: 0;
-    color: #7db665;
-  }
-  /*span {
+  outline: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  color: #7DB665;
+}
+
+textarea{
+ /* height: 50%;
+  width: 100%;
+  overflow-y: scroll; */
+   resize: vertical; 
+      overflow: auto;
+  
+}
+	/*span {
 		position: relative;
 		line-height: $line-height;
 	}*/
@@ -270,7 +263,7 @@ h1 {
   }
 }
 
-// Hide blur defs
+/*Hide blur defs*/
 svg {
   display: none;
 }
