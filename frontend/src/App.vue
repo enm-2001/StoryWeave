@@ -1,6 +1,6 @@
 <template>
 <div id="app">
-    <!-- <NavBar /> -->
+    <NavBar />
     <router-view></router-view>
   </div>
  
@@ -17,7 +17,7 @@
 // import ReadStory from './components/ReadStory.vue'
 // import DashBoard from './components/DashBoard.vue'
 // import DashboardBottom from './components/DashboardBottom.vue'
-// import NavBar from './components/NavBar.vue'
+import NavBar from './components/NavBar.vue'
 
 export default {
     name: 'App',
@@ -32,7 +32,7 @@ export default {
         // SignIn
     //     DashBoard,
     //    DashboardBottom,
-    // NavBar
+    NavBar
     },
   
 }

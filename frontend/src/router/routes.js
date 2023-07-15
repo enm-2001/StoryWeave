@@ -7,6 +7,7 @@ import UserProfile from '../components/UserProfile'
 import ReadStory from '../components/ReadStory'
 import NotiFication from '../components/NotiFication'
 import DashboardBottom from '../components/DashboardBottom'
+// import NavBar1 from '../components/NavBar1'
 
 
 const routes = [
@@ -18,6 +19,7 @@ const routes = [
     { path: '/readstory/:storyId', component: ReadStory },
     { path: '/notification', component: NotiFication },
     { path: '/dash', component: DashboardBottom},
+    // { path: '/nav', component: NavBar1},
     // { path: '/login', component: SignIn },
 ];
 
