@@ -1,18 +1,18 @@
 <template>
 
 <div class="cardc">
-    <div id="write-section">
-        <div class="heading">
-            <p class="created-by">Created by @leyrelineasrectas</p>
-            <div class="story-title">WHO'S ON LUNCH DUTY</div>
-        </div>
-        <hr class="horizontal-line">
-        <div class="previous-line">
-            <p> In the land of Astraladia, where dreams danced on moonbeams and stars whispered ancient secrets, a humble farm boy gazed at the night sky with wide-eyed wonder. A shooting star streaked across the heavens. The boy heard a faint, ethereal voice beckoning him to follow the star.
-            </p>
-        </div>
+  <div id="write-section">
+  <div class="heading">
+   <p class="created-by">Created by @leyrelineasrectas</p>
+   <div class="story-title">WHO'S ON LUNCH DUTY</div>
+   </div>
+    <hr class="horizontal-line">
+    <div class="previous-line">
+     <p> In the land of Astraladia, where dreams danced on moonbeams and stars whispered ancient secrets, a humble farm boy gazed at the night sky with wide-eyed wonder. A shooting star streaked across the heavens. The boy heard a faint, ethereal voice beckoning him to follow the star.
+    </p></div>
+    
 
-    </div>
+  </div>
 </div>
 
 </template>
@@ -24,8 +24,9 @@ export default {
         return {
 
         }
-    }
+    },
 
+    
 }
 </script>
 

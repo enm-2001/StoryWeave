@@ -15,7 +15,7 @@ const routes = [
     { path: '/startstory', component: StartStory },
     { path: '/startstory/:story_id', component: ContinueStory },
     { path: '/profile', component: UserProfile },
-    { path: '/readstory', component: ReadStory },
+    { path: '/readstory/:storyId', component: ReadStory },
     { path: '/notification', component: NotiFication },
     { path: '/dash', component: DashboardBottom},
     // { path: '/login', component: SignIn },
