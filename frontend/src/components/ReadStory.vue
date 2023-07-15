@@ -3,31 +3,29 @@
 
     <!-- Story Title -->
 <div class="story-heading">
-<p>WHO'S ON LUNCH DUTY</p>
+<p>{{ story_details.title }}</p>
 </div>
+<p class="started-by">Started by: {{ story_details.username }}</p>
 <!-- Story cards -->
-<div class="storycards">
+<div class="storycards" v-for="contribution in story_others" v-bind:key="contribution.contr_id">
   <div class="card">
   <div id="write-section">
   <div class="heading">
   <div>
-   <p class="created-by">Line by @leyrelineasrectas</p>
-  <div class="date"> 12/10/23</div>
+   <p class="created-by">Line by @{{contribution.username}}</p>
+  
   </div>
-   <div class="avatar"></div> 
+  <div class="date"> {{ contribution.date_contributed }}</div>
    </div>
     <hr class="horizontal-line">
     <div class="storyline">
-     <p> In the land of Astraladia, where dreams danced on moonbeams and stars whispered ancient secrets, a humble farm boy gazed at the night sky with wide-eyed wonder. A shooting star streaked across the heavens. The boy heard a faint, ethereal voice beckoning him to follow the star.
+     <p> {{ contribution.description }}
     </p></div>
 
 
   </div>
 </div>
 </div>
-    
-{{ story_details }}
-      {{ story_others }}
 
 </div>
 </template>
@@ -39,7 +37,7 @@ export default {
   data() {
     return {
       story_details: {},
-           story_others: []
+      story_others: []
     };
   },
   mounted(){
@@ -70,18 +68,25 @@ axios.get(`http://localhost:5000/api/readstory/${storyId}`)
     background-color: #DBDFEA;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
 }
-
-.story-heading {
-    color: #537188;
+.story-heading, .started-by{
+    color:#537188;
     font-size: 25px;
     font-family: Belanosima;
     display: flex;
-    padding: 20px;
     align-items: center;
-    justify-content: center;
-    font-weight: bolder;
-
+    justify-content:center;
+    font-weight:bolder;
 }
+
+.story-heading{
+  text-transform: uppercase;
+  padding:20px 20px 0px 20px;
+}
+
+.started-by{
+  padding: 0px 20px 0px 20px;
+}
+
 
 .logo {
     width: 120px;
