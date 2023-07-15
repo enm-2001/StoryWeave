@@ -2,10 +2,12 @@ const express = require("express");
 const router = express.Router();
 const client = require("../config/connection");
 const jwt = require("jsonwebtoken");
+const bcrypt = require('bcryptjs');
+require('dotenv').config()
 
-function generateAccessToken(user) {
-  return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15m" });
-}
+// function generateAccessToken(user) {
+//   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15m" });
+// }
 
 router.get("/users", (req, res) => {
   client.query("select * from users", (err, result) => {
@@ -36,14 +38,16 @@ router.post("/checkUser", (req, res) => {
   client.end;
 });
 
-router.post("/signup", (req, res) => {
+router.post("/signup", async (req, res) => {
   console.log(req.body);
   const { name, username, email, password } = req.body;
 
+  const hashedPassword = await bcrypt.hash(password, 10)
+
   const query = `INSERT INTO users (name, username, email, password, coins)
-    VALUES ('${name}', '${username}','${email}', '${password}', 0);
+    VALUES ('${name}', '${username}','${email}', '${hashedPassword}', 0);
     `;
-  client.query(query, (err, result1) => {
+  await client.query(query, (err, result1) => {
     if (result1) {
       console.log(result1);
       res.send("insertion completed");
@@ -53,42 +57,89 @@ router.post("/signup", (req, res) => {
   });
 });
 
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   const query = `select * from users where username = '${username}'`;
-  client.query(query, (err, result) => {
-    if (!err) {
+  const result = await client.query(query)
+  if(!result) {
+    console.log("Error: ", err);
+    return;
+  }
       console.log(result.rows[0]);
-      if (result.rows[0].password === password) {
+
+      const passwordCorrect = await bcrypt.compare(password, result.rows[0].password)
+      console.log(passwordCorrect);
+      if (passwordCorrect) {
         // console.log("ppppppppp");
         // const user = result.rows[0];
         // res.send(user);
+       
         const user = { name: username, user_id: result.rows[0].user_id};
-        const accessToken = generateAccessToken(user);
-        res.cookie('access_token', token, {
-          httpOnly: true
-        }).json({ accessToken: accessToken, user: user });
+        const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1h" });
+        // console.log("login generate", token)
+        res.json({ token: token });
 
       } else {
         res.json({ pcheck: true });
       }
-    } else {
-      console.log("Error: ", err);
-    }
+  
   });
-});
 
-router.get("/users/:user_id", (req, res) => {
+
+router.get("/logout", (req, res) => {
+  res.clearCookie('access_token');
+  res.status(200).json('Logout success')
+})
+
+router.get("/users/:user_id", async (req, res) => {
   const { user_id } = req.params;
-  const query = `select * from users where user_id = ${user_id}`;
-  client.query(query, (err, result) => {
-    if (!err) {
-      res.send(result.rows[0]);
-    } else {
-      console.log("err getting user: ", err);
-    }
-  });
+  const query1 = `select * from users where user_id = ${user_id}`;
+  
+  const result1 = await client.query(query1);
+  if(!result1){
+    console.log("Error in query1:", err);
+      res.status(500).json({ error: "Internal server error" });
+      return;
+  }
+  
+  const coins = result1.rows[0].coins;
+
+  const query2 = `select count(*) as stories from story where creator = ${user_id}`;
+  const result2 = await client.query(query2)
+  if(!result2){
+    console.log("Error in query2:", err);
+      res.status(500).json({ error: "Internal server error" });
+      return;
+  }
+  const stories_created = result2.rows[0].stories
+
+  const query3 = `select count(*) as contributions from contributions where user_id = ${user_id}`;
+  const result3 = await client.query(query3)
+  if(!result3){
+    console.log("Error in query3:", err);
+      res.status(500).json({ error: "Internal server error" });
+      return;
+  }
+  const stories_updated = result3.rows[0].contributions
+
+  const query4 = `select count(*) as pending from pending_contr where story_id in(select story_id from story where creator = ${user_id})`
+  const result4 = await client.query(query4)
+  if(!result4){
+    console.log("Error in query4:", err);
+      res.status(500).json({ error: "Internal server error" });
+      return;
+  }
+  const pending_requests = result4.rows[0].pending
+
+  const response = {
+    coins,
+    stories_created,
+    stories_updated,
+    pending_requests
+  }
+
+  res.send(response)
 });
 
 router.get("/users/:user_id/stories", (req, res) => {

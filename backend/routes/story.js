@@ -1,27 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const client = require("../config/connection");
-const jwt = require('jsonwebtoken')
+const { authenticateToken } = require('../middlewares/checkAuth')
 
-function authenticateToken(req, res, next) {
-
-  const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.split(' ')[1]
-
-  if (!token) {
-    return res.status(401).json({ message: 'No token provided' });
-  }
-
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
-    if (err) {
-      return res.status(401).json({ message: 'Invalid token' });
-    }
-
-    // Attach the decoded payload (user data) to the request for further processing
-    req.user = user;
-    next();
-  });
-}
 
 router.post("/story/create", authenticateToken ,async (req, res) => {
   try {
@@ -188,6 +169,7 @@ router.put("/story/update", (req, res) => {
   });
 });
 
+//stories contributed
 router.get("/story/contributions/:user_id", (req, res) => {
   const { user_id } = req.params;
   const query = `select count(*) as contributions from contributions where user_id = ${user_id}`;

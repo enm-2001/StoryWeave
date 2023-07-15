@@ -46,12 +46,28 @@
         <h2>Create Login</h2>
         <div>Use your account</div>
 
-        <input type="text" placeholder="Name" v-model="formData.name" required>
+        <input
+          type="text"
+          placeholder="Name"
+          v-model="formData.name"
+          required
+        />
 
-        <input type="text" placeholder="Username" v-model="formData.username" v-on:blur="checkUserforSignup(formData.username)" required>
+        <input
+          type="text"
+          placeholder="Username"
+          v-model="formData.username"
+          v-on:blur="checkUserforSignup(formData.username)"
+          required
+        />
         <span v-if="userExists">Username already exists</span>
 
-        <input type="email" placeholder="Email" v-model="formData.email" required/>
+        <input
+          type="email"
+          placeholder="Email"
+          v-model="formData.email"
+          required
+        />
         <input
           type="password"
           placeholder="Password"
@@ -67,7 +83,11 @@
         <span v-if="!userExistsforLogin">User does not exist</span>
         <span v-if="incorrect">Incorrect Password</span>
 
-        <input type="text" placeholder="Username" v-model="loginData.username" />
+        <input
+          type="text"
+          placeholder="Username"
+          v-model="loginData.username"
+        />
         <input
           type="password"
           placeholder="Password"
@@ -106,18 +126,18 @@ export default {
   methods: {
     signup() {
       console.log(this.formData);
-      if(!this.userExists){
+      if (!this.userExists) {
         axios
-        .post("http://localhost:5000/api/signup", this.formData)
-        .then((res) => {
-          console.log(res);
-          localStorage.setItem("user", JSON.stringify(this.formData));
-          router.push("/dashboard");
-        })
-        .catch((err) => console.log(err));
+          .post("http://localhost:5000/api/signup", this.formData)
+          .then((res) => {
+            console.log(res);
+            localStorage.setItem("user", JSON.stringify(this.formData));
+            router.push("/dashboard");
+          })
+          .catch((err) => console.log(err));
       }
     },
-    
+
     checkUserforSignup(username) {
       axios
         .post("http://localhost:5000/api/checkUser", { username })
@@ -156,7 +176,7 @@ export default {
           // console.log(res.data);
           if (!res.data.pcheck) {
             this.incorrect = res.data.pcheck;
-            localStorage.setItem("user", JSON.stringify(res.data));
+            localStorage.setItem("token", res.data.token);
             router.push("/dashboard");
           } else {
             // console.log("incoreeer");
@@ -196,15 +216,14 @@ export default {
 }
 
 .container {
-    position: relative;
-    width: 768px;
-    height: 480px;
-    border-radius: 10px;
-    overflow: hidden;
-    justify-content: center;
-    box-shadow: 0 35px 60px rgba(0, 0, 0, .2),
-        0 35px 50px rgba(0, 0, 0, .2);
-    background: linear-gradient(to bottom, #efefef, #ccc);
+  position: relative;
+  width: 768px;
+  height: 480px;
+  border-radius: 10px;
+  overflow: hidden;
+  justify-content: center;
+  box-shadow: 0 35px 60px rgba(0, 0, 0, 0.2), 0 35px 50px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to bottom, #efefef, #ccc);
 
   .overlay-container {
     position: absolute;
@@ -229,33 +248,33 @@ export default {
     transition: transform 0.5s ease-in-out;
   }
 
-    @mixin overlays($property) {
-        position: absolute;
-        top: 0;
-        bottom:0;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        flex-direction: column;
-        padding: 70px 40px;
-        width: calc(50% - 80px);
-        height: calc(100% - 140px);
-        text-align: center;
-        transform: translateX($property);
-        transition: transform .5s ease-in-out;
-    }
+  @mixin overlays($property) {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 70px 40px;
+    width: calc(50% - 80px);
+    height: calc(100% - 140px);
+    text-align: center;
+    transform: translateX($property);
+    transition: transform 0.5s ease-in-out;
+  }
 
   .overlay-left {
     @include overlays(-20%);
     height: 100%;
-    width: 50%
+    width: 50%;
   }
 
   .overlay-right {
     @include overlays(0);
     right: 0;
     height: 100%;
-    width: 50%
+    width: 50%;
   }
 }
 

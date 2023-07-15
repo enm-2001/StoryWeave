@@ -15,6 +15,7 @@
     "chart.js": "^4.3.0",
     "core-js": "^3.8.3",
     "jquery": "^3.7.0",
+    "jwt-decode": "^3.1.2",
     "popper.js": "^1.16.1",
     "sass": "^1.63.6",
     "sass-loader": "^13.3.2",
