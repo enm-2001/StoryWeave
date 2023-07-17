@@ -7,6 +7,8 @@ import UserProfile from '../components/UserProfile'
 import ReadStory from '../components/ReadStory'
 import NotiFication from '../components/NotiFication'
 import DashboardBottom from '../components/DashboardBottom'
+import store from '../store'
+// import Store from '../store'
 // import NavBar1 from '../components/NavBar1'
 
 
@@ -30,8 +32,15 @@ const router = createRouter({
   });
   
 router.beforeEach((to, from, next) => {
+    const token = localStorage.getItem("token")
+    if(token != null){
+        store.commit('setUserIsAuthenticated', true)
+    }
+    else{
+        store.commit('setUserIsAuthenticated', false)
+    }
     if(to.matched.some(record => record.meta.requiresAuth)){
-        if(localStorage.getItem("token") != null){
+        if(token != null){
             next();
         }
         else{
