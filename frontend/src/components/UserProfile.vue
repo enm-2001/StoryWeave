@@ -10,7 +10,7 @@
             <h3 class="card-title">Coins</h3>
             <p class="card-description">  <i class='fas fa-coins' style='font-size:35px'></i></p>
           </div>
-          <div class="card-data"> <p>50</p></div>
+          <div class="card-data"> <p>{{ details.coins }}</p></div>
         </div>
 
         <!-- Card 2 -->
@@ -19,7 +19,7 @@
             <h3 class="card-title">Stories created</h3>
             <p class="card-description"> <i class='fas fa-edit' style='font-size:35px'></i></p>
           </div>
-                  <div class="card-data"> <p>5</p></div>
+                  <div class="card-data"> <p>{{details.stories_created}}</p></div>
         </div>
 
         <!-- Card 3 -->
@@ -28,7 +28,7 @@
             <h3 class="card-title">Stories updated</h3>
             <p class="card-description"> <i class='fas fa-pen' style='font-size:35px'></i></p>
           </div>
-                  <div class="card-data"> <p>8</p></div>
+                  <div class="card-data"> <p>{{ details.stories_updated }}</p></div>
         </div>
 
       <!-- Card 4 -->
@@ -37,7 +37,7 @@
             <h3 class="card-title">Pending request</h3>
             <p class="card-description"> <i class="fa-sharp fa-solid fa-pen-fancy" style='font-size:35px'></i></p>
           </div>
-                  <div class="card-data"> <p>1</p></div>
+                  <div class="card-data"> <p>{{ details.pending_requests }}</p></div>
         </div>
       </div>
      
@@ -69,13 +69,31 @@
 </template>
 
 <script>
+import axios from 'axios';
 import ReadComponent from './ReadComponent.vue';
+import jwt_decode from 'jwt-decode'
 // import ChartData from './ChartData.vue';
 export default {
     name: 'UserProfile',
+    data(){
+      return{
+        details: {}
+      }
+    },
     components:{
       ReadComponent,
       // ChartData,
+    },
+    mounted(){
+      const token = localStorage.getItem("token")
+      const user = jwt_decode(token)
+      const user_id = user.user_id
+      axios.get(`http://localhost:5000/api/users/${user_id}`)
+      .then(res => {
+        console.log(res.data);
+        this.details = res.data
+      })
+      .catch(err => console.log(err))
     }
    
 }

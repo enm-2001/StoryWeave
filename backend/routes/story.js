@@ -1,39 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const client = require("../config/connection");
+const { authenticateToken } = require('../middlewares/checkAuth')
 
-// router.post("/story/create", (req, res) => {
-//   const { user_id } = req.body;
-//   const { title, description } = req.body.story;
-//   // console.log(title);
-//   const today = new Date();
-//   const date = today.getDate();
-//   console.log(date);
-//   const query = `insert into story(title,description,creator,date_created) values('${title}','${description}','${user_id}','${date}');`;
-//   client.query(query, (err, result) => {
-//     if (!err) {
-//       const query2 = `update users set coins = coins + 15 where user_id = ${user_id}`;
-//       client.query(query2, (err, result2) => {
-//         if (!err) {
-//           res.send("insertion of story complete");
-//         } else {
-//           console.log(err);
-//         }
-//       });
-//     } else {
-//       console.log("err in story: ", err);
-//     }
-//   });
-// });
 
-router.post("/story/create", async (req, res) => {
+router.post("/story/create", authenticateToken ,async (req, res) => {
   try {
     const { user_id } = req.body;
     const { title, description } = req.body.story;
     // console.log(title);
     const today = new Date();
 
-    const day = today.getDate() + 1;
+    const day = today.getDate();
     const month = today.getMonth() + 1; 
     const year = today.getFullYear();
 
@@ -191,6 +169,7 @@ router.put("/story/update", (req, res) => {
   });
 });
 
+//stories contributed
 router.get("/story/contributions/:user_id", (req, res) => {
   const { user_id } = req.params;
   const query = `select count(*) as contributions from contributions where user_id = ${user_id}`;
@@ -208,11 +187,12 @@ router.get("/story/contributions/:user_id", (req, res) => {
 router.get("/readstory/:storyId", async (req, res) => {
   const {storyId} = req.params
 
-  const query1 = `select s.title, s.creator from story s where story_id = ${storyId}`
+  const query1 = `select s.title, u.username from story s 
+  join users u on u.user_id = s.creator where story_id = ${storyId}`
   const result1 = await client.query(query1)
   const story_details = result1.rows[0]
 
-  const query2 = `select c.date_contributed, c.description, u.name from story s
+  const query2 = `select c.contr_id, TO_CHAR(date_contributed, 'DD/MM/YYYY') as date_contributed, c.description, u.username from story s
   join contributions c on s.story_id = c.story_id
   join users u on c.user_id = u.user_id
   where s.story_id = ${storyId}
