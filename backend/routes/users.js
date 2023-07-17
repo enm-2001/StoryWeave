@@ -142,7 +142,6 @@ router.get("/users/:user_id", async (req, res) => {
   res.send(response)
 });
 
-router.get("/users/:user")
 
 router.get("/users/:user_id/stories", (req, res) => {
   const { user_id } = req.params;

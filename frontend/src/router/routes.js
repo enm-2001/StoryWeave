@@ -13,7 +13,7 @@ const routes = [
     { path: '/login', component: SignIn },
     { path: '/dashboard', component: DashBoard },
     { path: '/startstory', component: StartStory },
-    { path: '/startstory/:story_id', component: ContinueStory },
+    { path: '/continuestory/:story_id', component: ContinueStory },
     { path: '/profile', component: UserProfile },
     { path: '/readstory/:storyId', component: ReadStory },
     { path: '/notification', component: NotiFication },
