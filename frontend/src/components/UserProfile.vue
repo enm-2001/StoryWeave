@@ -55,10 +55,10 @@
 
 
     <div class="col-6" style="width:100%;">
-     <div> <ReadComponent style="width:100%;"/></div>
+     <div> <ReadComponent style="width:100%;"/>{{ startedStories }}</div>
     </div>
     <div class="col-6">
-      <div><ReadComponent style="width:100%;"/></div>
+      <div><ReadComponent style="width:100%;"/>{{ contributedStories }}</div>
     
   </div>
 </div>
@@ -77,23 +77,25 @@ export default {
     name: 'UserProfile',
     data(){
       return{
-        details: {}
+        details: {},
+        startedStories : [],
+        contributedStories: []
       }
     },
     components:{
       ReadComponent,
       // ChartData,
     },
-    mounted(){
+    async mounted(){
       const token = localStorage.getItem("token")
       const user = jwt_decode(token)
       const user_id = user.user_id
-      axios.get(`http://localhost:5000/api/users/${user_id}`)
-      .then(res => {
-        console.log(res.data);
-        this.details = res.data
-      })
-      .catch(err => console.log(err))
+      const res = await axios.get(`http://localhost:5000/api/users/${user_id}`)
+      this.details = res.data
+      const res2 = await axios.get(`http://localhost:5000/api/users/startedstories/${user_id}`)
+      this.startedStories = res2.data
+      const res3 = await axios.get(`http://localhost:5000/api/users/contributedstories/${user_id}`)
+      this.contributedStories = res3.data
     }
    
 }

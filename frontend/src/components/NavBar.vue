@@ -3,6 +3,7 @@
 
   <!-- LOGO -->
     <div class="logo">StoryWeave</div>
+
     <!-- NAVIGATION MENU -->
     <ul class="nav-links">
       <!-- USING CHECKBOX HACK -->
@@ -23,7 +24,6 @@
 
 <script>
 import router from '../router/routes.js'
-// import store from '../store'
   export default {
     name: 'NavBar1',
     methods: {
@@ -48,10 +48,10 @@ li {
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-     background-color: #537188;
+  background-color: #537188;
   color: #fff;
-   font-family: Belanosima;
-   margin:0px;
+  font-family: Belanosima;
+  margin:0px;
 }
 
 button {
@@ -65,6 +65,10 @@ button {
 .nav-links a {
   color: #fff;
 }
+
+/* .nav-links{
+  vertical-align: center;
+} */
 
 /* LOGO */
 .logo {
