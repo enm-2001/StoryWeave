@@ -11,20 +11,25 @@
 
       <!-- NAVIGATION MENUS -->
       <div class="menu">
-        <li><a href="#">DashBoard</a></li>
-    <router-link to="/notification">
-        <li>  Notification</li>
-        </router-link>
-<li><a href="#">Profile</a></li>
-    <li><a href="#">Logout</a></li>
+    <router-link to="/dashboard"><li>DashBoard</li> </router-link>
+    <router-link to="/notification"><li>  Notification</li></router-link>
+  <router-link to="/profile"><li>Profile</li></router-link>
+    <li><button @click="logout">Logout</button></li>
       </div>
     </ul>
   </nav>
 </template>
 
 <script>
+import router from '../router/routes.js'
   export default {
-    name: 'NavBar1'
+    name: 'NavBar1',
+    methods: {
+      logout(){
+        localStorage.clear("token"),
+        router.push("/login")
+      }
+    }
   }
 </script>
 
@@ -45,6 +50,14 @@ li {
   color: #fff;
    font-family: Belanosima;
    margin:0px;
+}
+
+button {
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0;
+    margin: 0;
 }
 
 .nav-links a {

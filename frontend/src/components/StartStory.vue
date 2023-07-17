@@ -140,6 +140,53 @@ $line-height: 40px;
   color: #fff;
   background: #9fbe5a;
 }
+
+@media (max-width: 600px) {
+  /* Adjust the max-width and padding for smaller screens */
+  form__contact {
+    max-width: 100%;
+    padding: 0 10px; 
+  }
+
+ 
+  form__contact fieldset {
+    font-size: 18px;
+  }
+
+ 
+}
+
+@media only screen and (min-width: 600px) {
+  form__contact {
+    
+    padding: 0 10px;
+    width:100%; 
+  }
+
+  
+  form__contact fieldset {
+    font-size: 18px;
+  }
+}
+
+
+@media only screen and (min-width: 768px) {
+form__contact {
+    max-width: 200px;
+    width: 100px;
+    display:flex;
+  }
+
+
+  form__contact fieldset {
+    font-size: 18px;
+  }
+
+  svg {
+  display: none;
+}
+
+}
 .main-bg {
   display: flex;
   justify-content: center;
@@ -151,7 +198,7 @@ $line-height: 40px;
   background-repeat: no-repeat;
 
   height: 100vh;
-  width: 200vh;
+
 }
 
 h1 {
@@ -192,9 +239,9 @@ h1 {
       width: 1px;
       border-left: double #e08183;
     }
-  }
-
-  p {
+  } 
+  
+	p {
     margin: 0 0 $line-height 0;
     line-height: $line-height;
     color: #333;

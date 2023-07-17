@@ -105,11 +105,36 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+@media only screen and (max-width: 767.98px) {
+ .notification-heading {
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    font-family: Belanosima;
+    font-weight: bolder;
+    color: white;
+    justify-content: center;
+
+}
+.notification-sub {
+    display: flex;
+    /*   align-items: center; */
+    font-size: 10px;
+    font-family: Belanosima;
+    font-weight: bolder;
+    color: white;
+    justify-content: center;
+
+
+}
+}
+
 .notifications-2 {
     display: block;
     margin: 0 auto;
     padding: 1rem;
-    width: 50%;
+    width: 60%;
     font-family: Belanosima;
 }
 
@@ -121,7 +146,7 @@ export default {
     background-repeat: no-repeat;
 
     height: 100vh;
-    width: 200vh;
+
 }
 
 .right-side {
@@ -143,12 +168,12 @@ button {
 .notification-heading {
     display: flex;
     align-items: center;
-    font-size: 50px;
+    font-size: 45px;
     font-family: Belanosima;
     font-weight: bolder;
     color: white;
     justify-content: center;
-
+    padding-top:10px;
 }
 
 .notification-sub {
