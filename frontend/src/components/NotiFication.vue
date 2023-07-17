@@ -51,6 +51,7 @@
     
 <script>
 import axios from 'axios';
+import jwt_decode from 'jwt-decode'
 export default {
     name: 'NotiFication',
     data() {
@@ -88,7 +89,9 @@ export default {
         }
     },
     mounted() {
-        const user_id = JSON.parse(localStorage.getItem("user")).user_id;
+        const token = localStorage.getItem("token")
+        const user = jwt_decode(token)
+        const user_id = user.user_id;
         axios.get(`http://localhost:5000/api/story/pstory/${user_id}`)
             .then((res) => {
                 console.log(res.data);
