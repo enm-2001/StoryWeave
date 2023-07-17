@@ -2,27 +2,28 @@
     <!-- <div class="img-container">
         <img src="../assets/logof.png"  class="logo-img"/>
     </div> -->
-<!-- <h2>WRITE</h2>
-<p>Stories in need of a line</p> -->
 
+<div class="writestory" v-if="this.uncompletedStories.length != 0">
+  <h2>WRITE</h2>
+<div class="storycards" v-for="story in uncompletedStories" :key="story.story_id">
 <div class="card">
   <div id="write-section">
   <div class="heading">
 
-   <p class="created-by">Created by @leyrelineasrectas</p>
+   <p class="created-by">Created by @{{story.username}}</p>
 
 
-   <div class="story-title">LIFE IS A LIE </div>
+   <div class="story-title">{{ story.title }}</div>
 
    </div>
     <hr class="horizontal-line">
     <div class="previous-line">
-      <div class ="pheading">Previous line by @Cyndallager</div>
-      <p>In the land of Astraladia, where dreams danced on moonbeams and stars whispered ancient secrets, a humble farm boy gazed at the night sky with wide-eyed wonder. A shooting star streaked across the heavens. The boy heard a faint, ethereal voice beckoning him to follow the star.</p>
+      <div class ="pheading">Previous line by @{{ story.last_line_contributor }}</div>
+      <p>{{ story.description }}</p>
     </div>
     <hr class="horizontal-line">
     
-      <button id="add-line-button">
+      <button id="add-line-button" @click="continueStory(story.story_id)">
       <i class="glyphicon glyphicon-plus"></i>
 
       Add New Line
@@ -30,16 +31,33 @@
 
   </div>
 </div>
-
+</div>
+</div>
 </template>
 
 <script>
+import router from '@/router/routes';
+import axios from 'axios';
+
 
 export default {
     data: () => {
         return {
-            signUp: false
+            signUp: false,
+            uncompletedStories: []
         }
+    },
+    methods: {
+      continueStory(story_id){
+        router.push(`/continuestory/${story_id}`)
+      }
+    },
+    mounted(){
+      axios.get("http://localhost:5000/api/story/uncompleted/writestory")
+      .then(res => {
+        this.uncompletedStories = res.data
+      })
+      .catch(err => console.log(err))
     }
 }
 </script>
@@ -47,7 +65,7 @@ export default {
 <style>
 
 .card {
-  width: 43%;
+  width: 80%;
   margin: 20px auto;
   background-color: F9F5F6;
   border-radius: 5px;
@@ -56,6 +74,23 @@ export default {
     color: #2c3e50;
      border-radius: 15px;
      padding:0px
+}
+
+h2{
+    margin-top: 20px;
+    color:#537188;
+    font-size: 25px;
+    font-family: Belanosima;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    font-weight:bolder;
+}
+
+.storycards{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .date{
@@ -70,7 +105,6 @@ export default {
 #write-section {
   padding: 15px;
     font-family: Belanosima;;
-
   
 }
 

@@ -1,31 +1,49 @@
 <template>
 
+
+    <div class="readstory" v-if="this.completedStories.length != 0">
+        <h2 >READ</h2>
+<div class="storycards" v-for="story in completedStories" :key="story.story_id" @click="readStory(story.story_id)">
 <div class="cardc">
   <div id="write-section">
   <div class="heading">
-   <p class="created-by">Created by @leyrelineasrectas</p>
-   <div class="story-title">WHO'S ON LUNCH DUTY</div>
+   <p class="created-by">Created by @{{ story.username }}</p>
+   <div class="story-title">{{ story.title }}</div>
    </div>
     <hr class="horizontal-line">
     <div class="previous-line">
-     <p> In the land of Astraladia, where dreams danced on moonbeams and stars whispered ancient secrets, a humble farm boy gazed at the night sky with wide-eyed wonder. A shooting star streaked across the heavens. The boy heard a faint, ethereal voice beckoning him to follow the star.
+     <p> {{ story.description }}
     </p></div>
     
-
+</div>
   </div>
+</div>
 </div>
 
 </template>
 
 <script>
+import router from "@/router/routes";
+import axios from "axios";
 export default {
     name: 'ReadComponent',
     data: () => {
         return {
-
+            completedStories: []
         }
     },
-
+    methods: {
+        readStory(story_id){
+            router.push(`/readstory/${story_id}`)
+        }
+    },
+    mounted(){
+        axios.get("http://localhost:5000/api/story/completed/readstory")
+        .then(res => {
+            this.completedStories = res.data
+        })
+        .catch(err => console.log(err))
+    }
     
 }
 </script>
@@ -33,7 +51,7 @@ export default {
 <style scoped>
 
 .cardc {
-    width: 43%;
+    width: 80%;
     margin: 20px auto;
     background-color: F9F5F6;
     border-radius: 5px;
@@ -45,10 +63,26 @@ export default {
     padding: 0px;
 }
 
+h2{
+    margin-top: 20px;
+    color:#537188;
+    font-size: 25px;
+    font-family: Belanosima;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    font-weight:bolder;
+}
+.storycards{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .heading .story-title {
     color: #537188;
     font-weight: bolder;
     font-size: 19px;
+    text-transform: uppercase;
 }
 
 #write-section {
