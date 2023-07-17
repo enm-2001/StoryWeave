@@ -11,12 +11,10 @@
 
       <!-- NAVIGATION MENUS -->
       <div class="menu">
-        <li><a href="#">DashBoard</a></li>
-    <router-link to="/notification">
-        <li>  Notification</li>
-        </router-link>
-<li><a href="#">Profile</a></li>
-    <li><a href="#">Logout</a></li>
+    <router-link to="/dashboard"><li>DashBoard</li> </router-link>
+    <router-link to="/notification"><li>  Notification</li></router-link>
+  <router-link to="/profile"><li>Profile</li></router-link>
+    <li>Logout</li>
       </div>
     </ul>
   </nav>

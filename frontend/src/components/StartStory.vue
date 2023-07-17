@@ -1,29 +1,5 @@
 <template>
 
-  <!-- Navbar -->
-
-<!-- -->
-    <!-- <div class="card">
-      <div class="card-header">Start your Story</div>
-      <div class="card-body">
-        <input
-          type="text"
-          placeholder="Title of Story"
-          class="card-title"
-          v-model="story.title"
-          required
-        /><br />
-        <span v-if="titleNotExist" style="color: red;">Please enter the details of your story..</span>
-        <textarea
-          class="card-text"
-          placeholder="Start you story...."
-          v-model="story.description"
-          required
-        ></textarea
-        ><br />
-        <button @click="postStory()">Post</button>
-      </div>
-    </div> -->
     <div class="main-bg">
 <div class="wrapper">
 <h1>Start your story!!</h1>
@@ -112,6 +88,53 @@ $line-height: 40px;
   color: #fff;
   background: #9FBE5A;  
 }
+
+@media (max-width: 600px) {
+  /* Adjust the max-width and padding for smaller screens */
+  form__contact {
+    max-width: 100%;
+    padding: 0 10px; 
+  }
+
+ 
+  form__contact fieldset {
+    font-size: 18px;
+  }
+
+ 
+}
+
+@media only screen and (min-width: 600px) {
+  form__contact {
+    
+    padding: 0 10px;
+    width:100%; 
+  }
+
+  
+  form__contact fieldset {
+    font-size: 18px;
+  }
+}
+
+
+@media only screen and (min-width: 768px) {
+form__contact {
+    max-width: 200px;
+    width: 100px;
+    display:flex;
+  }
+
+
+  form__contact fieldset {
+    font-size: 18px;
+  }
+
+  svg {
+  display: none;
+}
+
+}
 .main-bg {
   display: flex;
   justify-content: center;
@@ -123,7 +146,7 @@ $line-height: 40px;
   background-repeat: no-repeat;
 
   height: 100vh;
-  width: 200vh;
+
 }
 
 h1 {
@@ -163,7 +186,6 @@ h1 {
       border-left: double #E08183;
     }
   } 
-  
 	p {
     margin: 0 0 $line-height 0;
     line-height: $line-height;

@@ -199,9 +199,9 @@ justify-items:center;
 
 
 .card-title {
-  font-size: 30px;
-  margin-bottom: 5px;
-  padding-right:25px;
+  font-size: 25px;
+  margin-bottom: 2px;
+  padding-right:10px;
  
 }
 
