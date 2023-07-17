@@ -13,11 +13,11 @@ import DashboardBottom from '../components/DashboardBottom'
 const routes = [
     { path: '/login', component: SignIn },
     { path: '/dashboard', component: DashBoard },
-    { path: '/startstory', component: StartStory },
-    { path: '/continuestory/:story_id', component: ContinueStory },
-    { path: '/profile', component: UserProfile },
+    { path: '/startstory', component: StartStory, meta: {requiresAuth: true} },
+    { path: '/continuestory/:story_id', component: ContinueStory, meta: {requiresAuth: true} },
+    { path: '/profile', component: UserProfile, meta: {requiresAuth: true} },
     { path: '/readstory/:storyId', component: ReadStory },
-    { path: '/notification', component: NotiFication },
+    { path: '/notification', component: NotiFication, meta: {requiresAuth: true} },
     { path: '/dash', component: DashboardBottom},
     // { path: '/nav', component: NavBar1},
     // { path: '/login', component: SignIn },
@@ -29,5 +29,18 @@ const router = createRouter({
     routes
   });
   
-  
-  export default router;
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.requiresAuth)){
+        if(localStorage.getItem("token") != null){
+            next();
+        }
+        else{
+            router.push("/login")
+        }
+    }
+    else{
+        next();
+    }
+})
+
+export default router;
