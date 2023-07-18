@@ -53,8 +53,7 @@
       id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
-      xml:space="preserve"
-    >
+      xml:space="preserve">
       <defs>
         <filter id="blur0">
           <feGaussianBlur in="SourceGraphic" stdDeviation="0 0" />
