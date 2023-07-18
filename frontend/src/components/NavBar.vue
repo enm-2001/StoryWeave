@@ -13,8 +13,8 @@
       <!-- NAVIGATION MENUS -->
       <div class="menu">
     <router-link to="/dashboard"><li>DashBoard</li> </router-link>
-    <router-link to="/notification"><li>  Notification</li></router-link>
-  <router-link to="/profile"><li>Profile</li></router-link>
+    <router-link to="/notification" v-if="this.$store.state.userIsAuthorized"><li>  Notification</li></router-link>
+  <router-link to="/profile" v-if="this.$store.state.userIsAuthorized"><li>Profile</li></router-link>
   <router-link to="/login" v-if="!this.$store.state.userIsAuthorized"><li>Login | Signup</li></router-link>
     <li><button @click="logout" v-if="this.$store.state.userIsAuthorized">Logout</button></li>
       </div>

@@ -16,7 +16,8 @@ import store from '../store'
 
 const routes = [
     { path: '/login', component: SignIn },
-    { path: '/dashboard', component: DashBoard },
+    { path: '/', component: DashBoard },
+    { path: '/dashboard', component: DashBoard},
     { path: '/startstory', component: StartStory, meta: {requiresAuth: true} },
     { path: '/continuestory/:story_id', component: ContinueStory, meta: {requiresAuth: true} },
     { path: '/profile', component: UserProfile, meta: {requiresAuth: true} },
