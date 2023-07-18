@@ -54,12 +54,13 @@
   </div>
 
 
-    <div class="col-6" style="width:100%;">
-     <div> <ReadComponent style="width:100%;"/></div>
+    <div class="col-6" v-for="story in startedStories" :key="story.story_id">
+     <div v-if="story.completedstory == 1"> <ReadComponent :username="username" style="width:100%;"/></div>
+     <div v-else><WriteComponent :username="username" style="width:100%;"/></div>
     </div>
-    <div class="col-6">
-      <div><ReadComponent style="width:100%;"/></div>
-    
+    <div class="col-6" v-for="story in contributedStories" :key="story.story_id">
+      <div v-if="story.completedstory == 1"> <ReadComponent :username="username" style="width:100%;"/></div>
+     <div v-else><WriteComponent :username="username" style="width:100%;"/></div>
   </div>
 </div>
 
@@ -71,29 +72,36 @@
 <script>
 import axios from 'axios';
 import ReadComponent from './ReadComponent.vue';
+import WriteComponent from './WriteComponent.vue';
 import jwt_decode from 'jwt-decode'
 // import ChartData from './ChartData.vue';
 export default {
     name: 'UserProfile',
     data(){
       return{
-        details: {}
+        details: {},
+        startedStories : [],
+        contributedStories: [],
+        username : ""
       }
     },
     components:{
-      ReadComponent,
-      // ChartData,
-    },
-    mounted(){
+    ReadComponent,
+    WriteComponent
+},
+    async mounted(){
       const token = localStorage.getItem("token")
       const user = jwt_decode(token)
       const user_id = user.user_id
-      axios.get(`http://localhost:5000/api/users/${user_id}`)
-      .then(res => {
-        console.log(res.data);
-        this.details = res.data
-      })
-      .catch(err => console.log(err))
+      this.username = user.username
+      console.log(user);
+
+      const res = await axios.get(`http://localhost:5000/api/users/${user_id}`)
+      this.details = res.data
+      const res2 = await axios.get(`http://localhost:5000/api/users/startedstories/${user_id}`)
+      this.startedStories = res2.data
+      const res3 = await axios.get(`http://localhost:5000/api/users/contributedstories/${user_id}`)
+      this.contributedStories = res3.data
     }
    
 }

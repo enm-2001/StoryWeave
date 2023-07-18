@@ -131,7 +131,7 @@ export default {
           .post("http://localhost:5000/api/signup", this.formData)
           .then((res) => {
             console.log(res);
-            localStorage.setItem("user", JSON.stringify(this.formData));
+            localStorage.setItem("token", res.data.token);
             router.push("/dashboard");
           })
           .catch((err) => console.log(err));

@@ -45,12 +45,15 @@ router.post("/signup", async (req, res) => {
   const hashedPassword = await bcrypt.hash(password, 10)
 
   const query = `INSERT INTO users (name, username, email, password, coins)
-    VALUES ('${name}', '${username}','${email}', '${hashedPassword}', 0);
-    `;
-  await client.query(query, (err, result1) => {
+    VALUES ($1, $2, $3, $4, $5) returning user_id`;
+  const values = [name, username, email, hashedPassword, 0]
+
+  await client.query(query, values, (err, result1) => {
     if (result1) {
-      console.log(result1);
-      res.send("insertion completed");
+      const user = { username: username, user_id: result1.rows[0].user_id};
+        const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1h" });
+        // console.log("login generate", token)
+        res.json({ token: token });
     } else {
       console.log("Error: ", err);
     }
@@ -71,11 +74,8 @@ router.post("/login", async (req, res) => {
       const passwordCorrect = await bcrypt.compare(password, result.rows[0].password)
       console.log(passwordCorrect);
       if (passwordCorrect) {
-        // console.log("ppppppppp");
-        // const user = result.rows[0];
-        // res.send(user);
-       
-        const user = { name: username, user_id: result.rows[0].user_id};
+
+        const user = { username: username, user_id: result.rows[0].user_id};
         const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1h" });
         // console.log("login generate", token)
         res.json({ token: token });
@@ -85,12 +85,6 @@ router.post("/login", async (req, res) => {
       }
   
   });
-
-
-router.get("/logout", (req, res) => {
-  res.clearCookie('access_token');
-  res.status(200).json('Logout success')
-})
 
 router.get("/users/:user_id", async (req, res) => {
   const { user_id } = req.params;
@@ -142,8 +136,8 @@ router.get("/users/:user_id", async (req, res) => {
   res.send(response)
 });
 
-
-router.get("/users/:user_id/stories", (req, res) => {
+//get started stories of particular user
+router.get("/users/startedstories/:user_id", (req, res) => {
   const { user_id } = req.params;
   const query = `select * from story where creator = ${user_id}`;
   client.query(query, (err, result) => {
@@ -155,12 +149,14 @@ router.get("/users/:user_id/stories", (req, res) => {
   });
 });
 
-router.get("/users/:user_id/coins", (req, res) => {
+//get contributed stories
+router.get("/users/contributedstories/:user_id", (req, res) => {
   const { user_id } = req.params;
-  const query = `select coins from users where user_id = ${user_id}`;
+  const query = `select s.* from story s 
+  join contributions c on c.story_id = s.story_id where c.user_id = ${user_id}`;
   client.query(query, (err, result) => {
     if (!err) {
-      res.send(result.rows[0]);
+      res.send(result.rows);
     } else {
       console.log(err);
     }
