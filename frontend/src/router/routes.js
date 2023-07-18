@@ -8,6 +8,7 @@ import ReadStory from '../components/ReadStory'
 import NotiFication from '../components/NotiFication'
 import DashboardBottom from '../components/DashboardBottom'
 import ModalBox from '../components/ModalBox'
+
 import store from '../store'
 // import Store from '../store'
 // import NavBar1 from '../components/NavBar1'
@@ -23,6 +24,7 @@ const routes = [
     { path: '/notification', component: NotiFication, meta: {requiresAuth: true} },
     { path: '/dash', component: DashboardBottom},
     { path: '/modal', component: ModalBox},
+    { path: '/continue', component: ContinueStory},
     // { path: '/nav', component: NavBar1},
     // { path: '/login', component: SignIn },
 ];
