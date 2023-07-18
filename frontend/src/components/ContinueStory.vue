@@ -64,7 +64,7 @@
 <script>
 import router from "@/router/routes";
 import axios from "axios";
-
+import jwt_decode from 'jwt-decode';
 
 export default {
   name: "StartStory",
@@ -80,7 +80,9 @@ export default {
   methods: {
     postStory() {
       console.log(this.story);
-        const user_id = JSON.parse(localStorage.getItem("user")).user_id;
+        const token = localStorage.getItem("token")
+        const user = jwt_decode(token)
+        const user_id = user.user_id;
         axios
           .post("http://localhost:5000/api/story/add", {
             story_id: this.story.story_id,

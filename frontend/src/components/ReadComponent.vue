@@ -33,6 +33,7 @@ export default {
       completedStories: [],
     };
   },
+  props: ['username'],
   methods: {
     readStory(story_id) {
       router.push(`/readstory/${story_id}`);
@@ -43,6 +44,10 @@ export default {
       .get("http://localhost:5000/api/story/completed/readstory")
       .then((res) => {
         this.completedStories = res.data;
+        console.log(this.username);
+        if(this.username != undefined){
+            this.completedStories = this.completedStories.filter(story => story.username == this.username)
+        }
       })
       .catch((err) => console.log(err));
   },

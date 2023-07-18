@@ -50,7 +50,7 @@ router.post("/signup", async (req, res) => {
 
   await client.query(query, values, (err, result1) => {
     if (result1) {
-      const user = { name: username, user_id: result1.rows[0].user_id};
+      const user = { username: username, user_id: result1.rows[0].user_id};
         const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1h" });
         // console.log("login generate", token)
         res.json({ token: token });
@@ -75,7 +75,7 @@ router.post("/login", async (req, res) => {
       console.log(passwordCorrect);
       if (passwordCorrect) {
 
-        const user = { name: username, user_id: result.rows[0].user_id};
+        const user = { username: username, user_id: result.rows[0].user_id};
         const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1h" });
         // console.log("login generate", token)
         res.json({ token: token });
@@ -152,7 +152,8 @@ router.get("/users/startedstories/:user_id", (req, res) => {
 //get contributed stories
 router.get("/users/contributedstories/:user_id", (req, res) => {
   const { user_id } = req.params;
-  const query = `select * from contributions where user_id = ${user_id}`;
+  const query = `select s.* from story s 
+  join contributions c on c.story_id = s.story_id where c.user_id = ${user_id}`;
   client.query(query, (err, result) => {
     if (!err) {
       res.send(result.rows);

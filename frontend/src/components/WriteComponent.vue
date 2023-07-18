@@ -4,6 +4,7 @@
     </div> -->
 
 <div class="writestory" v-if="this.uncompletedStories.length != 0">
+  {{ uncompletedStories.length }}
   <h2>WRITE</h2>
 <div class="storycards" v-for="story in uncompletedStories" :key="story.story_id">
 <div class="card">
@@ -47,6 +48,7 @@ export default {
             uncompletedStories: []
         }
     },
+    props: ['username'],
     methods: {
       continueStory(story_id){
         router.push(`/continuestory/${story_id}`)
@@ -56,6 +58,10 @@ export default {
       axios.get("http://localhost:5000/api/story/uncompleted/writestory")
       .then(res => {
         this.uncompletedStories = res.data
+        console.log(this.username);
+        if(this.username != undefined){
+          this.uncompletedStories = this.uncompletedStories.filter(story => story.username == this.username)
+        }
       })
       .catch(err => console.log(err))
     }
