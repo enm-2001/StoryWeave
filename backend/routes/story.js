@@ -6,7 +6,7 @@ const { authenticateToken } = require("../middlewares/checkAuth");
 router.post("/story/create", authenticateToken, async (req, res) => {
   try {
     const { user_id } = req.body;
-    const { title, description, completedstory } = req.body.story;
+    const { title, description } = req.body.story;
     console.log(req.body.story);
     // console.log(title);
     const today = new Date();
@@ -21,7 +21,7 @@ router.post("/story/create", authenticateToken, async (req, res) => {
 
     // const query = `INSERT INTO story (title, description, creator, date_created, completedstory) VALUES ('${title}', '${description}', '${user_id}', '${date}', 0) returning story_id`;
     const query = "INSERT INTO story (title, description, creator, date_created, completedstory) VALUES ($1, $2, $3, $4, $5) returning story_id";
-    const values = [title, description, user_id, date, completedstory];
+    const values = [title, description, user_id, date, 0];
 
     const result = await client.query(query, values);
 
@@ -76,9 +76,9 @@ router.delete("/story/delete", (req, res) => {
 });
 
 router.post("/story/add", (req, res) => {
-  const { story_id, des, user_id, completedstory } = req.body;
-  const query = `insert into pending_contr(story_id, des, user_id, completedstory) values($1, $2, $3, $4)`;
-  const values = [story_id, des, user_id, completedstory];
+  const { story_id, des, user_id } = req.body;
+  const query = `insert into pending_contr(story_id, des, user_id) values($1, $2, $3)`;
+  const values = [story_id, des, user_id];
   client.query(query, values, (err, result) => {
     if (!err) {
       res.send("inserted data");
@@ -114,11 +114,20 @@ router.delete("/story/:pstory_id/delete", (req, res) => {
 //update the story after acceptance
 router.put("/story/update", (req, res) => {
   const { story_id, des, user_id, pstory_id, completedstory } = req.body;
-  
-    const query2 = `UPDATE story SET description = $1, last_updated = $2, completedstory = $3 WHERE story_id = $3`;
+  const query1 = `SELECT description FROM story WHERE story_id = $1`;
+  client.query(query1, [story_id], (err, result) => {
+    if (err) {
+      console.log("Error in query1:", err);
+      res.status(500).json({ error: "Internal server error" });
+      return;
+    }
+
+    const { description } = result.rows[0];
+    const updatedDescription = description + " " + des;
+    const query2 = `UPDATE story SET description = $1, last_updated = $2, completedstory = $3 WHERE story_id = $4`;
     client.query(
       query2,
-      [des, user_id, completedstory, story_id],
+      [updatedDescription, user_id, completedstory, story_id],
       (err2, result2) => {
         if (err2) {
           console.log("Error in query2:", err2);
@@ -164,7 +173,7 @@ router.put("/story/update", (req, res) => {
       }
     );
   });
-
+});
 
 //stories contributed
 router.get("/story/contributions/:user_id", (req, res) => {

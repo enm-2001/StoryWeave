@@ -1,29 +1,5 @@
 <template>
 
-  <!-- Navbar -->
-
-<!-- -->
-    <!-- <div class="card">
-      <div class="card-header">Start your Story</div>
-      <div class="card-body">
-        <input
-          type="text"
-          placeholder="Title of Story"
-          class="card-title"
-          v-model="story.title"
-          required
-        /><br />
-        <span v-if="titleNotExist" style="color: red;">Please enter the details of your story..</span>
-        <textarea
-          class="card-text"
-          placeholder="Start you story...."
-          v-model="story.description"
-          required
-        ></textarea
-        ><br />
-        <button @click="postStory()">Post</button>
-      </div>
-    </div> -->
     <div class="main-bg">
 <div class="wrapper">
 
@@ -31,8 +7,9 @@
   
   <form class="form__contact" @submit.prevent="postStory">
     <fieldset>
-      <p>Title of the story is <textarea cols="40"  class="form__field field--name" placeholder="storytitle" tabindex="1" v-model="story.title" ></textarea></p>
-      <p>Story starts like this -><textarea rows="9" cols="40" class="form__field field--story" placeholder="story" tabindex="3" v-model="story.description">.</textarea></p>
+      <p>Title of the story is <textarea cols="40"  class="form__field field--name" placeholder="storytitle" tabindex="1" v-model="story.title" readonly></textarea></p>
+      <p>Story starts like this -><textarea rows="4" cols="40" class="form__field field--story" placeholder="story" tabindex="3" v-model="story.description" readonly>.</textarea></p>
+      <p>Continue the story -><textarea rows="4" cols="40" class="form__field field--story" placeholder="story" tabindex="3" v-model="des">.</textarea></p>
          <span v-if="titleNotExist" style="color: red;">Please enter the details of your story..</span>
       <!-- <button type="submit" class="button button--xlarge" tabindex="4">Post it! &#187;</button> -->
          <input class="modal-btn" type="checkbox" id="modal-btn" name="modal-btn" />
@@ -82,7 +59,8 @@ export default {
     return {
       story: {},
       storyId: false,
-      titleNotExist: false
+      titleNotExist: false,
+      des: ""
     };
   },
   methods: {
@@ -94,7 +72,7 @@ export default {
         axios
           .post("http://localhost:5000/api/story/add", {
             story_id: this.story.story_id,
-            des:" " + this.story.description,
+            des:this.des,
             user_id,
             completedstory : completed
           })

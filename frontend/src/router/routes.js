@@ -7,7 +7,6 @@ import UserProfile from '../components/UserProfile'
 import ReadStory from '../components/ReadStory'
 import NotiFication from '../components/NotiFication'
 import DashboardBottom from '../components/DashboardBottom'
-import ModalBox from '../components/ModalBox'
 
 import store from '../store'
 // import Store from '../store'
@@ -16,14 +15,14 @@ import store from '../store'
 
 const routes = [
     { path: '/login', component: SignIn },
-    { path: '/dashboard', component: DashBoard },
+    { path: '/', component: DashBoard },
+    { path: '/dashboard', component: DashBoard},
     { path: '/startstory', component: StartStory, meta: {requiresAuth: true} },
     { path: '/continuestory/:story_id', component: ContinueStory, meta: {requiresAuth: true} },
     { path: '/profile', component: UserProfile, meta: {requiresAuth: true} },
     { path: '/readstory/:storyId', component: ReadStory },
     { path: '/notification', component: NotiFication, meta: {requiresAuth: true} },
     { path: '/dash', component: DashboardBottom},
-    { path: '/modal', component: ModalBox},
     { path: '/continue', component: ContinueStory},
     // { path: '/nav', component: NavBar1},
     // { path: '/login', component: SignIn },

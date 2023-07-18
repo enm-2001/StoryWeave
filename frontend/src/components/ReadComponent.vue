@@ -1,6 +1,6 @@
 <template>
   <div class="readstory" v-if="this.completedStories.length != 0">
-    <h2>READ</h2>
+    <!-- <h2>READ</h2> -->
     <div
       class="storycards"
       v-for="story in completedStories"
@@ -55,6 +55,10 @@ export default {
 </script>
 
 <style scoped>
+
+.readstory{
+    width: 100vh;
+}
 .cardc {
   width: 80%;
   margin: 20px auto;
