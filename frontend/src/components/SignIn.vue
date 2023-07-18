@@ -22,26 +22,7 @@
           </div>
         </div>
       </div>
-      <!-- <form class="sign-up">
-        <h2>Create login</h2>
-        <div>Use your email for registration</div>
-        <input type="text" placeholder="Name" v-model="formData.name" required />
-        <input
-          type="email"
-          placeholder="Email"
-          v-model="formData.email"
-          v-on:blur="checkUserforSignup(formData.email)"
-          required
-        />
-        <span v-if="userExists">User already exists</span>
-        <input
-          type="password"
-          placeholder="Password"
-          v-model="formData.password"
-          required
-        />
-        <button @click="signup()">Sign Up</button>
-      </form> -->
+ 
       <form class="sign-up" @submit.prevent="signup()">
         <h2>Create Login</h2>
         <div>Use your account</div>
@@ -66,8 +47,11 @@
           type="email"
           placeholder="Email"
           v-model="formData.email"
+          v-on:blur="validateEmail(formData.email)"
           required
         />
+        <span v-if="!validEmail">Enter a valid email</span>
+
         <input
           type="password"
           placeholder="Password"
@@ -121,12 +105,20 @@ export default {
       incorrect: false,
       userExists: false,
       userExistsforLogin: true,
+      validEmail: true,
     };
   },
   methods: {
+    validateEmail(email) {
+      if (/^[^@]+@\w+(\.\w+)+\w$/.test(email)) {
+        this.validEmail = true;
+      } else {
+        this.validEmail = false;
+      }
+    },
     signup() {
       console.log(this.formData);
-      if (!this.userExists) {
+      if (!this.userExists && this.validEmail) {
         axios
           .post("http://localhost:5000/api/signup", this.formData)
           .then((res) => {

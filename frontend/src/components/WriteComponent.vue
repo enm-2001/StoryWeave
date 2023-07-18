@@ -4,7 +4,7 @@
     </div> -->
 
 <div class="writestory" v-if="this.uncompletedStories.length != 0">
-  <h2>WRITE</h2>
+  <!-- <h2>WRITE</h2> -->
 <div class="storycards" v-for="story in uncompletedStories" :key="story.story_id">
 <div class="card">
   <div id="write-section">
