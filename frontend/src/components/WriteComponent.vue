@@ -108,6 +108,7 @@ h2{
     color:#537188;
     font-weight: bolder;
     font-size: 19px;
+    text-transform: uppercase;
 }
 
 #write-section {
