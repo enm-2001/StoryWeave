@@ -69,6 +69,9 @@ export default {
 
 <style>
 
+.writestory{
+  width: 100vh;
+}
 .card {
   width: 80%;
   margin: 20px auto;
