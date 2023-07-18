@@ -65,6 +65,7 @@ export default {
             axios.put("http://localhost:5000/api/story/update", {
                     story_id: pstory.story_id,
                     des: pstory.des,
+                    completedstory: pstory.completedstory,
                     user_id: pstory.user_id,
                     pstory_id: pstory.id
                 })

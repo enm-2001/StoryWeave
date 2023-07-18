@@ -70,9 +70,7 @@ export default {
   name: "StartStory",
   data() {
     return {
-      story: {
-        
-      },
+      story: {},
       storyId: false,
       titleNotExist: false
     };
@@ -86,7 +84,7 @@ export default {
         axios
           .post("http://localhost:5000/api/story/add", {
             story_id: this.story.story_id,
-            des:this.story.description,
+            des:" " + this.story.description,
             user_id,
           })
           .then((res) => {
