@@ -96,8 +96,13 @@ router.get("/users/:user_id", async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
       return;
   }
-  
-  const coins = result1.rows[0].coins;
+  let coins
+  if(result1.rows[0] != null){
+    coins = result1.rows[0].coins
+  }
+  else{
+    coins = 0
+  }
 
   const query2 = `select count(*) as stories from story where creator = ${user_id}`;
   const result2 = await client.query(query2)
@@ -106,7 +111,13 @@ router.get("/users/:user_id", async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
       return;
   }
-  const stories_created = result2.rows[0].stories
+  let stories_created
+  if(result2.rows[0] != null){
+    stories_created = result2.rows[0].stories
+  }
+  else{
+    stories_created = 0
+  }
 
   const query3 = `select count(distinct(story_id)) as contributions from contributions where user_id = ${user_id} group by story_id`;
   const result3 = await client.query(query3)
@@ -115,7 +126,14 @@ router.get("/users/:user_id", async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
       return;
   }
-  const stories_updated = result3.rows[0].contributions
+  let stories_updated
+  if(result3.rows[0] != null){
+    stories_updated = result3.rows[0].contributions
+  }
+  else{
+    stories_updated = 0
+  }
+
 
   const query4 = `select count(*) as pending from pending_contr where story_id in(select story_id from story where creator = ${user_id})`
   const result4 = await client.query(query4)
@@ -124,7 +142,13 @@ router.get("/users/:user_id", async (req, res) => {
       res.status(500).json({ error: "Internal server error" });
       return;
   }
-  const pending_requests = result4.rows[0].pending
+  let pending_requests
+  if(result4.rows[0] != null){
+    pending_requests = result4.rows[0].pending
+  }
+  else{
+    pending_requests = 0
+  }
 
   const response = {
     coins,

@@ -45,24 +45,28 @@
  <div class="stories" style="padding-top:10px;">
 
 
-    <div class="col-6">
+    <div class="col-6" v-if="startedStories.length != 0">
+      
      <div class="col-text"> Stories Started</div>
+     <div  v-for="story in startedStories" :key="story.story_id">
+
+     <div v-if="story.completedstory == 1"> <ReadComponent :username="username" style="width:100%;"/></div>
+     <div v-else><WriteComponent :username="username" style="width:100%;"/></div>
     </div>
-    <div class="col-6">
+    </div>
+    <div class="col-6" v-if="contributedStories.length != 0">
       <div class="col-text">Stories Contributed</div>
+      <div  v-for="story in contributedStories" :key="story.story_id">
+      <div v-if="story.completedstory == 1"> <ReadComponent :username="username" style="width:100%;"/></div>
+     <div v-else><WriteComponent :username="username" style="width:100%;"/></div>
+  </div>
  
   </div>
 
 
-<div class="col-6" v-for="story in startedStories" :key="story.story_id">
-     <div v-if="story.completedstory == 1"> <ReadComponent :username="username" style="width:100%;"/></div>
-     <div v-else><WriteComponent :username="username" style="width:100%;"/></div>
-    </div>
 
-    <div class="col-6" v-for="story in contributedStories" :key="story.story_id">
-      <div v-if="story.completedstory == 1"> <ReadComponent :username="username" style="width:100%;"/></div>
-     <div v-else><WriteComponent :username="username" style="width:100%;"/></div>
-  </div>
+
+
 </div>
 
 

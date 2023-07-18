@@ -24,5 +24,7 @@ export default {
 </script>
 
 <style>
-
+h1{
+    height: 30px;
+}
 </style>

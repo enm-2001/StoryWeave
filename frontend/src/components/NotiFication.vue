@@ -5,7 +5,7 @@
         Notification
     </div>
 
-    <div class="notification-sub">
+    <div class="notification-sub" v-if="updated_stories.length != 0">
         Your stories
     </div>
 

@@ -55,6 +55,10 @@ export default {
 </script>
 
 <style scoped>
+
+.readstory{
+    width: 100vh;
+}
 .cardc {
   width: 80%;
   margin: 20px auto;
