@@ -30,8 +30,9 @@
   
   <form class="form__contact" @submit.prevent="postStory">
     <fieldset>
-      <p>Title of the story is <input class="form__field field--name" placeholder="storytitle" tabindex="1" v-model="story.title" ></p>
-      <p>Story starts like this -><textarea rows="8" cols="60" class="form__field field--story" placeholder="story" tabindex="3" v-model="story.description"></textarea>.</p>
+      <p>Title of the story is -><textarea class="form__field field--name" cols="40" placeholder="storytitle" tabindex="1" v-model="story.title" ></textarea></p>
+      <p>Story starts like this -><textarea rows="9" cols="40" class="form__field field--story" placeholder="story" tabindex="3" v-model="story.description"></textarea>.</p>
+       <span v-if="titleNotExist" style="color: red;">Please enter the details of your story..</span>
       <!-- <button type="submit" class="button button--xlarge" tabindex="4">
       Post it! &#187;
       </button> -->
@@ -40,8 +41,8 @@
     <div class="modal">
         <div class="modal-wrap">
             <p>Do you want to also end this story ?</p>
-            <button style="padding-right:50px">Yes</button>
-            <button style="padding-right:50px">No</button>
+            <button @click="postStory(1)" style="padding-right:50px" > Yes </button>
+            <button @click="postStory(0)" style="padding-right:50px"> No </button>
         </div>
     </div>
     </fieldset>
@@ -53,7 +54,8 @@
       id="Layer_1"
       xmlns="http://www.w3.org/2000/svg"
       xmlns:xlink="http://www.w3.org/1999/xlink"
-      xml:space="preserve">
+      xml:space="preserve"
+>
       <defs>
         <filter id="blur0">
           <feGaussianBlur in="SourceGraphic" stdDeviation="0 0" />
@@ -87,14 +89,17 @@ export default {
       story: {
         title: "",
         description: "",
+        completedstory:0,
       },
+      
       storyId: false,
       titleNotExist: false,
     };
   },
 
   methods: {
-    postStory() {
+    postStory(completed) {
+      this.story.completedstory = completed
       // console.log(this.story);
       if (this.story.title != "" || this.story.description != "") {
         console.log("----------");
@@ -143,6 +148,8 @@ export default {
 <style lang="scss" scoped>
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+@import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
+
 
 *,
 *::before,
@@ -253,8 +260,7 @@ p {
     font-size: 18px;
     background-color: #ffeba7;
     color: #102770;
-    font-family: 'unicons';
-    content: '\eac6';
+    content: "X";
     box-shadow: 0 12px 25px 0 rgba(16, 39, 112, .25);
     transition: all 200ms linear;
     opacity: 0;

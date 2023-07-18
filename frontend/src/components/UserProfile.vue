@@ -42,7 +42,7 @@
       </div>
      
 
- <div class="stories">
+ <div class="stories" style="padding-top:10px;">
 
 
     <div class="col-6">

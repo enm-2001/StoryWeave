@@ -33,7 +33,17 @@
     <fieldset>
       <p>Title of the story is <input class="form__field field--name" placeholder="storytitle" tabindex="1" v-model="story.title" ></p>
       <p>Story starts like this -><input class="form__field field--story" placeholder="story" tabindex="3" v-model="story.description">.</p>
-      <button type="submit" class="button button--xlarge" tabindex="4">Post it! &#187;</button>
+         <span v-if="titleNotExist" style="color: red;">Please enter the details of your story..</span>
+      <!-- <button type="submit" class="button button--xlarge" tabindex="4">Post it! &#187;</button> -->
+         <input class="modal-btn" type="checkbox" id="modal-btn" name="modal-btn" />
+    <label for="modal-btn" style="align-items:right">Post it <i class="uil uil-expand-arrows"></i></label>
+    <div class="modal">
+        <div class="modal-wrap">
+            <p>Do you want to also end this story ?</p>
+            <button @click="postStory(1)" style="padding-right:50px" > Yes </button>
+            <button @click="postStory(0)" style="padding-right:50px"> No </button>
+        </div>
+    </div>
     </fieldset>
   </form>
 </div>
@@ -67,19 +77,17 @@ import axios from "axios";
 import jwt_decode from 'jwt-decode';
 
 export default {
-  name: "StartStory",
+  name: "ContinueStory",
   data() {
     return {
-      story: {
-        
-      },
+      story: {},
       storyId: false,
       titleNotExist: false
     };
   },
   methods: {
-    postStory() {
-      console.log(this.story);
+    postStory(completed) {
+        console.log(this.story);
         const token = localStorage.getItem("token")
         const user = jwt_decode(token)
         const user_id = user.user_id;
@@ -88,6 +96,7 @@ export default {
             story_id: this.story.story_id,
             des:this.story.description,
             user_id,
+            completedstory : completed
           })
           .then((res) => {
             console.log("Story posted..", res);
