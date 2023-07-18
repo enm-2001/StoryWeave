@@ -108,7 +108,7 @@ router.get("/users/:user_id", async (req, res) => {
   }
   const stories_created = result2.rows[0].stories
 
-  const query3 = `select count(*) as contributions from contributions where user_id = ${user_id}`;
+  const query3 = `select count(distinct(story_id)) as contributions from contributions where user_id = ${user_id} group by story_id`;
   const result3 = await client.query(query3)
   if(!result3){
     console.log("Error in query3:", err);
@@ -144,7 +144,7 @@ router.get("/users/startedstories/:user_id", (req, res) => {
     if (!err) {
       res.send(result.rows);
     } else {
-      console.log(err);
+      console.log("get started stories: ",err);
     }
   });
 });
@@ -153,12 +153,12 @@ router.get("/users/startedstories/:user_id", (req, res) => {
 router.get("/users/contributedstories/:user_id", (req, res) => {
   const { user_id } = req.params;
   const query = `select s.* from story s 
-  join contributions c on c.story_id = s.story_id where c.user_id = ${user_id}`;
+  join contributions c on c.story_id = s.story_id where c.user_id = ${user_id} group by s.story_id`;
   client.query(query, (err, result) => {
     if (!err) {
       res.send(result.rows);
     } else {
-      console.log(err);
+      console.log("get contributed stories: ",err);
     }
   });
 });
