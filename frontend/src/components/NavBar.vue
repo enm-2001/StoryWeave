@@ -14,7 +14,8 @@
     <router-link to="/dashboard"><li>DashBoard</li> </router-link>
     <router-link to="/notification"><li>  Notification</li></router-link>
   <router-link to="/profile"><li>Profile</li></router-link>
-    <li><button @click="logout">Logout</button></li>
+  <router-link to="/login" v-if="!this.$store.state.userIsAuthorized"><li>Login | Signup</li></router-link>
+    <li><button @click="logout" v-if="this.$store.state.userIsAuthorized">Logout</button></li>
       </div>
     </ul>
   </nav>
@@ -22,6 +23,7 @@
 
 <script>
 import router from '../router/routes.js'
+// import store from '../store'
   export default {
     name: 'NavBar1',
     methods: {

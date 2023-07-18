@@ -128,6 +128,10 @@ export default {
    color:#537188;
    font-size:30px;
    font-weight:bolder;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+
 }
 .col-6{
   padding-left:40px;

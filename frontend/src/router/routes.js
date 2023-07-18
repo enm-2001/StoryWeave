@@ -8,17 +8,19 @@ import ReadStory from '../components/ReadStory'
 import NotiFication from '../components/NotiFication'
 import DashboardBottom from '../components/DashboardBottom'
 import ModalBox from '../components/ModalBox'
+import store from '../store'
+// import Store from '../store'
 // import NavBar1 from '../components/NavBar1'
 
 
 const routes = [
     { path: '/login', component: SignIn },
     { path: '/dashboard', component: DashBoard },
-    { path: '/startstory', component: StartStory },
-    { path: '/continuestory/:story_id', component: ContinueStory },
-    { path: '/profile', component: UserProfile },
+    { path: '/startstory', component: StartStory, meta: {requiresAuth: true} },
+    { path: '/continuestory/:story_id', component: ContinueStory, meta: {requiresAuth: true} },
+    { path: '/profile', component: UserProfile, meta: {requiresAuth: true} },
     { path: '/readstory/:storyId', component: ReadStory },
-    { path: '/notification', component: NotiFication },
+    { path: '/notification', component: NotiFication, meta: {requiresAuth: true} },
     { path: '/dash', component: DashboardBottom},
     { path: '/modal', component: ModalBox},
     // { path: '/nav', component: NavBar1},
@@ -31,5 +33,25 @@ const router = createRouter({
     routes
   });
   
-  
-  export default router;
+router.beforeEach((to, from, next) => {
+    const token = localStorage.getItem("token")
+    if(token != null){
+        store.commit('setUserIsAuthenticated', true)
+    }
+    else{
+        store.commit('setUserIsAuthenticated', false)
+    }
+    if(to.matched.some(record => record.meta.requiresAuth)){
+        if(token != null){
+            next();
+        }
+        else{
+            router.push("/login")
+        }
+    }
+    else{
+        next();
+    }
+})
+
+export default router;
