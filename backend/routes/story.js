@@ -89,7 +89,10 @@ router.post("/story/add", (req, res) => {
 //get pending stories for particular user
 router.get("/story/pstory/:user_id", (req, res) => {
   const { user_id } = req.params;
-  const query = `select * from pending_contr where story_id in(select story_id from story where creator = ${user_id})`;
+  const query = `select p.*, s.title from story s
+  join pending_contr p on p.story_id = s.story_id
+  where s.creator = ${user_id}`
+  // pending_contr where story_id in(select story_id from story where creator = ${user_id})`;
   client.query(query, (err, result) => {
     if (!err) {
       res.send(result.rows);

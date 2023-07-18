@@ -16,7 +16,7 @@
             <li v-for="story in updated_stories" :key="story.story_id">
                 <div class="approval">
                     <div class="left-side">
-
+                    <h1>{{story.title}}</h1>
                         {{story.des}}
                     </div>
                     <div class="right-side">
