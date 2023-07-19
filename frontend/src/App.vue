@@ -4,34 +4,15 @@
     <router-view></router-view>
   </div>
  
-<!-- <SignIn />  -->
-<!-- <DashBoard/>
-<hr style="width:90%">
-<DashboardBottom/> -->
-<!-- <ReadStory/> -->
 </template>
 
 <script>
- 
-// import SignIn from './components/SignIn.vue'  
-// import ReadStory from './components/ReadStory.vue'
-// import DashBoard from './components/DashBoard.vue'
-// import DashboardBottom from './components/DashboardBottom.vue'
+
 import NavBar from './components/NavBar.vue'
 
 export default {
     name: 'App',
-    data(){
-        return{
-            userLogged: false
-        }
-    },
     components: {
-        // SideBar,
-        // ReadStory,
-        // SignIn
-    //     DashBoard,
-    //    DashboardBottom,
     NavBar
     },
   
