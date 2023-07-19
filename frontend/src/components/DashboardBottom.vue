@@ -1,12 +1,13 @@
 <template>
- <div class="stories">
+<div class="stories">
     <div class="col-6">
-     <div class="col-text"> Read Story</div>
+        <div class="col-text"> Read Story</div>
     </div>
     <div class="col-6">
-      <div class="col-text">Contribute Story</div>
+        <div class="col-text">Contribute Story</div>
     </div>
 </div>
+
 <div class="rwcomp">
     <ReadComponent class="rcomp" />
     <WriteComponent class="wcomp" />
@@ -30,27 +31,26 @@ export default {
 </script>
 
 <style scoped>
-.stories{
+.stories {
     display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding-top:20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
 }
 
-
-.col-text{
-   font-family: Belanosima;
-   color:#537188;
-   font-size:25px;
-   font-weight:bolder;
+.col-text {
+    font-family: Belanosima;
+    color: #537188;
+    font-size: 25px;
+    font-weight: bolder;
     display: flex;
     align-items: center;
-    justify-content:center;
+    justify-content: center;
 
 }
-.col-6{
-  padding:0px;
-  margin:0px;
-}
 
+.col-6 {
+    padding: 0px;
+    margin: 0px;
+}
 </style>

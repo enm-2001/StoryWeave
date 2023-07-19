@@ -1,55 +1,54 @@
 <template>
 <div class="main">
-
     <!-- Story Title -->
-<div class="story-heading">
-<p>{{ story_details.title }}</p>
-</div>
-<p class="started-by">Started by: {{ story_details.username }}</p>
-<!-- Story cards -->
-<div class="storycards" v-for="contribution in story_others" v-bind:key="contribution.contr_id">
-  <div class="card">
-  <div id="write-section">
-  <div class="heading">
-  <div>
-   <p class="created-by">Line by @{{contribution.username}}</p>
-  
-  </div>
-  <div class="date"> {{ contribution.date_contributed }}</div>
-   </div>
-    <hr class="horizontal-line">
-    <div class="storyline">
-     <p> {{ contribution.description }}
-    </p></div>
+    <div class="story-heading">
+        <p>{{ story_details.title }}</p>
+    </div>
+    <p class="started-by">Started by: {{ story_details.username }}</p>
+    <!-- Story cards -->
+    <div class="storycards" v-for="contribution in story_others" v-bind:key="contribution.contr_id">
+        <div class="card">
+            <div id="write-section">
+                <div class="heading">
+                    <div>
+                        <p class="created-by">Line by @{{contribution.username}}</p>
 
+                    </div>
+                    <div class="date"> {{ contribution.date_contributed }}</div>
+                </div>
+                <hr class="horizontal-line">
+                <div class="storyline">
+                    <p> {{ contribution.description }}
+                    </p>
+                </div>
 
-  </div>
-</div>
-</div>
+            </div>
+        </div>
+    </div>
 
 </div>
 </template>
 
 <script>
-  import axios from 'axios';
+import axios from 'axios';
 export default {
-  name: 'ReadStory',
-  data() {
-    return {
-      story_details: {},
-      story_others: []
-    };
-  },
-  mounted(){
+    name: 'ReadStory',
+    data() {
+        return {
+            story_details: {},
+            story_others: []
+        };
+    },
+    mounted() {
 
-const storyId = this.$route.params.storyId;
-console.log(storyId);
-axios.get(`http://localhost:5000/api/readstory/${storyId}`)
-.then(res => {
-  this.story_details = res.data.story_details;
-  this.story_others = res.data.story_others
-})
-}
+        const storyId = this.$route.params.storyId;
+        console.log(storyId);
+        axios.get(`http://localhost:5000/api/readstory/${storyId}`)
+            .then(res => {
+                this.story_details = res.data.story_details;
+                this.story_others = res.data.story_others
+            })
+    }
 }
 </script>
 
@@ -68,25 +67,26 @@ axios.get(`http://localhost:5000/api/readstory/${storyId}`)
     background-color: #DBDFEA;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
 }
-.story-heading, .started-by{
-    color:#537188;
+
+.story-heading,
+.started-by {
+    color: #537188;
     font-size: 25px;
     font-family: Belanosima;
     display: flex;
     align-items: center;
-    justify-content:center;
-    font-weight:bolder;
+    justify-content: center;
+    font-weight: bolder;
 }
 
-.story-heading{
-  text-transform: uppercase;
-  padding:20px 20px 0px 20px;
+.story-heading {
+    text-transform: uppercase;
+    padding: 20px 20px 0px 20px;
 }
 
-.started-by{
-  padding: 0px 20px 0px 20px;
+.started-by {
+    padding: 0px 20px 0px 20px;
 }
-
 
 .logo {
     width: 120px;
@@ -117,8 +117,6 @@ axios.get(`http://localhost:5000/api/readstory/${storyId}`)
     background-color: #ddd;
     margin: 17px;
     padding: 0px;
-
-    /*width:auto;*/
     align-items: right
 }
 
@@ -131,7 +129,6 @@ axios.get(`http://localhost:5000/api/readstory/${storyId}`)
     font-family: Avenir, Helvetica;
     color: #2c3e50;
     border-radius: 15px;
-    /*  margin:12px; */
     padding: 0px;
 }
 

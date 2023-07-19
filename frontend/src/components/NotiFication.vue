@@ -1,22 +1,19 @@
 <template>
 <div class="main">
-
     <div class="notification-heading">
         Notification
     </div>
-
     <div class="notification-sub" v-if="updated_stories.length != 0">
         Your stories
     </div>
 
-<!-- Notification for your stories -->
+    <!-- Notification for your stories -->
     <main>
         <ol class="gradient-list">
-
             <li v-for="story in updated_stories" :key="story.story_id">
                 <div class="approval">
                     <div class="left-side">
-
+                        <h1>{{story.title}}</h1>
                         {{story.des}}
                     </div>
                     <div class="right-side">
@@ -25,7 +22,6 @@
                     </div>
                 </div>
             </li>
-
         </ol>
     </main>
 
@@ -33,7 +29,7 @@
         Your contributed Stories
     </div>
 
-<!-- Notification for contributed Story -->
+    <!-- Notification for contributed Story -->
     <div class="notifications-2">
         <ol class="gradient-list">
             <li v-for="notification in accepted_stories" :key="notification.contr_id">
@@ -48,7 +44,7 @@
 
 </div>
 </template>
-    
+
 <script>
 import axios from 'axios';
 import jwt_decode from 'jwt-decode'
@@ -112,29 +108,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 @media only screen and (max-width: 767.98px) {
- .notification-heading {
-    display: flex;
-    align-items: center;
-    font-size: 20px;
-    font-family: Belanosima;
-    font-weight: bolder;
-    color: white;
-    justify-content: center;
+    .notification-heading {
+        display: flex;
+        align-items: center;
+        font-size: 20px;
+        font-family: Belanosima;
+        font-weight: bolder;
+        color: white;
+        justify-content: center;
 
-}
-.notification-sub {
-    display: flex;
-    /*   align-items: center; */
-    font-size: 10px;
-    font-family: Belanosima;
-    font-weight: bolder;
-    color: white;
-    justify-content: center;
+    }
 
+    .notification-sub {
+        display: flex;
+        font-size: 10px;
+        font-family: Belanosima;
+        font-weight: bolder;
+        color: white;
+        justify-content: center;
 
-}
+    }
 }
 
 .notifications-2 {
@@ -149,9 +143,7 @@ export default {
     background-image: url("../assets/background.jpg");
     background-size: cover;
     background-position: center;
-
     background-repeat: no-repeat;
-
     height: 100vh;
 
 }
@@ -159,7 +151,6 @@ export default {
 .right-side {
     display: flex;
     margin: auto;
-
     justify-content: center;
 
 }
@@ -180,12 +171,11 @@ button {
     font-weight: bolder;
     color: white;
     justify-content: center;
-    padding-top:10px;
+    padding-top: 10px;
 }
 
 .notification-sub {
     display: flex;
-    /*   align-items: center; */
     font-size: 30px;
     font-family: Belanosima;
     font-weight: bolder;
@@ -204,7 +194,6 @@ button {
     padding: 20px;
     font-size: 18px;
     height: 80px
-        /*justify-items:start;*/
 }
 
 .navbar-logo {
@@ -237,21 +226,16 @@ button {
     font-weight: bold;
 }
 
-/*** VARIABLES ***/
-/* Colors */
 $black: #1d1f20;
 $blue: #83e4e2;
 $green: #a2ed56;
 $yellow: #fddc32;
 $white: #fafafa;
 
-/*** EXTEND ***/
-/* box-shadow */
 %boxshadow {
     box-shadow: 0.15rem 0.25rem 0.25rem 0.6rem rgba(0, 0, 0, 0.05), 0 0.5rem 1.125rem rgba(75, 0, 0, 0.05);
 }
 
-/*** STYLE ***/
 *,
 *:before,
 *:after {
