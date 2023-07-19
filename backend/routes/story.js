@@ -20,7 +20,8 @@ router.post("/story/create", authenticateToken, async (req, res) => {
     console.log(date);
 
     // const query = `INSERT INTO story (title, description, creator, date_created, completedstory) VALUES ('${title}', '${description}', '${user_id}', '${date}', 0) returning story_id`;
-    const query = "INSERT INTO story (title, description, creator, date_created, completedstory) VALUES ($1, $2, $3, $4, $5) returning story_id";
+    const query =
+      "INSERT INTO story (title, description, creator, date_created, completedstory) VALUES ($1, $2, $3, $4, $5) returning story_id";
     const values = [title, description, user_id, date, 0];
 
     const result = await client.query(query, values);
@@ -36,7 +37,7 @@ router.post("/story/create", authenticateToken, async (req, res) => {
     });
 
     const query3 = `insert into contributions(user_id, story_id, date_contributed, description) values($1, $2, $3, $4)`;
-    const values3 = [user_id, story_id, date, description]
+    const values3 = [user_id, story_id, date, description];
     await client.query(query3, values3, (err3, result3) => {
       if (err3) {
         console.log(err3);
@@ -76,9 +77,9 @@ router.delete("/story/delete", (req, res) => {
 });
 
 router.post("/story/add", (req, res) => {
-  const { story_id, des, user_id } = req.body;
-  const query = `insert into pending_contr(story_id, des, user_id) values($1, $2, $3)`;
-  const values = [story_id, des, user_id];
+  const { story_id, des, user_id, completedstory } = req.body;
+  const query = `insert into pending_contr(story_id, des, user_id, completedstory) values($1, $2, $3, $4)`;
+  const values = [story_id, des, user_id, completedstory];
   client.query(query, values, (err, result) => {
     if (!err) {
       res.send("inserted data");
@@ -175,6 +176,22 @@ router.put("/story/update", (req, res) => {
   });
 });
 
+//get accepted stories notification
+router.get("/story/acceptedStories/:user_id", (req, res) => {
+  const { user_id } = req.params;
+  const query = `select c.contr_id, s.title from story s 
+  join contributions c on s.story_id = c.story_id
+  where s.creator != ${user_id} and c.user_id = ${user_id}`;
+
+  client.query(query, (err, result) => {
+    if (!err) {
+      res.send(result.rows);
+    } else {
+      console.log("err getting notification: ", err);
+    }
+  });
+});
+
 //stories contributed
 router.get("/story/contributions/:user_id", (req, res) => {
   const { user_id } = req.params;
@@ -191,10 +208,8 @@ router.get("/story/contributions/:user_id", (req, res) => {
 
 //get completed stories
 router.get("/story/completed/readstory", async (req, res) => {
-  // const query = `select s.title, u.username, min(c.description) from story s
-  // join users u on u.user_id = s.creator
-  // join contributions c on c.story_id = s.story_id where completedstory = 1`
-  const query = `SELECT s.story_id, s.title, u.username, c.description
+
+  const query = `SELECT s.story_id, s.title, u.username as creator, c.description
     FROM story s
     JOIN users u ON u.user_id = s.creator
     JOIN (
@@ -216,7 +231,7 @@ router.get("/story/completed/readstory", async (req, res) => {
 
 //get uncompleted stories
 router.get("/story/uncompleted/writestory", async (req, res) => {
-  const query = `SELECT s.story_id, s.title, u.username, c.description, u2.username as last_line_contributor
+  const query = `SELECT s.story_id, s.title, u.username as creator, c.description, u2.username as last_line_contributor
     FROM story s
     JOIN users u ON u.user_id = s.creator
     JOIN (

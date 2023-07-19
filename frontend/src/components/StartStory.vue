@@ -1,25 +1,29 @@
 <template>
-<div class="main-bg">
-    <div class="wrapper">
-        <h1>Start your story!!</h1>
-        <form class="form__contact" @submit.prevent="postStory">
-            <fieldset>
-                <p>Title of the story is -><textarea class="form__field field--name" cols="40" placeholder="storytitle" tabindex="1" v-model="story.title"></textarea></p>
-                <p>Story starts like this -><textarea rows="9" cols="40" class="form__field field--story" placeholder="story" tabindex="3" v-model="story.description"></textarea>.</p>
-                <span v-if="titleNotExist" style="color: red;">Please enter the details of your story..</span>
-             
-                <input class="modal-btn" type="checkbox" id="modal-btn" name="modal-btn" />
-                <label for="modal-btn" style="align-items:right">Post it <i class="uil uil-expand-arrows"></i></label>
-                <div class="modal">
-                    <div class="modal-wrap">
-                        <p>Do you want to also end this story ?</p>
-                        <button @click="postStory(1)" style="padding-right:50px"> Yes </button>
-                        <button @click="postStory(0)" style="padding-right:50px"> No </button>
-                    </div>
-                </div>
-            </fieldset>
-        </form>
+    <div class="main-bg">
+<div class="wrapper">
+<h1>Start your story!!</h1>
+
+  
+  <form class="form__contact" @submit.prevent="postStory">
+    <fieldset>
+      <p>Title of the story is -><textarea class="form__field field--name" cols="40" placeholder="storytitle" tabindex="1" v-model="story.title" ></textarea></p>
+      <p>Story starts like this -><textarea rows="9" cols="40" class="form__field field--story" placeholder="story" tabindex="3" v-model="story.description"></textarea>.</p>
+       <span v-if="titleNotExist" style="color: red;">Please enter the details of your story..</span>
+      <!-- <button type="submit" class="button button--xlarge" tabindex="4">
+      Post it! &#187;
+      </button> -->
+       <input class="modal-btn" type="checkbox" id="modal-btn" name="modal-btn" />
+    <label for="modal-btn" style="align-items:right">Post it <i class="uil uil-expand-arrows"></i></label>
+    <div class="modal">
+        <div class="modal-wrap">
+            <p>Do you want to also end this story ?</p>
+            <button type="submit" @click="story.completedstory = 1" style="padding-right:50px" > Yes </button>
+            <button type="submit" @click="story.completedstory = 0" style="padding-right:50px"> No </button>
+        </div>
     </div>
+    </fieldset>
+  </form>
+</div>
 
     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
         <defs>
@@ -63,11 +67,11 @@ export default {
         };
     },
 
-    methods: {
-        postStory(completed) {
-            this.story.completedstory = completed
-            if (this.story.title != "" || this.story.description != "") {
-                console.log("----------");
+  methods: {
+    postStory() {
+      // console.log(this.story);
+      if (this.story.title != "" || this.story.description != "") {
+        console.log("----------");
 
                 const token = localStorage.getItem("token");
                 try {

@@ -32,10 +32,10 @@
     <!-- Notification for contributed Story -->
     <div class="notifications-2">
         <ol class="gradient-list">
-            <li>
+            <li v-for="notification in accepted_stories" :key="notification.contr_id">
                 <div class="approval">
                     <div class="left-side">
-                        Your contribution for story titled as "Who's on lunch duty is accepted" and you have been credited 5 coins for your contribution.
+                        Your contribution for story titled as "{{ notification.title }}" and you have been credited 5 coins for your contribution.
                     </div>
                 </div>
             </li>
@@ -53,6 +53,7 @@ export default {
     data() {
         return {
             updated_stories: [],
+            accepted_stories: []
         }
     },
     methods: {
@@ -85,17 +86,22 @@ export default {
                 .catch(err => console.log(err))
         }
     },
-    mounted() {
+    async mounted() {
         const token = localStorage.getItem("token")
         const user = jwt_decode(token)
         const user_id = user.user_id;
-        axios.get(`http://localhost:5000/api/story/pstory/${user_id}`)
+        await axios.get(`http://localhost:5000/api/story/pstory/${user_id}`)
             .then((res) => {
                 console.log(res.data);
                 this.updated_stories = res.data
             })
             .catch(err => console.log(err))
-
+        await axios.get(`http://localhost:5000/api/story/acceptedStories/${user_id}`)
+        .then((res1) => {
+            console.log("res1",res1);
+            this.accepted_stories = res1.data
+        })
+        .catch(err1 => console.log(err1))
     },
 
 }

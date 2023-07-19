@@ -1,66 +1,41 @@
 <template>
-
-<div class="writestory" v-if="this.uncompletedStories.length != 0">
-  <!-- <h2>WRITE</h2> -->
-<div class="storycards" v-for="story in uncompletedStories" :key="story.story_id">
-<div class="card">
-  <div id="write-section">
-  <div class="heading">
-
-   <p class="created-by">Created by @{{story.username}}</p>
-
-
-   <div class="story-title">{{ story.title }}</div>
-
-   </div>
-    <hr class="horizontal-line">
-    <div class="previous-line">
-      <div class ="pheading">Previous line by @{{ story.last_line_contributor }}</div>
-      <p>{{ story.description }}</p>
-    </div>
-    <hr class="horizontal-line">
-    
-      <button id="add-line-button" @click="continueStory(story.story_id)">
-      <i class="glyphicon glyphicon-plus"></i>
-
-      Add New Line
-      </button>
-
-  </div>
-</div>
-</div>
-</div>
+   <WriteComponent1 :incompleteStories="this.incompleteStories"/>
 </template>
 
 <script>
-import router from '@/router/routes';
+// import router from '@/router/routes';
 import axios from 'axios';
-
+import WriteComponent1 from './WriteComponent1.vue';
 
 export default {
     data: () => {
         return {
             signUp: false,
-            uncompletedStories: []
-        }
+            incompleteStories: []
+        };
     },
-    props: ['username'],
-    methods: {
-      continueStory(story_id){
-        router.push(`/continuestory/${story_id}`)
-      }
+    components: { WriteComponent1 },
+    // props: ["username", "contributor"],
+    // methods: {
+    //     continueStory(story_id) {
+    //         router.push(`/continuestory/${story_id}`);
+    //     }
+    // },
+    async mounted() {
+        await axios.get("http://localhost:5000/api/story/uncompleted/writestory")
+            .then(res => {
+            this.incompleteStories = res.data;
+            // console.log(this.username, this.contributor);
+            // if (this.username != undefined) {
+            //     this.incompleteStories = this.incompleteStories.filter(story => story.username == this.username);
+            // }
+            // if (this.contributor != undefined) {
+            //     this.incompleteStories = this.incompleteStories.filter(story => story.last_line_contributor == this.contributor);
+            // }
+        })
+            .catch(err => console.log(err));
     },
-    mounted(){
-      axios.get("http://localhost:5000/api/story/uncompleted/writestory")
-      .then(res => {
-        this.uncompletedStories = res.data
-        console.log(this.username);
-        if(this.username != undefined){
-          this.uncompletedStories = this.uncompletedStories.filter(story => story.username == this.username)
-        }
-      })
-      .catch(err => console.log(err))
-    }
+
 }
 </script>
 
