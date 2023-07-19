@@ -4,7 +4,7 @@
         <div class="cardc">
             <div id="write-section">
                 <div class="heading">
-                    <p class="created-by">Created by @{{ story.username }}</p>
+                    <p class="created-by">Created by :-> @{{ story.username }}</p>
                     <div class="story-title">{{ story.title }}</div>
                 </div>
                 <hr class="horizontal-line" />
@@ -16,6 +16,7 @@
     </div>
 </div>
 </template>
+
 
 <script>
 import router from "@/router/routes";
