@@ -1,18 +1,19 @@
 <template>    <div class="main-bg">
-<div class="wrapper"><h1>Continue this story</h1>  <form class="form__contact" @submit.prevent="postStory">
+<div class="wrapper"><h1>Continue this story</h1>  
+<form class="form__contact" @submit.prevent="postStory">
     <fieldset>
       <p>Title of the story is <textarea cols="40"  class="form__field field--name" placeholder="storytitle" tabindex="1" v-model="story.title" readonly></textarea></p>
       <p>Story starts like this -><textarea rows="4" cols="40" class="form__field field--story" placeholder="story" tabindex="3" v-model="story.description" readonly>.</textarea></p>
       <p>Continue the story -><textarea rows="4" cols="40" class="form__field field--story" placeholder="story" tabindex="3" v-model="des">.</textarea></p>
          <span v-if="titleNotExist" style="color: red;">Please enter the details of your story..</span>
-      <button type="submit" class="button button--xlarge" tabindex="4">Submit! &#187;</button>
+      <button type="submit" v-if="displaySubmit" class="button button--xlarge" tabindex="4">Submit! &#187;</button>
          <input class="modal-btn" type="checkbox" id="modal-btn" name="modal-btn" />
-    <label for="modal-btn" style="align-items:right">Post it <i class="uil uil-expand-arrows"></i></label>
+    <label for="modal-btn" v-if="!displaySubmit" style="align-items:right">Post it <i class="uil uil-expand-arrows"></i></label>
     <div class="modal">
         <div class="modal-wrap">
             <p>Do you want to also end this story ?</p>
-            <button @click="postStory(1)" style="padding-right:50px" > Yes </button>
-            <button @click="postStory(0)" style="padding-right:50px"> No </button>
+            <button @click="completedButton(story, 1)" style="padding-right:50px" > Yes </button>
+            <button @click="completedButton(story, 0)" style="padding-right:50px"> No </button>
         </div>
     </div>
     </fieldset>
@@ -36,7 +37,9 @@
     </filter>
   </defs>
 </svg></div>
-</template><script>
+</template>
+
+<script>
 import router from "@/router/routes";
 import axios from "axios";
 import jwt_decode from 'jwt-decode';export default {
@@ -46,12 +49,14 @@ import jwt_decode from 'jwt-decode';export default {
       story: {},
       storyId: false,
       titleNotExist: false,
-      des: ""
+      des: "",
+      isModalBtnClicked: false,
+      displaySubmit : false
     };
   },
   methods: {
-    postStory(completed) {
-      console.log(completed);
+    postStory() {
+      // console.log(completed);
         console.log(this.story);
         const token = localStorage.getItem("token")
         const user = jwt_decode(token)
@@ -61,13 +66,20 @@ import jwt_decode from 'jwt-decode';export default {
             story_id: this.story.story_id,
             des:this.des,
             user_id,
-            completedstory : completed
+            completedstory : this.story.completedstory
           })
           .then((res) => {
             console.log("Story posted..", res);
             router.push("/profile");
           })
-          .catch((err) => console.log(err));    },
+          .catch((err) => console.log(err));   
+    },
+          completedButton(story, completed){
+            story.completedstory = completed;
+            const element = document.querySelector('.modal');
+            element.style.display = "none"
+            this.displaySubmit = true
+          }
   },
   mounted(){
       const story_id = this.$route.params.story_id;
