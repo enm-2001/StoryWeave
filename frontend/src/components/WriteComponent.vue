@@ -21,6 +21,7 @@ export default {
     //         router.push(`/continuestory/${story_id}`);
     //     }
     // },
+    
     async mounted() {
         await axios.get("http://localhost:5000/api/story/uncompleted/writestory")
             .then(res => {

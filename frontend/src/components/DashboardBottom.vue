@@ -8,10 +8,12 @@
     </div>
 </div>
 
+
 <div class="rwcomp">
     <ReadComponent class="rcomp" />
-    <WriteComponent class="wcomp" />
+    <WriteComponent class="wcomp"/>
 </div>
+
 </template>
 
 <script>
@@ -21,12 +23,17 @@ import WriteComponent from './WriteComponent.vue'
 export default {
     name: "DashboardBottom",
     data: () => {
-        return {};
+        return {
+      readCount: 0,
+      writeCount: 0,
+        };
     },
+
     components: {
         ReadComponent,
         WriteComponent,
     },
+      
 };
 </script>
 

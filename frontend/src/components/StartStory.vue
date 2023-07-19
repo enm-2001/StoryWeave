@@ -9,18 +9,9 @@
       <p>Title of the story is -><textarea class="form__field field--name" cols="40" placeholder="storytitle" tabindex="1" v-model="story.title" ></textarea></p>
       <p>Story starts like this -><textarea rows="9" cols="40" class="form__field field--story" placeholder="story" tabindex="3" v-model="story.description"></textarea>.</p>
        <span v-if="titleNotExist" style="color: red;">Please enter the details of your story..</span>
-      <!-- <button type="submit" class="button button--xlarge" tabindex="4">
+      <button type="submit" class="button button--xlarge" tabindex="4">
       Post it! &#187;
-      </button> -->
-       <input class="modal-btn" type="checkbox" id="modal-btn" name="modal-btn" />
-    <label for="modal-btn" style="align-items:right">Post it <i class="uil uil-expand-arrows"></i></label>
-    <div class="modal">
-        <div class="modal-wrap">
-            <p>Do you want to also end this story ?</p>
-            <button type="submit" @click="story.completedstory = 1" style="padding-right:50px" > Yes </button>
-            <button type="submit" @click="story.completedstory = 0" style="padding-right:50px"> No </button>
-        </div>
-    </div>
+      </button>
     </fieldset>
   </form>
 </div>

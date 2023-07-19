@@ -17,6 +17,7 @@ export default {
   components: {
     ReadComponent1
   },
+
 //   props: ['username'],
 //   methods: {
 //     readStory(story_id) {
