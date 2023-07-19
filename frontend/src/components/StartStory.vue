@@ -1,28 +1,4 @@
 <template>
-  <!-- Navbar -->
-
-  <!-- -->
-  <!-- <div class="card">
-      <div class="card-header">Start your Story</div>
-      <div class="card-body">
-        <input
-          type="text"
-          placeholder="Title of Story"
-          class="card-title"
-          v-model="story.title"
-          required
-        /><br />
-        <span v-if="titleNotExist" style="color: red;">Please enter the details of your story..</span>
-        <textarea
-          class="card-text"
-          placeholder="Start you story...."
-          v-model="story.description"
-          required
-        ></textarea
-        ><br />
-        <button @click="postStory()">Post</button>
-      </div>
-    </div> -->
     <div class="main-bg">
 <div class="wrapper">
 <h1>Start your story!!</h1>
@@ -41,8 +17,8 @@
     <div class="modal">
         <div class="modal-wrap">
             <p>Do you want to also end this story ?</p>
-            <button @click="postStory(1)" style="padding-right:50px" > Yes </button>
-            <button @click="postStory(0)" style="padding-right:50px"> No </button>
+            <button type="submit" @click="story.completedstory = 1" style="padding-right:50px" > Yes </button>
+            <button type="submit" @click="story.completedstory = 0" style="padding-right:50px"> No </button>
         </div>
     </div>
     </fieldset>
@@ -98,8 +74,7 @@ export default {
   },
 
   methods: {
-    postStory(completed) {
-      this.story.completedstory = completed
+    postStory() {
       // console.log(this.story);
       if (this.story.title != "" || this.story.description != "") {
         console.log("----------");

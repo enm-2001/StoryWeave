@@ -1,31 +1,11 @@
 <template>
-  <div class="readstory" v-if="this.completedStories.length != 0">
-    <!-- <h2>READ</h2> -->
-    <div
-      class="storycards"
-      v-for="story in completedStories"
-      :key="story.story_id"
-      @click="readStory(story.story_id)"
-    >
-      <div class="cardc">
-        <div id="write-section">
-          <div class="heading">
-            <p class="created-by">Created by @{{ story.username }}</p>
-            <div class="story-title">{{ story.title }}</div>
-          </div>
-          <hr class="horizontal-line" />
-          <div class="previous-line">
-            <p>{{ story.description }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <ReadComponent1 :completedStories = "this.completedStories"/>
 </template>
 
 <script>
-import router from "@/router/routes";
+// import router from "@/router/routes";
 import axios from "axios";
+import ReadComponent1 from "./ReadComponent1.vue";
 export default {
   name: "ReadComponent",
   data: () => {
@@ -33,21 +13,25 @@ export default {
       completedStories: [],
     };
   },
-  props: ['username'],
-  methods: {
-    readStory(story_id) {
-      router.push(`/readstory/${story_id}`);
-    },
+  components: {
+    ReadComponent1
   },
-  mounted() {
-    axios
+//   props: ['username'],
+//   methods: {
+//     readStory(story_id) {
+//       router.push(`/readstory/${story_id}`);
+//     },
+//   },
+  async mounted() {
+    await axios
       .get("http://localhost:5000/api/story/completed/readstory")
       .then((res) => {
-        this.completedStories = res.data;
-        console.log(this.username);
-        if(this.username != undefined){
-            this.completedStories = this.completedStories.filter(story => story.username == this.username)
-        }
+        this.completedStories = res.data; 
+        console.log("cccccccccommmmpppp",this.completedStories);
+        // if(this.username != undefined){
+        //     console.log("userrrrrrr",this.username);
+        //     this.completedStories = this.completedStories.filter(story => story.username == this.username)
+        // }
       })
       .catch((err) => console.log(err));
   },

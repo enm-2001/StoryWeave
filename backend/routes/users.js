@@ -163,7 +163,9 @@ router.get("/users/:user_id", async (req, res) => {
 //get started stories of particular user
 router.get("/users/startedstories/:user_id", (req, res) => {
   const { user_id } = req.params;
-  const query = `select * from story where creator = ${user_id}`;
+  const query = `select s.*, u.username as creator from story s
+  join users u on u.user_id = s.creator
+  where s.creator = ${user_id}`;
   client.query(query, (err, result) => {
     if (!err) {
       res.send(result.rows);
@@ -176,8 +178,10 @@ router.get("/users/startedstories/:user_id", (req, res) => {
 //get contributed stories
 router.get("/users/contributedstories/:user_id", (req, res) => {
   const { user_id } = req.params;
-  const query = `select s.* from story s 
-  join contributions c on c.story_id = s.story_id where c.user_id = ${user_id} group by s.story_id`;
+  const query = `select s.*, c.description, u.username as creator from story s 
+  join contributions c on c.story_id = s.story_id 
+  join users u on u.user_id = s.creator
+  where c.user_id = ${user_id} group by s.story_id, c.description, u.username`;
   client.query(query, (err, result) => {
     if (!err) {
       res.send(result.rows);

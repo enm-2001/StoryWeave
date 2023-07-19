@@ -65,6 +65,7 @@ export default {
   },
   methods: {
     postStory(completed) {
+      console.log(completed);
         console.log(this.story);
         const token = localStorage.getItem("token")
         const user = jwt_decode(token)
