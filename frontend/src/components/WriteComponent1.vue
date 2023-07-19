@@ -16,7 +16,7 @@
     <hr class="horizontal-line">
     <div class="previous-line">
       <div class ="pheading" v-if="this.profile == undefined">Previous line by @{{ story.last_line_contributor }}</div>
-      <p>{{ story.description }}</p>
+      <p>{{ story.des }}</p>
     </div>
     <hr class="horizontal-line">
     

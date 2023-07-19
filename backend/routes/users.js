@@ -4,6 +4,7 @@ const client = require("../config/connection");
 const jwt = require("jsonwebtoken");
 const bcrypt = require('bcryptjs');
 require('dotenv').config()
+const { authenticateToken } = require("../middlewares/checkAuth");
 
 // function generateAccessToken(user) {
 //   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15m" });
@@ -51,7 +52,7 @@ router.post("/signup", async (req, res) => {
   await client.query(query, values, (err, result1) => {
     if (result1) {
       const user = { username: username, user_id: result1.rows[0].user_id};
-        const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1h" });
+        const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1d" });
         // console.log("login generate", token)
         res.json({ token: token });
     } else {
@@ -76,7 +77,7 @@ router.post("/login", async (req, res) => {
       if (passwordCorrect) {
 
         const user = { username: username, user_id: result.rows[0].user_id};
-        const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1h" });
+        const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1d" });
         // console.log("login generate", token)
         res.json({ token: token });
 
@@ -86,7 +87,7 @@ router.post("/login", async (req, res) => {
   
   });
 
-router.get("/users/:user_id", async (req, res) => {
+router.get("/users/:user_id", authenticateToken, async (req, res) => {
   const { user_id } = req.params;
   const query1 = `select * from users where user_id = ${user_id}`;
   
@@ -161,10 +162,16 @@ router.get("/users/:user_id", async (req, res) => {
 });
 
 //get started stories of particular user
-router.get("/users/startedstories/:user_id", (req, res) => {
+router.get("/users/startedstories/:user_id", authenticateToken, (req, res) => {
   const { user_id } = req.params;
-  const query = `select s.*, u.username as creator from story s
+  const query = `select s.*, c.description as des, u.username as creator from story s
   join users u on u.user_id = s.creator
+  JOIN (
+      SELECT story_id, MIN(contr_id) AS min_contr_id
+      FROM contributions
+      GROUP BY story_id
+    ) AS min_contr ON min_contr.story_id = s.story_id
+    JOIN contributions c ON c.story_id = min_contr.story_id AND c.contr_id = min_contr.min_contr_id
   where s.creator = ${user_id}`;
   client.query(query, (err, result) => {
     if (!err) {
@@ -176,12 +183,12 @@ router.get("/users/startedstories/:user_id", (req, res) => {
 });
 
 //get contributed stories
-router.get("/users/contributedstories/:user_id", (req, res) => {
+router.get("/users/contributedstories/:user_id", authenticateToken, (req, res) => {
   const { user_id } = req.params;
-  const query = `select s.*, c.description, u.username as creator from story s 
+  const query = `select s.*, c.description as des, u.username as creator from story s 
   join contributions c on c.story_id = s.story_id 
   join users u on u.user_id = s.creator
-  where c.user_id = ${user_id} group by s.story_id, c.description, u.username`;
+  where c.user_id = ${user_id} and s.creator != ${user_id} group by s.story_id, c.description, u.username`;
   client.query(query, (err, result) => {
     if (!err) {
       res.send(result.rows);

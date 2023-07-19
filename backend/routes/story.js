@@ -52,7 +52,7 @@ router.post("/story/create", authenticateToken, async (req, res) => {
   }
 });
 
-router.get("/story/:story_id", (req, res) => {
+router.get("/story/:story_id", authenticateToken, (req, res) => {
   const { story_id } = req.params;
   const query = `select * from story where story_id = ${story_id}`;
   client.query(query, (err, result) => {
@@ -76,7 +76,7 @@ router.delete("/story/delete", (req, res) => {
   });
 });
 
-router.post("/story/add", (req, res) => {
+router.post("/story/add", authenticateToken, (req, res) => {
   const { story_id, des, user_id, completedstory } = req.body;
   const query = `insert into pending_contr(story_id, des, user_id, completedstory) values($1, $2, $3, $4)`;
   const values = [story_id, des, user_id, completedstory];
@@ -113,7 +113,7 @@ router.delete("/story/:pstory_id/delete", (req, res) => {
 });
 
 //update the story after acceptance
-router.put("/story/update", (req, res) => {
+router.put("/story/update", authenticateToken, (req, res) => {
   const { story_id, des, user_id, pstory_id, completedstory } = req.body;
   const query1 = `SELECT description FROM story WHERE story_id = $1`;
   client.query(query1, [story_id], (err, result) => {
@@ -177,7 +177,7 @@ router.put("/story/update", (req, res) => {
 });
 
 //get accepted stories notification
-router.get("/story/acceptedStories/:user_id", (req, res) => {
+router.get("/story/acceptedStories/:user_id", authenticateToken, (req, res) => {
   const { user_id } = req.params;
   const query = `select c.contr_id, s.title from story s 
   join contributions c on s.story_id = c.story_id
@@ -193,7 +193,7 @@ router.get("/story/acceptedStories/:user_id", (req, res) => {
 });
 
 //stories contributed
-router.get("/story/contributions/:user_id", (req, res) => {
+router.get("/story/contributions/:user_id", authenticateToken, (req, res) => {
   const { user_id } = req.params;
   const query = `select count(*) as contributions from contributions where user_id = ${user_id}`;
   client.query(query, (err, result) => {
@@ -207,9 +207,9 @@ router.get("/story/contributions/:user_id", (req, res) => {
 });
 
 //get completed stories
-router.get("/story/completed/readstory", async (req, res) => {
+router.get("/story/completed/readstory", authenticateToken, async (req, res) => {
 
-  const query = `SELECT s.story_id, s.title, u.username as creator, c.description
+  const query = `SELECT s.story_id, s.title, u.username as creator, c.description as des
     FROM story s
     JOIN users u ON u.user_id = s.creator
     JOIN (
@@ -230,8 +230,8 @@ router.get("/story/completed/readstory", async (req, res) => {
 });
 
 //get uncompleted stories
-router.get("/story/uncompleted/writestory", async (req, res) => {
-  const query = `SELECT s.story_id, s.title, u.username as creator, c.description, u2.username as last_line_contributor
+router.get("/story/uncompleted/writestory", authenticateToken, async (req, res) => {
+  const query = `SELECT s.story_id, s.title, u.username as creator, c.description as des, u2.username as last_line_contributor
     FROM story s
     JOIN users u ON u.user_id = s.creator
     JOIN (
@@ -266,7 +266,7 @@ router.put("/story/completed/:story_id", async (req, res) => {
 });
 
 //read full story
-router.get("/readstory/:storyId", async (req, res) => {
+router.get("/readstory/:storyId", authenticateToken, async (req, res) => {
   const { storyId } = req.params;
 
   const query1 = `select s.title, u.username from story s 

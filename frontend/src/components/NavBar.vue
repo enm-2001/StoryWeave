@@ -17,9 +17,6 @@
             <router-link to="/login" v-if="!this.$store.state.userIsAuthorized">
                 <li>Login | Signup</li>
             </router-link>
-            <router-link to="/profile" v-if="this.$store.state.userIsAuthorized">
-                <li>{{}}</li>
-            </router-link>
             <li><button @click="logout" v-if="this.$store.state.userIsAuthorized">Logout</button></li>
         </div>
     </ul>
