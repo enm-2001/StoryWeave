@@ -3,6 +3,15 @@
     <div class="notification-heading">
         Notification
     </div>
+
+    <div class="image-row" v-if="updated_stories.length == 0 && accepted_stories.length == 0">
+    <div class="col-12">
+        <img src="../assets/noti.png" alt="Company Logo" style="width:50%" class="center" />
+    </div>
+
+</div> 
+
+
     <div class="notification-sub" v-if="updated_stories.length != 0">
         Your stories
     </div>
@@ -25,7 +34,7 @@
         </ol>
     </main>
 
-    <div class="notification-sub">
+    <div class="notification-sub" v-if="accepted_stories.length !=0">
         Your contributed Stories
     </div>
 
@@ -108,11 +117,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  padding-top:20px;
+}
+
 @media only screen and (max-width: 767.98px) {
     .notification-heading {
         display: flex;
         align-items: center;
-        font-size: 20px;
+        font-size: 25px;
         font-family: Belanosima;
         font-weight: bolder;
         color: white;

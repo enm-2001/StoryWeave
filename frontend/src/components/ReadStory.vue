@@ -11,8 +11,7 @@
             <div id="write-section">
                 <div class="heading">
                     <div>
-                        <p class="created-by">Line by @{{contribution.username}}</p>
-
+                            <p class="created-by">Line by @{{contribution.username}}</p>
                     </div>
                     <div class="date"> {{ contribution.date_contributed }}</div>
                 </div>
