@@ -12,8 +12,8 @@
     <div class="modal">
         <div class="modal-wrap">
             <p>Do you want to also end this story ?</p>
-            <button @click="completedButton(story, 1)" style="padding-right:50px" > Yes </button>
-            <button @click="completedButton(story, 0)" style="padding-right:50px"> No </button>
+            <button type="button" @click="completedButton(story, 1)" style="padding-right:50px" > Yes </button>
+            <button type="button" @click="completedButton(story, 0)" style="padding-right:50px"> No </button>
         </div>
     </div>
     </fieldset>

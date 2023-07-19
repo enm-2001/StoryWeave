@@ -7,7 +7,7 @@
         :key="story.story_id"
         @click="readStory(story.story_id)"
       >
-        <div class="cardc" v-if="completedstory != 0">
+        <div class="cardc" v-if="story.completedstory != 0">
           <div id="write-section">
             <div class="heading">
               <p class="created-by">Created by @{{ story.creator }}</p>
@@ -15,7 +15,7 @@
             </div>
             <hr class="horizontal-line" />
             <div class="previous-line">
-              <p>{{ story.description }}</p>
+              <p>{{ story.des }}</p>
             </div>
           </div>
         </div>
