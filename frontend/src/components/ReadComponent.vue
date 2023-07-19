@@ -2,6 +2,7 @@
   <ReadComponent1 :completedStories = "this.completedStories"/>
 </template>
 
+
 <script>
 // import router from "@/router/routes";
 import axios from "axios";
