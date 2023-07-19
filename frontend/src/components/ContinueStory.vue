@@ -1,17 +1,11 @@
-<template>
-
-    <div class="main-bg">
-<div class="wrapper">
-
-<h1>Continue this story</h1>
-  
-  <form class="form__contact" @submit.prevent="postStory">
+<template>    <div class="main-bg">
+<div class="wrapper"><h1>Continue this story</h1>  <form class="form__contact" @submit.prevent="postStory">
     <fieldset>
       <p>Title of the story is <textarea cols="40"  class="form__field field--name" placeholder="storytitle" tabindex="1" v-model="story.title" readonly></textarea></p>
       <p>Story starts like this -><textarea rows="4" cols="40" class="form__field field--story" placeholder="story" tabindex="3" v-model="story.description" readonly>.</textarea></p>
       <p>Continue the story -><textarea rows="4" cols="40" class="form__field field--story" placeholder="story" tabindex="3" v-model="des">.</textarea></p>
          <span v-if="titleNotExist" style="color: red;">Please enter the details of your story..</span>
-      <!-- <button type="submit" class="button button--xlarge" tabindex="4">Post it! &#187;</button> -->
+      <button type="submit" class="button button--xlarge" tabindex="4">Submit! &#187;</button>
          <input class="modal-btn" type="checkbox" id="modal-btn" name="modal-btn" />
     <label for="modal-btn" style="align-items:right">Post it <i class="uil uil-expand-arrows"></i></label>
     <div class="modal">
@@ -23,9 +17,7 @@
     </div>
     </fieldset>
   </form>
-</div>
-
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+</div><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
   <defs>
     <filter id="blur0">
       <feGaussianBlur in="SourceGraphic" stdDeviation="0 0" />
@@ -43,17 +35,11 @@
       <feGaussianBlur in="SourceGraphic" stdDeviation="0 20" />
     </filter>
   </defs>
-</svg>
-
-</div>
-</template>
-
-<script>
+</svg></div>
+</template><script>
 import router from "@/router/routes";
 import axios from "axios";
-import jwt_decode from 'jwt-decode';
-
-export default {
+import jwt_decode from 'jwt-decode';export default {
   name: "ContinueStory",
   data() {
     return {
@@ -65,6 +51,7 @@ export default {
   },
   methods: {
     postStory(completed) {
+      console.log(completed);
         console.log(this.story);
         const token = localStorage.getItem("token")
         const user = jwt_decode(token)
@@ -80,56 +67,43 @@ export default {
             console.log("Story posted..", res);
             router.push("/profile");
           })
-          .catch((err) => console.log(err));
-    
-    },
+          .catch((err) => console.log(err));    },
   },
   mounted(){
       const story_id = this.$route.params.story_id;
     axios
       .get(`http://localhost:5000/api/story/${story_id}`)
-      .then((res) => (this.story = res.data));
-    
-  }
+      .then((res) => (this.story = res.data));  }
 };
 </script>
 
-<style lang ="scss" scoped>
 
-
-@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
-@import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");
-
-
-*,
+<style lang ="scss" scoped>@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
+@import url("https://use.fontawesome.com/releases/v5.13.0/css/all.css");*,
 *::before,
 *::after {
     box-sizing: border-box;
-}
-
-body {
+}body {
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
     font-size: 15px;
     line-height: 1.7;
-    color: #1f2029;
+    color: #1F2029
+;
     background-color: #fff;
     overflow: hidden;
     background-image: url('https://assets.codepen.io/1462889/back-page.svg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: 101%;
-}
-
-p {
+}p {
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 1.7;
-    color: #1f2029;
-}
-
-.section {
+    color: #1F2029
+;
+}.section {
     position: relative;
     width: 100%;
     display: block;
@@ -139,19 +113,13 @@ p {
     flex-wrap: wrap;
     -ms-flex-pack: center;
     justify-content: center;
-}
-
-.full-height {
+}.full-height {
     min-height: 100vh;
-}
-
-[type="checkbox"]:checked,
+}[type="checkbox"]:checked,
 [type="checkbox"]:not(:checked) {
     position: absolute;
     left: -9999px;
-}
-
-.modal-btn:checked+label,
+}.modal-btn:checked+label,
 .modal-btn:not(:checked)+label {
     position: relative;
     font-family: 'Poppins', sans-serif;
@@ -180,23 +148,21 @@ p {
     align-self: center;
     border: none;
     cursor: pointer;
-    background-color: #102770;
-    color: #ffeba7;
+    background-color: #102770
+;
+    color: #FFEBA7
+;
     box-shadow: 0 12px 35px 0 rgba(16, 39, 112, .25);
-}
-
-.modal-btn:not(:checked)+label:hover {
-    background-color: #ffeba7;
-    color: #102770;
-}
-
-.modal-btn:checked+label .uil,
+}.modal-btn:not(:checked)+label:hover {
+    background-color: #FFEBA7
+;
+    color: #102770
+;
+}.modal-btn:checked+label .uil,
 .modal-btn:not(:checked)+label .uil {
     margin-left: 10px;
     font-size: 18px;
-}
-
-.modal-btn:checked+label:after,
+}.modal-btn:checked+label:after,
 .modal-btn:not(:checked)+label:after {
     position: fixed;
     top: 30px;
@@ -208,30 +174,28 @@ p {
     text-align: center;
     line-height: 30px;
     font-size: 18px;
-    background-color: #ffeba7;
-    color: #102770;
+    background-color: #FFEBA7
+;
+    color: #102770
+;
     content: "X";
     box-shadow: 0 12px 25px 0 rgba(16, 39, 112, .25);
     transition: all 200ms linear;
     opacity: 0;
     pointer-events: none;
     transform: translateY(20px);
-}
-
-.modal-btn:checked+label:hover:after,
+}.modal-btn:checked+label:hover:after,
 .modal-btn:not(:checked)+label:hover:after {
-    background-color: #102770;
-    color: #ffeba7;
-}
-
-.modal-btn:checked+label:after {
+    background-color: #102770
+;
+    color: #FFEBA7
+;
+}.modal-btn:checked+label:after {
     transition: opacity 300ms 300ms ease, transform 300ms 300ms ease, background-color 250ms linear, color 250ms linear;
     opacity: 1;
     pointer-events: auto;
     transform: translateY(0);
-}
-
-.modal {
+}.modal {
     position: fixed;
     display: block;
     display: -ms-flexbox;
@@ -251,15 +215,11 @@ p {
     pointer-events: none;
     opacity: 0;
     transition: opacity 250ms 700ms ease;
-}
-
-.modal-btn:checked~.modal {
+}.modal-btn:checked~.modal {
     pointer-events: auto;
     opacity: 1;
     transition: all 300ms ease-in-out;
-}
-
-.modal-wrap {
+}.modal-wrap {
     position: relative;
     display: block;
     width: 100%;
@@ -277,112 +237,74 @@ p {
     opacity: 0;
     transform: scale(0.6);
     transition: opacity 250ms 250ms ease, transform 300ms 250ms ease;
-}
-
-.modal-wrap img {
+}.modal-wrap img {
     display: block;
     width: 100%;
     height: auto;
-}
-
-.modal-wrap p {
+}.modal-wrap p {
     padding: 20px 30px 0 30px;
-}
-
-.modal-btn:checked~.modal .modal-wrap {
+}.modal-btn:checked~.modal .modal-wrap {
     opacity: 1;
     transform: scale(1);
     transition: opacity 250ms 500ms ease, transform 350ms 500ms ease;
-}
-
-.logo {
+}.logo {
     position: absolute;
     top: 25px;
     left: 25px;
     display: block;
     z-index: 1000;
     transition: all 250ms linear;
-}
-
-.logo img {
+}.logo img {
     height: 26px;
     width: auto;
     display: block;
     filter: brightness(10%);
     transition: filter 250ms 700ms linear;
-}
-
-.modal-btn:checked~.logo img {
+}.modal-btn:checked~.logo img {
     filter: brightness(100%);
     transition: all 250ms linear;
-}
-
-@media screen and (max-width: 500px) {
+}@media screen and (max-width: 500px) {
     .modal-wrap {
         width: calc(100% - 40px);
         padding-bottom: 15px;
-    }
-
-    .modal-wrap p {
+    }    .modal-wrap p {
         padding: 15px 20px 0 20px;
     }
-}
-
-@import url("https://fonts.googleapis.com/css?family=Roboto+Slab:400");
-@import url("https://fonts.googleapis.com/css?family=Shadows+Into+Light");
-
-$line-height: 40px;
-
-::selection {
+}@import url("https://fonts.googleapis.com/css?family=Roboto+Slab:400");
+@import url("https://fonts.googleapis.com/css?family=Shadows+Into+Light");$line-height: 40px;::selection {
   color: #fff;
-  background: #9fbe5a;
-}
-
-@media (max-width: 600px) {
+  background: #9FBE5A
+;
+}@media (max-width: 600px) {
   /* Adjust the max-width and padding for smaller screens */
   form__contact {
     max-width: 100%;
-    padding: 0 10px; 
-  }
-
- 
-  form__contact fieldset {
+    padding: 0 10px;
+  }  form__contact fieldset {
     font-size: 18px;
   }
-
- 
-}
-
-@media only screen and (min-width: 600px) {
-  form__contact {
-    
-    padding: 0 10px;
-    width:100%; 
   }
 
+  @media only screen and (min-width: 600px) {
+  form__contact {   
+    padding: 0 10px;
+    width:100%;
+  }  
   
   form__contact fieldset {
     font-size: 18px;
   }
 }
-
-
 @media only screen and (min-width: 768px) {
 form__contact {
     max-width: 200px;
     width: 100px;
     display:flex;
-  }
-
-
-  form__contact fieldset {
+  }  form__contact fieldset {
     font-size: 18px;
-  }
-
-  svg {
+  }  svg {
   display: none;
 }
-
 }
 .main-bg {
   display: flex;
@@ -390,15 +312,7 @@ form__contact {
   align-items: center;
   background-image: url("../assets/background.jpg");
   background-size: cover;
-  background-position: center;
-
-  background-repeat: no-repeat;
-
-  height: 100vh;
-
-}
-
-h1 {
+  background-position: center;  background-repeat: no-repeat;  height: 100vh;}h1 {
   margin-bottom: 75px;
   padding: 0 20vw;
   font-family: Belanosima;
@@ -406,7 +320,6 @@ h1 {
   text-align: center;
   color: #fff;
 }
-
 .form__contact {
   max-width: 800px;
   margin: 0 auto;
@@ -415,9 +328,7 @@ h1 {
     5% 100% repeat;
   border-image-width: 0px 0px 0px 30px;
   transform: translateY(100%);
-  animation: init 1s ease-in-out forwards;
-
-  fieldset {
+  animation: init 1s ease-in-out forwards;  fieldset {
     position: relative;
     margin: 0;
     padding: 30px 30px $line-height 80px;
@@ -425,129 +336,100 @@ h1 {
     border-radius: 0 20px 20px 0;
     font: 24px "Shadows Into Light", cursive;
     background: #fff linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 0) 0
-      20px / 100% $line-height;
-
-    &:after {
+      20px / 100% $line-height;    &:after {
       position: absolute;
       top: 0;
       left: 50px;
       content: "";
       height: 100%;
       width: 1px;
-      border-left: double #e08183;
+      border-left: double #E08183;
     }
-  } 
+  }  
   
-	p {
+  p {
     margin: 0 0 $line-height 0;
     line-height: $line-height;
     color: #333;
   }
-
-input,textarea{
+  
+  input,textarea{
   position: relative;
-		line-height: $line-height;
+    line-height: $line-height;
     border: none;
   outline: none;
   background: none;
   padding: 0;
   margin: 0;
-  color: #7DB665;
-}
-
-textarea{
+  color: #7DB665
+;
+}textarea{
  /* height: 50%;
   width: 100%;
   overflow-y: scroll; */
-   resize: vertical; 
-      overflow: auto;
-  
-}
-	/*span {
-		position: relative;
-		line-height: $line-height;
-	}*/
-
-  button {
+   resize: vertical;
+      overflow: auto;}
+  /*span {
+    position: relative;
+    line-height: $line-height;
+  }*/  button {
     margin-top: $line-height;
     float: right;
     border: none;
     font-family: "Shadows Into Light", cursive;
-    color: #e08183;
+    color: #E08183
+;
     background: transparent;
     cursor: pointer;
-    transition: transform 0.25s ease;
-
-    &:hover {
+    transition: transform 0.25s ease;    &:hover {
       transform: translateX(10px);
     }
   }
-}
-
-.form__field::placeholder {
+}.form__field::placeholder {
   color: silver; /* Replace with your desired color */
-}
-
-.form__field {
+}.form__field {
   display: inline;
-  color: #7db665;
-  outline: none;
-
-  &:empty {
+  color: #7DB665
+;
+  outline: none;  &:empty {
     display: inline-block;
-    color: #7db665;
-  }
-
-  // Use a data-attr to replicate a placeholder
+    color: #7DB665
+;
+  }  // Use a data-attr to replicate a placeholder
   &:empty,
   &:empty:focus {
     &:before {
       content: attr(placeholder);
     }
   }
-}
-
-/*Hide blur defs*/
+}/*Hide blur defs*/
 svg {
   display: none;
-}
-
-@keyframes init {
+}@keyframes init {
   75% {
     transform: translateY(-20px);
   }
   100% {
     transform: translateY(0);
   }
-}
-
-@keyframes do-blur {
+}@keyframes do-blur {
   0% {
     filter: url(#blur4);
-  }
-
-  25% {
+  }  25% {
     filter: url(#blur3);
-  }
-
-  50% {
+  }  50% {
     filter: url(#blur2);
-  }
-
-  75% {
+  }  75% {
     filter: url(#blur1);
-  }
-
-  100% {
+  }  100% {
     filter: url(#blur0);
   }
-}
-
-.navbar {
+}.navbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #537188;
+  background-color: #537188
+;
   font-family: Belanosima;
   color: #fff;
   padding: 20px;
@@ -555,18 +437,14 @@ svg {
   height: 80px;
   margin: 0px;
   /*justify-items:start;*/
-}
-
-.navbar-logo {
+}.navbar-logo {
   left: 20px;
   position: absolute;
   width: 60px;
   height: auto;
   margin-left: 0px;
   font-size: 50px;
-}
-
-.nav-links {
+}.nav-links {
   right: 20px;
   position: absolute;
   list-style: none;
@@ -574,20 +452,11 @@ svg {
   margin: 0;
   display: flex;
   font-size: 20px;
-}
-
-.nav-links li {
+}.nav-links li {
   margin-left: 20px;
   padding: 10px;
-}
-
-.nav-links a {
+}.nav-links a {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
-}
-
-
-
-
-</style>
+}</style>

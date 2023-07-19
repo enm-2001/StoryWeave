@@ -229,7 +229,6 @@ export default {
     .logo img {
         max-width: 200px;
         height: auto;
-
     }
 
     .text {

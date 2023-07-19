@@ -1,7 +1,4 @@
 <template>
-    <!-- <div class="img-container">
-        <img src="../assets/logof.png"  class="logo-img"/>
-    </div> -->
 
 <div class="writestory" v-if="this.uncompletedStories.length != 0">
   <!-- <h2>WRITE</h2> -->
