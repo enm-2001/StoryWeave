@@ -38,6 +38,7 @@ export default {
 </script>
 <style scoped>
 .readstory {
+  z-index: 1;
     width: 100vh;
 }
 
