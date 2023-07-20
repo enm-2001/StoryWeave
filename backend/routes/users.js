@@ -76,7 +76,8 @@ router.post("/login", async (req, res) => {
       console.log(passwordCorrect);
       if (passwordCorrect) {
 
-        const user = { username: username, user_id: result.rows[0].user_id};
+        const user = { username: username, name: result.rows[0].name, email: result.rows[0].email, user_id: result.rows[0].user_id};
+        console.log(user)
         const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1d" });
         // console.log("login generate", token)
         res.json({ token: token });

@@ -23,17 +23,12 @@
         <form class="sign-up" @submit.prevent="signup()">
             <h2>Create Login</h2>
             <div>Use your account</div>
-
             <input type="text" placeholder="Name" v-model="formData.name" required />
-
             <input type="text" placeholder="Username" v-model="formData.username" v-on:blur="checkUserforSignup(formData.username)" required />
             <span v-if="userExists">Username already exists</span>
-
             <input type="email" placeholder="Email" v-model="formData.email" v-on:blur="validateEmail(formData.email)" required />
             <span v-if="!validEmail">Enter a valid email</span>
-
             <input type="password" placeholder="Password" v-model="formData.password" />
-
             <button type="submit">Sign Up</button>
         </form>
         <form class="sign-in" @submit.prevent="checkUserforLogin">

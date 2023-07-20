@@ -26,10 +26,7 @@
                       <div class="form-group">
                           <button type="submit">Reset Password</button>
                       </div>
-                      
-                    
                     </form>
-    
                   </div>
                 </div>
               </div>
