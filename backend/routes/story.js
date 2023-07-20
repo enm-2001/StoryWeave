@@ -263,7 +263,7 @@ router.put("/story/completed/:story_id", async (req, res) => {
 });
 
 //read full story
-router.get("/readstory/:storyId", authenticateToken, async (req, res) => {
+router.get("/readstory/:storyId", async (req, res) => {
   const { storyId } = req.params;
 
   const query1 = `select s.title, u.username from story s 
