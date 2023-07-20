@@ -22,14 +22,11 @@
             <li class="services" v-if="this.$store.state.userIsAuthorized">
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <ul class="dropdown">
-                    <li><a href="/">Name</a></li>
-                    <li><a href="/">Email</a></li>
-                    <li><a href="/">Password</a></li>
+                    <li><a href="/">{{this.username}}</a></li>
+                    <li><a href="/">{{this.name}}</a></li>
+                    <li><a href="/">{{this.email}}</a></li>
                 </ul>
-
             </li>
-
-            <li v-if="this.$store.state.userIsAuthorized" style="color: bisque;">{{ this.username }}</li>
         </div>
     </ul>
 </nav>
@@ -42,7 +39,9 @@ export default {
     name: 'NavBar',
     data(){
         return{
-            username: ""
+            username: "",
+            name:"",
+            email:"",
         }
     },
     methods: {
@@ -55,6 +54,8 @@ export default {
         const token = localStorage.getItem("token")
         const user = jwt_decode(token)
         this.username = user.username 
+        this.name = user.name 
+        this.email = user.email 
     }
 }
 </script>
