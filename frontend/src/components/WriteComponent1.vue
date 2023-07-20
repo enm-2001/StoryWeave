@@ -34,36 +34,16 @@
 
 <script>
 import router from '@/router/routes';
-// import axios from 'axios';
 
 
 export default {
-    // data: () => {
-    //     return {
-    //         signUp: false,
-    //         uncompletedStories: []
-    //     }
-    // },
+
     props: ['incompleteStories', 'profile'],
     methods: {
       continueStory(story_id){
         router.push(`/continuestory/${story_id}`)
       }
     },
-    // async mounted(){
-    //   await axios.get("http://localhost:5000/api/story/uncompleted/writestory")
-    //   .then(res => {
-    //     this.uncompletedStories = res.data
-    //     console.log(this.username, this.contributor);
-    //     if(this.username != undefined){
-    //       this.uncompletedStories = this.uncompletedStories.filter(story => story.username == this.username)
-    //     }
-    //     if(this.contributor != undefined){
-    //       this.uncompletedStories = this.uncompletedStories.filter(story => story.last_line_contributor == this.contributor)
-    //     }
-    //   })
-    //   .catch(err => console.log(err))
-    // }
 }
 </script>
 
