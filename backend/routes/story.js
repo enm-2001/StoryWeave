@@ -143,12 +143,10 @@ router.put("/story/update", authenticateToken, (req, res) => {
             res.status(500).json({ error: "Internal server error" });
             return;
           }
-
           const today = new Date();
           const day = today.getDate() + 1;
           const month = today.getMonth() + 1;
           const year = today.getFullYear();
-
           const date = `${day}/${month}/${year}`;
           const query4 = `INSERT INTO contributions (user_id, story_id, date_contributed, description) VALUES ($1, $2, $3, $4)`;
           const values = [user_id, story_id, date, des];
@@ -158,7 +156,6 @@ router.put("/story/update", authenticateToken, (req, res) => {
               res.status(500).json({ error: "Internal server error" });
               return;
             }
-
             const query5 = `delete from pending_contr where id = ${pstory_id}`;
             client.query(query5, (err5, result5) => {
               if (err5) {
@@ -292,3 +289,4 @@ router.get("/readstory/:storyId", authenticateToken, async (req, res) => {
 });
 
 module.exports = router;
+

@@ -455,6 +455,7 @@ h1 {
         padding: 0;
         margin: 0;
         color: #7DB665;
+        overflow-wrap: break-word;
     }
 
     textarea {

@@ -174,6 +174,10 @@ export default {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+     background-image: url("../assets/back1.jpeg");
+      background-repeat: no-repeat, repeat;
+       background-position: center; /* Center the image */
+  background-size: cover;
 }
 
 .main-content {
