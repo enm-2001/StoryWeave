@@ -21,10 +21,10 @@
 
             <li class="services" v-if="this.$store.state.userIsAuthorized">
                 <i class="fa fa-user" aria-hidden="true"></i>
-                <ul class="dropdown">
-                    <li><a href="/">{{this.username}}</a></li>
-                    <li><a href="/">{{this.name}}</a></li>
-                    <li><a href="/">{{this.email}}</a></li>
+                <ul class="dropdown" >
+                    <li><a href="/" style="color: #537188;">{{this.username}}</a></li>
+                    <li><a href="/" style="color: #537188;">{{this.name}}</a></li>
+                    <li><a href="/" style="color: #537188;">{{this.email}}</a></li>
                 </ul>
             </li>
         </div>
@@ -61,6 +61,7 @@ export default {
 </script>
 
 <style scoped>
+
 a {
     text-decoration: none;
 }
@@ -118,12 +119,13 @@ button {
 }
 
 .dropdown {
-    background-color: #537188;
+    background-color: #E3F4F4;
     padding: 1em 0;
     position: absolute;
     display: none;
     border-radius: 8px;
     top: 35px;
+    width: 250px;
 }
 
 .dropdown li+li {
@@ -134,10 +136,12 @@ button {
     padding: 0.5em 1em;
     width: 8em;
     text-align: center;
+    width: 100%;
 }
 
 .dropdown li:hover {
-    background-color: #537188;
+    background-color: white;
+    width: 100%;
 }
 
 .services:hover .dropdown {
