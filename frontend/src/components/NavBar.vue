@@ -18,7 +18,8 @@
                 <li>Login | Signup</li>
             </router-link>
             <li><button @click="logout" v-if="this.$store.state.userIsAuthorized">Logout</button></li>
-            <li class="services">
+
+            <li class="services" v-if="this.$store.state.userIsAuthorized">
                 <i class="fa fa-user" aria-hidden="true"></i>
                 <ul class="dropdown">
                     <li><a href="/">{{this.username}}</a></li>

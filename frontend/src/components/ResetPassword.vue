@@ -2,23 +2,23 @@
 <div class="mainbg">
     <div class="mainDiv">
         <div class="cardStyle">
-            <form action="" method="post" name="signupForm" id="signupForm">
+            <form action="" method="post" name="signupForm" id="signupForm" @submit.prevent="reset">
                 <img src="../assets/reset.png" id="signupLogo" style="width:60%;height:100px;"/>
                 <h2 class="formTitle">
                     Reset Your Password
                 </h2>
                 <div class="inputDiv">
                     <label class="inputLabel" for="password">New Password</label>
-                    <input type="password" id="password" name="password" required>
+                    <input type="password" id="password" name="password" v-model="password" required>
                 </div>
 
                 <div class="inputDiv">
                     <label class="inputLabel" for="confirmPassword">Confirm Password</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword">
+                    <input type="password" id="confirmPassword" name="confirmPassword" v-model="confirmPassword">
                 </div>
 
                 <div class="buttonWrapper">
-                    <button type="submit" id="submitButton" onclick="validateSignupForm()" class="submitButton pure-button pure-button-primary">
+                    <button type="submit" id="submitButton" class="submitButton pure-button pure-button-primary">
                         <span>Continue</span>
                        
                     </button>
@@ -31,8 +31,30 @@
 </template>
 
 <script>
+import router from '@/router/routes';
+import axios from 'axios';
+
 export default {
     name: 'ResetPassword',
+    data(){
+      return{
+        password: "",
+        confirmPassword: ""
+      }
+    },
+    methods:{
+      reset(){
+        if(this.password == this.confirmPassword){
+          const token = this.$route.query.token
+          axios.post("http://localhost:5000/api/resetPassword",{password: this.password, token: token})
+          .then(res => {
+            console.log(res);
+            router.push("/login")
+          })
+          .catch(err => console.log(err))
+        }
+      }
+    }
 }
 </script>
 
