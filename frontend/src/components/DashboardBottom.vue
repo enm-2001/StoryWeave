@@ -1,4 +1,5 @@
 <template>
+<div class="mainbg">
 <div class="stories">
     <div class="col-6">
         <div class="col-text"> Read Story</div>
@@ -12,6 +13,7 @@
 <div class="rwcomp">
     <ReadComponent class="rcomp" />
     <WriteComponent class="wcomp"/>
+</div>
 </div>
 
 </template>
@@ -38,6 +40,13 @@ export default {
 </script>
 
 <style scoped>
+
+.mainbg{
+         background-image: url("../assets/back3.avif");
+      background-repeat: no-repeat, repeat;
+       background-position: center; /* Center the image */
+  background-size: cover;
+}
 .stories {
     display: flex;
     flex-wrap: wrap;

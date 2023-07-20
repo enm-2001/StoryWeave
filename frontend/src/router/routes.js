@@ -7,6 +7,8 @@ import UserProfile from '../components/UserProfile'
 import ReadStory from '../components/ReadStory'
 import NotiFication from '../components/NotiFication'
 import DashboardBottom from '../components/DashboardBottom'
+import ForgetPassword from '../components/ForgetPassword'
+import ResetPassword from '../components/ResetPassword'
 
 import store from '../store'
 // import Store from '../store'
@@ -24,6 +26,8 @@ const routes = [
     { path: '/notification', component: NotiFication, meta: {requiresAuth: true} },
     { path: '/dash', component: DashboardBottom},
     { path: '/continue', component: ContinueStory},
+    { path: '/forget', component: ForgetPassword},
+    { path: '/reset', component: ResetPassword},
     // { path: '/nav', component: NavBar1},
     // { path: '/login', component: SignIn },
 ];
