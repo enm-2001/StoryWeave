@@ -5,7 +5,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require('bcryptjs');
 require('dotenv').config()
 const { authenticateToken } = require("../middlewares/checkAuth");
-
+const nodemailer = require('nodemailer');
+const Mailgen = require('mailgen');
 // function generateAccessToken(user) {
 //   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15m" });
 // }
@@ -197,5 +198,14 @@ router.get("/users/contributedstories/:user_id", authenticateToken, (req, res) =
     }
   });
 });
+
+router.post("/users/forgotpassword", async (req, res) => {
+  const {username} = req.body
+  const query = `select email from users where username = ${username}`
+  const response = await client.query(query)
+  if(!response){
+    console.log("error getting email ");
+  }
+})
 
 module.exports = router;

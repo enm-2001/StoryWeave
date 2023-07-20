@@ -25,33 +25,16 @@
   
   <script>
   import router from "@/router/routes";
-//   import axios from "axios";
+
   export default {
     name: "ReadComponent1",
-    // data: () => {
-    //   return {
-    //     completedStories: [],
-    //   };
-    // },
+
     props: ['completedStories'],
     methods: {
       readStory(story_id) {
         router.push(`/readstory/${story_id}`);
       },
     },
-    // async mounted() {
-    //   await axios
-    //     .get("http://localhost:5000/api/story/completed/readstory")
-    //     .then((res) => {
-    //       this.completedStories = res.data; 
-    //       console.log("cccccccccommmmpppp",this.completedStories);
-    //       if(this.username != undefined){
-    //           console.log("userrrrrrr",this.username);
-    //           this.completedStories = this.completedStories.filter(story => story.username == this.username)
-    //       }
-    //     })
-    //     .catch((err) => console.log(err));
-    // },
   };
   </script>
   
@@ -71,6 +54,7 @@
     border-radius: 15px;
     /*  margin:12px; */
     padding: 0px;
+    cursor: pointer;
   }
   
   h2 {

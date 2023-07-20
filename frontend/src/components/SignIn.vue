@@ -43,7 +43,7 @@
             <span v-if="incorrect">Incorrect Password</span>
             <input type="text" placeholder="Username" v-model="loginData.username" />
             <input type="password" placeholder="Password" v-model="loginData.password" />
-            <a href="#">Forgot your password?</a>
+            <button @click="forgotPassword(loginData.username)"><a href="#">Forgot your password?</a></button>
             <button type="submit">Sign In</button>
         </form>
     </div>
@@ -145,6 +145,12 @@ export default {
                 })
                 .catch((err) => console.log(err));
         },
+        async forgotPassword(username){
+            const response = await axios.post("http://localhost:5000/api/users/forgotpassword",{
+                username: username
+            })
+            console.log(response);
+        }
     },
 };
 </script>

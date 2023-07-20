@@ -204,7 +204,7 @@ router.get("/story/contributions/:user_id", authenticateToken, (req, res) => {
 });
 
 //get completed stories
-router.get("/story/completed/readstory", authenticateToken, async (req, res) => {
+router.get("/story/completed/readstory", async (req, res) => {
 
   const query = `SELECT s.story_id, s.title, u.username as creator, c.description as des
     FROM story s
@@ -227,7 +227,7 @@ router.get("/story/completed/readstory", authenticateToken, async (req, res) => 
 });
 
 //get uncompleted stories
-router.get("/story/uncompleted/writestory", authenticateToken, async (req, res) => {
+router.get("/story/uncompleted/writestory", async (req, res) => {
   const query = `SELECT s.story_id, s.title, u.username as creator, c.description as des, u2.username as last_line_contributor
     FROM story s
     JOIN users u ON u.user_id = s.creator
