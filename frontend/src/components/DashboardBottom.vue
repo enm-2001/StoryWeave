@@ -42,6 +42,7 @@ export default {
 <style scoped>
 
 .mainbg{
+    z-index: -1;
          background-image: url("../assets/back3.avif");
       background-repeat: no-repeat, repeat;
        background-position: center; /* Center the image */

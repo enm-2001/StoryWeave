@@ -174,6 +174,8 @@ export default {
     background: none;
     padding: 0;
     margin: 0;
+    text-transform: none;
+    width: 200px;
 }
 .container {
     position: relative;
@@ -249,7 +251,7 @@ p {
 
 a {
     color: blue;
-    // text-decoration: none;
+    text-decoration: underline;
     margin: 15px 0;
     font-size: 1.5rem;
 }

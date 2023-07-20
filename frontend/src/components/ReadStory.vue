@@ -52,6 +52,13 @@ export default {
 </script>
 
 <style scoped>
+.main{
+    background-image: url("../assets/back1.jpeg");
+      background-repeat: no-repeat, repeat;
+       background-position: center; /* Center the image */
+  background-size: cover;
+  height:100vh;
+}
 .details {
     display: flex;
     align-items: center;
