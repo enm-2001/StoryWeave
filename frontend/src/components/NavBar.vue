@@ -29,6 +29,7 @@
 
             </li>
 
+            <li v-if="this.$store.state.userIsAuthorized" style="color: bisque;">{{ this.username }}</li>
         </div>
     </ul>
 </nav>
@@ -36,13 +37,24 @@
 
 <script>
 import router from '../router/routes.js'
+import jwt_decode from 'jwt-decode'
 export default {
-    name: 'NavBar1',
+    name: 'NavBar',
+    data(){
+        return{
+            username: ""
+        }
+    },
     methods: {
         logout() {
             localStorage.clear("token"),
                 router.push("/login")
         }
+    },
+    mounted(){
+        const token = localStorage.getItem("token")
+        const user = jwt_decode(token)
+        this.username = user.username 
     }
 }
 </script>

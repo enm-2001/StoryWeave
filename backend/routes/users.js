@@ -89,7 +89,7 @@ router.post("/login", async (req, res) => {
 
 router.get("/users/:user_id", authenticateToken, async (req, res) => {
   const { user_id } = req.params;
-  const query1 = `select * from users where user_id = ${user_id}`;
+  const query1 = `select coins from users where user_id = ${user_id}`;
   
   const result1 = await client.query(query1);
   if(!result1){
@@ -120,7 +120,7 @@ router.get("/users/:user_id", authenticateToken, async (req, res) => {
     stories_created = 0
   }
 
-  const query3 = `select count(distinct(story_id)) as contributions from contributions where user_id = ${user_id} group by story_id`;
+  const query3 = `select count(distinct(story_id)) as contributions from contributions where user_id = ${user_id} group by user_id`;
   const result3 = await client.query(query3)
   if(!result3){
     console.log("Error in query3:", err);
