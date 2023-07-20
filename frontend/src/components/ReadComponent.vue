@@ -1,45 +1,41 @@
 <template>
-  <ReadComponent1 :completedStories = "this.completedStories"/>
+<ReadComponent1 :completedStories="this.completedStories" />
 </template>
-
 
 <script>
 // import router from "@/router/routes";
 import axios from "axios";
 import ReadComponent1 from "./ReadComponent1.vue";
 export default {
-  name: "ReadComponent",
-  data: () => {
-    return {
-      completedStories: [],
-    };
-  },
-  components: {
-    ReadComponent1
-  },
-
-//   props: ['username'],
-//   methods: {
-//     readStory(story_id) {
-//       router.push(`/readstory/${story_id}`);
-//     },
-//   },
-  async mounted() {
-    await axios
-      .get("http://localhost:5000/api/story/completed/readstory")
-      .then((res) => {
-        this.completedStories = res.data; 
-        console.log("cccccccccommmmpppp",this.completedStories);
-        // if(this.username != undefined){
-        //     console.log("userrrrrrr",this.username);
-        //     this.completedStories = this.completedStories.filter(story => story.username == this.username)
-        // }
-      })
-      .catch((err) => console.log(err));
-  },
+    name: "ReadComponent",
+    data: () => {
+        return {
+            completedStories: [],
+        };
+    },
+    components: {
+        ReadComponent1
+    }, //   props: ['username'],
+    //   methods: {
+    //     readStory(story_id) {
+    //       router.push(`/readstory/${story_id}`);
+    //     },
+    //   },
+    async mounted() {
+        await axios
+            .get("http://localhost:5000/api/story/completed/readstory")
+            .then((res) => {
+                this.completedStories = res.data;
+                console.log("cccccccccommmmpppp", this.completedStories);
+                // if(this.username != undefined){
+                //     console.log("userrrrrrr",this.username);
+                //     this.completedStories = this.completedStories.filter(story => story.username == this.username)
+                // }
+            })
+            .catch((err) => console.log(err));
+    },
 };
 </script>
-
 <style scoped>
 .readstory {
   z-index: 1;
@@ -53,7 +49,7 @@ export default {
     border-radius: 5px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     font-family: Avenir, Helvetica;
-    color: #2c3e50;
+    color: #2C3E50;
     border-radius: 15px;
     padding: 0px;
 }

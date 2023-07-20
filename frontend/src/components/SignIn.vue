@@ -236,12 +236,12 @@ export default {
 
 h2 {
     margin: 0;
-    font-size: 30px;
+    font-size: 35px;
 }
 
 p {
     margin: 20px 0 30px;
-    font-size: 20px;
+    font-size: 25px;
 }
 
 a {
@@ -417,7 +417,7 @@ form {
 
     p {
         margin: 20px 0 30px;
-        font-size: 15px;
+        font-size: 20px;
     }
 
     a {
@@ -429,7 +429,7 @@ form {
 
     h2 {
         margin: 0;
-        font-size: 20px;
+        font-size: 25px;
     }
 
     .main-bg {
