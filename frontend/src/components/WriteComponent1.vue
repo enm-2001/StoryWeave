@@ -2,7 +2,7 @@
 <template>
 <div class="writestory" v-if="this.incompleteStories.length != 0">
     <div class="storycards" v-for="story in incompleteStories" :key="story.story_id">
-        <div class="cardc" v-if="story.completedstory != 0">
+        <div class="cardc" v-if="story.completedstory != 1">
             <div id="write-section">
                 <div class="heading">
                     <p class="created-by">Created by @{{ story.creator }}</p>
