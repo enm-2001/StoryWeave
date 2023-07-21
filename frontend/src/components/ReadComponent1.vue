@@ -33,7 +33,7 @@ export default {
 </script>  
 <style scoped>
   .readstory {
-      width: 100vh;
+    width: 100vh;
   }
 
   .cardc {

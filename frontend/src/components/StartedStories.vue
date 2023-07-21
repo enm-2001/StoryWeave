@@ -52,6 +52,8 @@ export default {
     },
     mounted() {
         const token = localStorage.getItem("token");
+        try{
+         
         const user = jwt_decode(token);
         const user_id = user.user_id;
         axios
@@ -60,6 +62,17 @@ export default {
                 this.startedStories = res.data;
             })
             .catch((err) => console.log(err));
+        }
+        catch (error) {
+        if (error.name === 'InvalidTokenError') {
+          console.error('Invalid Token:', error.message);
+          // Handle the error, e.g., show an error message to the user
+          // or redirect to the login page if the token is invalid
+        } else {
+          console.error('Unexpected Error:', error);
+          // Handle other unexpected errors here, if necessary
+        }
+      }
     },
 };
 </script>

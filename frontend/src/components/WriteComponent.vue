@@ -26,13 +26,6 @@ export default {
     await axios.get("http://localhost:5000/api/story/uncompleted/writestory")
     .then(res => {
         this.incompleteStories = res.data;
-        // console.log(this.username, this.contributor);
-        // if (this.username != undefined) {
-        //     this.incompleteStories = this.incompleteStories.filter(story => story.username == this.username);
-        // }
-        // if (this.contributor != undefined) {
-        //     this.incompleteStories = this.incompleteStories.filter(story => story.last_line_contributor == this.contributor);
-        // }
     })
     .catch(err => console.log(err));
 },

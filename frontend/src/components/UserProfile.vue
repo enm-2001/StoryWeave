@@ -105,7 +105,8 @@ export default {
 },
     async mounted(){
       const token = localStorage.getItem("token")
-      const user = jwt_decode(token)
+      try{
+        const user = jwt_decode(token)
       const user_id = user.user_id
       this.username = user.username
       console.log(user);
@@ -118,6 +119,17 @@ export default {
       const res3 = await axios.get(`http://localhost:5000/api/users/contributedstories/${user_id}`)
       this.contributedStories = res3.data
       console.log("contributed: ", this.contributedStories);
+      }
+      catch (error) {
+        if (error.name === 'InvalidTokenError') {
+          console.error('Invalid Token:', error.message);
+          // Handle the error, e.g., show an error message to the user
+          // or redirect to the login page if the token is invalid
+        } else {
+          console.error('Unexpected Error:', error);
+          // Handle other unexpected errors here, if necessary
+        }
+      }
     }
 
 }
