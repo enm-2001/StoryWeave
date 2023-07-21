@@ -88,7 +88,7 @@ router.post("/story/add", authenticateToken, (req, res) => {
 });
 
 //get pending stories for particular user
-router.get("/story/pstory/:user_id", (req, res) => {
+router.get("/story/pstory/:user_id", authenticateToken, (req, res) => {
   const { user_id } = req.params;
   const query = `select p.*, s.title from story s
   join pending_contr p on p.story_id = s.story_id
@@ -102,7 +102,7 @@ router.get("/story/pstory/:user_id", (req, res) => {
 });
 
 //remove from pending list after rejection
-router.delete("/story/:pstory_id/delete", (req, res) => {
+router.delete("/story/:pstory_id/delete", authenticateToken, (req, res) => {
   const { pstory_id } = req.params;
   const query = `delete from pending_contr where id = ${pstory_id}`;
   client.query(query, (err, result) => {
