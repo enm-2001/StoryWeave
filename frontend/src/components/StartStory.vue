@@ -92,10 +92,15 @@ export default {
                             }
                         });
                 } catch (error) {
-                    console.error("Failed to decode token:", error);
-                    localStorage.clear("token")
-                    router.push("/login")
-                }
+        if (error.name === 'InvalidTokenError') {
+          console.error('Invalid Token:', error.message);
+          // Handle the error, e.g., show an error message to the user
+          // or redirect to the login page if the token is invalid
+        } else {
+          console.error('Unexpected Error:', error);
+          // Handle other unexpected errors here, if necessary
+        }
+      }
 
             } else {
                 this.titleNotExist = true;

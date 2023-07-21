@@ -81,7 +81,7 @@ h2 {
 #write-section {
     padding: 15px;
     font-family: Belanosima;
-    ;
+    
 }
 
 .horizontal-line {
