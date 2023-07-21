@@ -9,6 +9,8 @@ import NotiFication from '../components/NotiFication'
 import DashboardBottom from '../components/DashboardBottom'
 import ForgetPassword from '../components/ForgetPassword'
 import ResetPassword from '../components/ResetPassword'
+import ReadComponent from '../components/ReadComponent'
+import WriteComponent from '../components/WriteComponent'
 
 import store from '../store'
 // import Store from '../store'
@@ -28,6 +30,8 @@ const routes = [
     { path: '/continue', component: ContinueStory},
     { path: '/forget', component: ForgetPassword},
     { path: '/reset', component: ResetPassword},
+    { path: '/read', component: ReadComponent},
+    { path: '/write', component: WriteComponent},
     // { path: '/nav', component: NavBar1},
     // { path: '/login', component: SignIn },
 ];
