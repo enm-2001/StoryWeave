@@ -132,7 +132,11 @@ export default {
   methods: {
     postStory() {
       // console.log(completed);
-      console.log(this.story);
+      if(this.des == null){
+        alert("Enter the description")
+      }
+      else{
+        console.log(this.story);
       const token = localStorage.getItem("token");
       try {
         
@@ -160,6 +164,8 @@ export default {
           // Handle other unexpected errors here, if necessary
         }
       }
+      }
+      
     },
     completedButton(story, completed) {
       story.completedstory = completed;
