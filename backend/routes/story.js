@@ -52,7 +52,7 @@ router.post("/story/create", authenticateToken, async (req, res) => {
   }
 });
 
-router.get("/story/:story_id", authenticateToken, (req, res) => {
+router.get("/story/:story_id", (req, res) => {
   const { story_id } = req.params;
   const query = `select * from story where story_id = ${story_id}`;
   client.query(query, (err, result) => {
@@ -88,7 +88,7 @@ router.post("/story/add", authenticateToken, (req, res) => {
 });
 
 //get pending stories for particular user
-router.get("/story/pstory/:user_id", (req, res) => {
+router.get("/story/pstory/:user_id", authenticateToken, (req, res) => {
   const { user_id } = req.params;
   const query = `select p.*, s.title from story s
   join pending_contr p on p.story_id = s.story_id
@@ -102,7 +102,7 @@ router.get("/story/pstory/:user_id", (req, res) => {
 });
 
 //remove from pending list after rejection
-router.delete("/story/:pstory_id/delete", (req, res) => {
+router.delete("/story/:pstory_id/delete", authenticateToken, (req, res) => {
   const { pstory_id } = req.params;
   const query = `delete from pending_contr where id = ${pstory_id}`;
   client.query(query, (err, result) => {
@@ -143,10 +143,12 @@ router.put("/story/update", authenticateToken, (req, res) => {
             res.status(500).json({ error: "Internal server error" });
             return;
           }
+
           const today = new Date();
           const day = today.getDate() + 1;
           const month = today.getMonth() + 1;
           const year = today.getFullYear();
+
           const date = `${day}/${month}/${year}`;
           const query4 = `INSERT INTO contributions (user_id, story_id, date_contributed, description) VALUES ($1, $2, $3, $4)`;
           const values = [user_id, story_id, date, des];
@@ -156,6 +158,7 @@ router.put("/story/update", authenticateToken, (req, res) => {
               res.status(500).json({ error: "Internal server error" });
               return;
             }
+
             const query5 = `delete from pending_contr where id = ${pstory_id}`;
             client.query(query5, (err5, result5) => {
               if (err5) {
@@ -289,4 +292,3 @@ router.get("/readstory/:storyId", async (req, res) => {
 });
 
 module.exports = router;
-

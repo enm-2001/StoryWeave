@@ -7,7 +7,7 @@ require("dotenv").config();
 const { authenticateToken } = require("../middlewares/checkAuth");
 const nodemailer = require("nodemailer");
 const Mailgen = require("mailgen");
-const crypto = require('crypto');
+const crypto = require("crypto");
 // function generateAccessToken(user) {
 //   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15m" });
 // }
@@ -76,21 +76,28 @@ router.post("/login", async (req, res) => {
   }
   console.log(result.rows[0]);
 
-      const passwordCorrect = await bcrypt.compare(password, result.rows[0].password)
-      console.log(passwordCorrect);
-      if (passwordCorrect) {
-
-        const user = { username: username, name: result.rows[0].name, email: result.rows[0].email, user_id: result.rows[0].user_id};
-        console.log(user)
-        const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1d" });
-        // console.log("login generate", token)
-        res.json({ token: token });
-
-      } else {
-        res.json({ pcheck: true });
-      }
-  
-  });
+  const passwordCorrect = await bcrypt.compare(
+    password,
+    result.rows[0].password
+  );
+  console.log(passwordCorrect);
+  if (passwordCorrect) {
+    const user = {
+      username: username,
+      name: result.rows[0].name,
+      email: result.rows[0].email,
+      user_id: result.rows[0].user_id,
+    };
+    console.log(user);
+    const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: "1d",
+    });
+    // console.log("login generate", token)
+    res.json({ token: token });
+  } else {
+    res.json({ pcheck: true });
+  }
+});
 
 router.get("/users/:user_id", authenticateToken, async (req, res) => {
   const { user_id } = req.params;
@@ -211,7 +218,7 @@ router.post("/forgotpassword", async (req, res) => {
   }
 
   const email = result.rows[0].email;
-  const resetToken = crypto.randomBytes(20).toString('hex');
+  const resetToken = crypto.randomBytes(20).toString("hex");
   resetTokens[resetToken] = username;
 
   let config = {
@@ -269,19 +276,18 @@ router.post("/forgotpassword", async (req, res) => {
 });
 
 router.post("/resetPassword", async (req, res) => {
-  const {password, token} = req.body
-  const username = resetTokens[token]
+  const { password, token } = req.body;
+  const username = resetTokens[token];
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const query = `update users set password = $1 where username = $2`
+  const query = `update users set password = $1 where username = $2`;
   await client.query(query, [hashedPassword, username], (err, result) => {
-    if(!err){
-      res.send("Reset password successful")
+    if (!err) {
+      res.send("Reset password successful");
+    } else {
+      console.log("error in reset password: ", err);
     }
-    else{
-      console.log("error in reset password: ",err);
-    }
-  })
-})
+  });
+});
 
 module.exports = router;

@@ -22,7 +22,7 @@
             <li v-for="story in updated_stories" :key="story.story_id">
                 <div class="approval">
                     <div class="left-side">
-                        <h1>{{story.title}}</h1>
+                        <h3 style="text-transform: capitalize;">{{story.title}}</h3>
                         {{story.des}}
                     </div>
                     <div class="right-side">
@@ -97,6 +97,8 @@ export default {
     },
     async mounted() {
         const token = localStorage.getItem("token")
+        try{
+           
         const user = jwt_decode(token)
         const user_id = user.user_id;
         await axios.get(`http://localhost:5000/api/story/pstory/${user_id}`)
@@ -111,6 +113,17 @@ export default {
             this.accepted_stories = res1.data
         })
         .catch(err1 => console.log(err1))
+        }
+        catch (error) {
+        if (error.name === 'Invalid token specified') {
+          console.error('Invalid Token:', error.message);
+          // Handle the error, e.g., show an error message to the user
+          // or redirect to the login page if the token is invalid
+        } else {
+          console.error('Unexpected Error:', error);
+          // Handle other unexpected errors here, if necessary
+        }
+      }
     },
 
 }
