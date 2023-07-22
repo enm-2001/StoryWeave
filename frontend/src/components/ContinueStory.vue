@@ -132,7 +132,7 @@ export default {
   methods: {
     postStory() {
       // console.log(completed);
-      if(this.des == null){
+      if(this.des == ""){
         alert("Enter the description")
       }
       else{
