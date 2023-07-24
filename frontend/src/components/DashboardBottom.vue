@@ -13,7 +13,9 @@
     <WriteComponent class="wcomp"/>
 </div>
 </div>
-</template><script>
+</template>
+
+<script>
 import ReadComponent from './ReadComponent.vue';
 import WriteComponent from './WriteComponent.vue';
 export default {

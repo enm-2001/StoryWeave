@@ -5,6 +5,8 @@ import router from './router/routes'
 import httpInterceptor from "./interceptor.js";
 import store from './store'
 
+
+
 httpInterceptor();
 
 createApp(App).use(router).use(store).mount('#app');

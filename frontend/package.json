@@ -2,6 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
+  "type": "module", 
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -10,15 +11,19 @@
   "dependencies": {
     "@babel/preset-env": "^7.22.7",
     "@popperjs/core": "^2.11.8",
+    "@xenova/transformers": "^2.4.2",
     "axios": "^1.4.0",
     "bootstrap": "^4.6.2",
     "chart.js": "^4.3.0",
     "core-js": "^3.8.3",
     "jquery": "^3.7.0",
     "jwt-decode": "^3.1.2",
+    "numjs": "^0.16.1",
+    "pandas-js": "^0.2.4",
     "popper.js": "^1.16.1",
     "sass": "^1.63.6",
     "sass-loader": "^13.3.2",
+    "transformers": "^3.1.0",
     "vue": "^3.2.13",
     "vue-card-slide": "^1.1.1",
     "vue-chartjs": "^5.2.0",
@@ -57,5 +62,10 @@
     "last 2 versions",
     "not dead",
     "not ie 11"
-  ]
+  ],
+  "description": "## Project setup ``` npm install ```",
+  "main": "babel.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
