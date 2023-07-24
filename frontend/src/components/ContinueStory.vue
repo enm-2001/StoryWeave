@@ -155,12 +155,18 @@ export default {
           })
           .catch((err) => console.log(err));
       } catch (error) {
-        if (error.name === "InvalidTokenError") {
-          console.error("Invalid Token:", error.message);
-          // Handle the error, e.g., show an error message to the user
-          // or redirect to the login page if the token is invalid
-        } else {
-          console.error("Unexpected Error:", error);
+        const status = error.response.status 
+        if (status === 403) {
+          alert("Token expired...Please login again")
+          localStorage.clear("token")
+          router.push("/login")
+        }
+        else if(status === 401){
+          alert("No token provided... Please login")
+          router.push("login")
+        }
+        else {
+          console.error('Unexpected Error:', error);
           // Handle other unexpected errors here, if necessary
         }
       }
