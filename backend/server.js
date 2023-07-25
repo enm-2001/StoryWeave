@@ -1,6 +1,8 @@
-const express = require("express");
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import usersRoutes from "./routes/users.js";
+import storyRoutes from "./routes/story.js";
 
 //const path = require
 
@@ -9,8 +11,9 @@ app.use(cors());
 app.use(cookieParser())
 app.use(express.json());
 
-app.use("/api", require("./routes/users.js"));
-app.use("/api", require("./routes/story.js"));
+app.use("/api", usersRoutes);
+app.use("/api", storyRoutes);
+
 
 app.listen(5000, () => {
   console.log("Server running on port 5000....");
