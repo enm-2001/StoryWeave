@@ -7,9 +7,9 @@ import { pipeline } from '@xenova/transformers'
 
 // router.post("/getSentiment", sentimentAnalysis)
 router.post("/getSentiment", async (req, res) => {
-    const {story} = req.body
+    const {des} = req.body
     let classifier =  await pipeline('sentiment-analysis');
-    let result =  await classifier(story);
+    let result =  await classifier(des);
     res.send(result)
 })
 
@@ -293,6 +293,11 @@ router.get("/readstory/:storyId", async (req, res) => {
   const result2 = await client.query(query2);
   const story_others = result2.rows;
 
+  for(let i = 0; i<story_others.length; i++){
+    let classifier =  await pipeline('sentiment-analysis');
+    let result =  await classifier(story_others[i].description);
+    story_others[i] = {...story_others[i], sentiment : result[0].label}
+  }
   const response = {
     story_details,
     story_others,
