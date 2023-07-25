@@ -1,10 +1,10 @@
-import { pipeline } from '@xenova/transformers';
+// import { pipeline } from '@xenova/transformers';
 
 
-let classifier =  await pipeline('sentiment-analysis');
+// let classifier =  await pipeline('sentiment-analysis');
 
-let result =  await classifier('this is terrific');
+// let result =  await classifier('this is terrific');
 
-console.log(result)
+
 
 
