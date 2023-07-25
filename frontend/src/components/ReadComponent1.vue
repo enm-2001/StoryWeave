@@ -5,17 +5,17 @@
         <div class="cardc" v-if="story.completedstory != 0">
             <div id="write-section">
                 <div class="heading">
-            
+                    <div>
                     <p class="created-by">Created by @{{ story.creator }}</p>
-                           <div class="senti-badge">
-
-                <span v-if="!sentiment" class="badge ">Negative</span>
-                <span v-else class="badge badge-success">Positive</span> 
-
-
-                </div>
+                           
                     <div class="story-title">{{ story.title }}</div> 
-           
+                </div>
+                    <div class="senti-badge">
+
+<span class="badge ">{{ story.sentiment }}</span>
+
+
+</div>
                 </div>
              
                 <hr class="horizontal-line" />
@@ -51,17 +51,22 @@ return{
 };
 </script>  
 <style scoped>
+.heading {
+  display: flex;
+  justify-content: space-between;
+  justify-content: center;
+  width: 100%;
+}
 .senti-badge{
-margin-left: auto; 
+margin: auto;
 margin-right: 0;
  float: right;
  font-size:19px;
- 
 }
-
 .badge{
  border-radius: 13px;
  padding:9px;
+ background: #5F7161;
 }
   .readstory {
     width: 100vh;
