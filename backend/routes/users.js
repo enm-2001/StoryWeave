@@ -1,13 +1,17 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const client = require("../config/connection");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-require("dotenv").config();
-const { authenticateToken } = require("../middlewares/checkAuth");
-const nodemailer = require("nodemailer");
-const Mailgen = require("mailgen");
-const crypto = require("crypto");
+import client from "../config/connection.js";
+import jwt  from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+import dotenv from "dotenv";
+
+
+import { authenticateToken }  from "../middlewares/checkAuth.js";
+import nodemailer  from "nodemailer";
+import Mailgen  from "mailgen";
+import crypto  from "crypto";
+
+dotenv.config();
 // function generateAccessToken(user) {
 //   return jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "15m" });
 // }
@@ -292,4 +296,4 @@ router.post("/resetPassword", async (req, res) => {
   });
 });
 
-module.exports = router;
+export default router;

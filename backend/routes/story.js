@@ -1,10 +1,17 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const client = require("../config/connection");
-const { authenticateToken } = require("../middlewares/checkAuth");
+import client from "../config/connection.js";
+import { authenticateToken } from "../middlewares/checkAuth.js";
+import { pipeline } from '@xenova/transformers'
 // import {sentimentAnalysis} = require('./sentiment.mjs')
 
 // router.post("/getSentiment", sentimentAnalysis)
+router.post("/getSentiment", async (req, res) => {
+    const {story} = req.body
+    let classifier =  await pipeline('sentiment-analysis');
+    let result =  await classifier(story);
+    res.send(result)
+})
 
 router.post("/story/create", authenticateToken, async (req, res) => {
   try {
@@ -295,4 +302,4 @@ router.get("/readstory/:storyId", async (req, res) => {
 });
 
 
-module.exports = router;
+export default router;
