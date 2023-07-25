@@ -11,20 +11,22 @@
             <div id="write-section">
                 <div class="heading">
                     <div>
-                            <p class="created-by">Line by @{{contribution.username}}</p>
+                        <p class="created-by">Line by @{{contribution.username}}</p>
                     </div>
                     <div class="date"> {{ contribution.date_contributed }}</div>
                 </div>
                 <hr class="horizontal-line">
                 <div class="storyline">
+                    <span class="badge ">{{sentiment(contribution.description)}}</span>
+                    <!-- <span class="badge badge-success">Positive</span>  -->
                     <p> {{ contribution.description }}
                     </p>
+
                 </div>
 
             </div>
         </div>
     </div>
-    
 
 </div>
 </template>
@@ -36,8 +38,18 @@ export default {
     data() {
         return {
             story_details: {},
-            story_others: []
+            story_others: [],
+            // sentiment : true,
         };
+    },
+    computed: {
+        sentiment(des) {
+            let senti;
+            const res = axios.post("http://localhost:5000/api/getSentiment", des)
+            senti = res.data.label
+            return senti
+
+        }
     },
     mounted() {
 
@@ -46,20 +58,23 @@ export default {
         axios.get(`http://localhost:5000/api/readstory/${storyId}`)
             .then(res => {
                 this.story_details = res.data.story_details;
-                this.story_others = res.data.story_others
+                this.story_others = res.data.story_others;
+
             })
     }
 }
 </script>
 
 <style scoped>
-.main{
+.main {
     background-image: url("../assets/back1.jpeg");
-      background-repeat: no-repeat, repeat;
-       background-position: center; /* Center the image */
-  background-size: cover;
-  height:100vh;
+    background-repeat: no-repeat, repeat;
+    background-position: center;
+    /* Center the image */
+    background-size: cover;
+    height: 100vh;
 }
+
 .details {
     display: flex;
     align-items: center;
