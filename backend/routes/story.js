@@ -6,12 +6,12 @@ import { pipeline } from '@xenova/transformers'
 // import {sentimentAnalysis} = require('./sentiment.mjs')
 
 // router.post("/getSentiment", sentimentAnalysis)
-router.post("/getSentiment", async (req, res) => {
-    const {des} = req.body
-    let classifier =  await pipeline('sentiment-analysis');
-    let result =  await classifier(des);
-    res.send(result)
-})
+// router.post("/getSentiment", async (req, res) => {
+//     const {des} = req.body
+//     let classifier =  await pipeline('sentiment-analysis');
+//     let result =  await classifier(des);
+//     res.send(result)
+// })
 
 router.post("/story/create", authenticateToken, async (req, res) => {
   try {
