@@ -66,7 +66,7 @@ margin-right: 0;
 .badge{
  border-radius: 13px;
  padding:9px;
- background: #5F7161;
+     background: #5F7161;
 }
   .readstory {
     width: 100vh;

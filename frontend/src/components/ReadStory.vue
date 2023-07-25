@@ -18,7 +18,7 @@
                         <div class="date"> {{ contribution.date_contributed }}</div>
                     </div>
                     <div class="senti-badge">
-                    <span class="badge" style="background-color: {{ contribution.sentiment === 'POSITIVE' ? 'green' : 'red' }}">{{ contribution.sentiment  }}</span>
+                    <span class="badge" style="background-color: {{ contribution.sentiment === 'POSITIVE' ? #5F7161 : 'red' }}">{{ contribution.sentiment  }}</span>
                 </div>
                     
                 </div>
@@ -85,7 +85,7 @@ export default {
 .badge {
     border-radius: 13px;
     padding: 9px;
-    background: "#C3EDC0";
+    background: #5F7161;
 }
 
 .main {
