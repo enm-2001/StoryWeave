@@ -1,7 +1,10 @@
 <template>
   <div class="main">
     <!-- Story Title -->
-    <div class="story-heading">
+    <div class="spinner-border" v-if="story_others.length == 0" role="status">
+  <span class="visually-hidden"></span>
+</div>
+    <div class="story-heading" v-else>
       <p>{{ story_details.title }}</p>
     </div>
     <p class="started-by">Started by: {{ story_details.username }}</p>
@@ -93,6 +96,27 @@ export default {
     height: 100vh;
 }
 
+.spinner-border{
+    display: flex;
+    margin: auto;
+}
+.heading {
+  display: flex;
+  justify-content: space-between;
+  justify-content: center;
+  width: 100%;
+}
+.senti-badge{
+margin: auto;
+margin-right: 0;
+ float: right;
+ font-size:19px;
+}
+.badge{
+ border-radius: 13px;
+ padding:9px;
+ background: #5F7161;
+}
 .details {
   display: flex;
   align-items: center;
@@ -144,11 +168,7 @@ export default {
   justify-items: center;
 }
 
-.heading {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
+
 
 .avatar {
   width: 40px;
