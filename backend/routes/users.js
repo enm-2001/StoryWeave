@@ -130,7 +130,9 @@ router.get("/users/:user_id", authenticateToken, async (req, res) => {
     stories_created = 0;
   }
 
-  const query3 = `select count(distinct(story_id)) as contributions from contributions where user_id = ${user_id} group by user_id`;
+  //const query3 = `select count(distinct(story_id)) as contributions from contributions where user_id = ${user_id} group by user_id`;
+  const query3 = `select count(distinct(c.story_id)) as contributions from contributions c
+  join story s on s.story_id = c.story_id where c.user_id = ${user_id} and s.creator != ${user_id}`
   const result3 = await client.query(query3);
   if (!result3) {
     console.log("Error in query3:", err);

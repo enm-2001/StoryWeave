@@ -185,6 +185,12 @@ export default {
       }
     },
   },
+  created(){
+    const token = localStorage.getItem("token")
+    if(token != null){
+      router.push("/dashboard")
+    }
+  }
 };
 </script>
 

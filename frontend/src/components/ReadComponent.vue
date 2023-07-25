@@ -30,11 +30,6 @@ export default {
       .get("http://localhost:5000/api/story/completed/readstory")
       .then((res) => {
         this.completedStories = res.data; 
-        console.log("cccccccccommmmpppp",this.completedStories);
-        // if(this.username != undefined){
-        //     console.log("userrrrrrr",this.username);
-        //     this.completedStories = this.completedStories.filter(story => story.username == this.username)
-        // }
       })
       .catch((err) => console.log(err));
   },

@@ -80,6 +80,15 @@ export default {
       router.push("/login");
     },
   },
+  mounted(){
+        const token = localStorage.getItem("token");
+        if (token != null) {
+          const user = jwt_decode(token);
+          this.username = user.username;
+          this.name = user.name;
+          this.email = user.email;
+        }
+  }
 
 };
 </script>
