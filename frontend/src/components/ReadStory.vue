@@ -66,11 +66,23 @@ export default {
 </script>
 
 <style scoped>
+.senti-badge {
+    margin-left: auto;
+    margin-right: 0;
+    float: right;
+    font-size: 19px;
+}
+
+.badge {
+    border-radius: 13px;
+    padding: 9px;
+    background: "#C3EDC0";
+}
+
 .main {
     background-image: url("../assets/back1.jpeg");
     background-repeat: no-repeat, repeat;
     background-position: center;
-    /* Center the image */
     background-size: cover;
     height: 100vh;
 }
