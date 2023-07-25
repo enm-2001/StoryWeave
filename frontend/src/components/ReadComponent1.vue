@@ -5,9 +5,19 @@
         <div class="cardc" v-if="story.completedstory != 0">
             <div id="write-section">
                 <div class="heading">
+            
                     <p class="created-by">Created by @{{ story.creator }}</p>
-                    <div class="story-title">{{ story.title }}</div>
+                           <div class="senti-badge">
+
+                <span v-if="!sentiment" class="badge ">Negative</span>
+                <span v-else class="badge badge-success">Positive</span> 
+
+
                 </div>
+                    <div class="story-title">{{ story.title }}</div> 
+           
+                </div>
+             
                 <hr class="horizontal-line" />
                 <div class="previous-line">
                     <p>{{ story.des }}</p>
@@ -29,9 +39,30 @@ export default {
             router.push(`/readstory/${story_id}`);
         },
     },
+     data(){
+return{
+    sentiment: true
+}
+        },
+
+        // mounted(){
+        //     const storyId= 
+        // }
 };
 </script>  
 <style scoped>
+.senti-badge{
+margin-left: auto; 
+margin-right: 0;
+ float: right;
+ font-size:19px;
+ 
+}
+
+.badge{
+ border-radius: 13px;
+ padding:9px;
+}
   .readstory {
     width: 100vh;
   }

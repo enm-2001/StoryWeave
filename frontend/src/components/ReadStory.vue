@@ -6,58 +6,75 @@
     </div>
     <p class="started-by">Started by: {{ story_details.username }}</p>
     <!-- Story cards -->
-    <div
-      class="storycards"
-      v-for="contribution in story_others"
-      v-bind:key="contribution.contr_id"
-    >
-      <div class="card">
-        <div id="write-section">
-          <div class="heading">
-            <div>
-              <p class="created-by">Line by @{{ contribution.username }}</p>
+    <div class="storycards" v-for="contribution in story_others" v-bind:key="contribution.contr_id">
+        <div class="card">
+            <div id="write-section">
+                <div class="heading">
+                    <div>
+                        <p class="created-by">Line by @{{contribution.username}}</p>
+                    </div>
+                    <div class="date"> {{ contribution.date_contributed }}</div>
+                </div>
+                <hr class="horizontal-line">
+                <div class="storyline">
+                    <span class="badge ">{{sentiment(contribution.description)}}</span>
+                    <!-- <span class="badge badge-success">Positive</span>  -->
+                    <p> {{ contribution.description }}
+                    </p>
+
+                </div>
+
             </div>
-            <div class="date">{{ contribution.date_contributed }}</div>
-          </div>
-          <hr class="horizontal-line" />
-          <div class="storyline">
-            <p>{{ contribution.description }}</p>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
+
+</div>
 </template>
 
 <script>
 import axios from "axios";
 export default {
-  name: "ReadStory",
-  data() {
-    return {
-      story_details: {},
-      story_others: [],
-    };
-  },
-  mounted() {
-    const storyId = this.$route.params.storyId;
-    console.log(storyId);
-    axios.get(`http://localhost:5000/api/readstory/${storyId}`).then((res) => {
-      this.story_details = res.data.story_details;
-      this.story_others = res.data.story_others;
-    });
-  },
-};
+    name: 'ReadStory',
+    data() {
+        return {
+            story_details: {},
+            story_others: [],
+            // sentiment : true,
+        };
+    },
+    computed: {
+        sentiment(des) {
+            let senti;
+            const res = axios.post("http://localhost:5000/api/getSentiment", des)
+            senti = res.data.label
+            return senti
+
+        }
+    },
+    mounted() {
+
+        const storyId = this.$route.params.storyId;
+        console.log(storyId);
+        axios.get(`http://localhost:5000/api/readstory/${storyId}`)
+            .then(res => {
+                this.story_details = res.data.story_details;
+                this.story_others = res.data.story_others;
+
+            })
+    }
+}
 </script>
 
 <style scoped>
 .main {
-  background-image: url("../assets/back1.jpeg");
-  background-repeat: no-repeat, repeat;
-  background-position: center; /* Center the image */
-  background-size: cover;
-  height: 100vh;
+    background-image: url("../assets/back1.jpeg");
+    background-repeat: no-repeat, repeat;
+    background-position: center;
+    /* Center the image */
+    background-size: cover;
+    height: 100vh;
 }
+
 .details {
   display: flex;
   align-items: center;

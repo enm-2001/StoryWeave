@@ -1,4 +1,3 @@
-
 <template>
 <div class="writestory" v-if="this.incompleteStories.length != 0">
     <div class="storycards" v-for="story in incompleteStories" :key="story.story_id">
@@ -12,8 +11,6 @@
                 <div class="previous-line">
                     <p>{{ story.des }}</p>
                 </div>
-
-
                 <hr class="horizontal-line"> <button id="add-line-button" @click="continueStory(story.story_id)">
                     <i class="glyphicon glyphicon-plus"></i> Add New Line
                 </button>

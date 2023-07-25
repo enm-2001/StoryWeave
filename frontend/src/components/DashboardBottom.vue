@@ -20,7 +20,9 @@
     </div> -->
     </div>
     </template>
-    <script>
+    
+
+<script>
     import ReadComponent from './ReadComponent.vue';
     import WriteComponent from './WriteComponent.vue';
     export default {
