@@ -219,7 +219,7 @@ router.get("/story/contributions/:user_id", authenticateToken, (req, res) => {
 //get completed stories
 router.get("/story/completed/readstory", async (req, res) => {
 
-  const query = `SELECT s.story_id, s.title, u.username as creator, c.description as des
+  const query = `SELECT s.story_id, s.title, s.description as sentides, u.username as creator, c.description as des
     FROM story s
     JOIN users u ON u.user_id = s.creator
     JOIN (
@@ -230,13 +230,25 @@ router.get("/story/completed/readstory", async (req, res) => {
     JOIN contributions c ON c.story_id = min_contr.story_id AND c.contr_id = min_contr.min_contr_id
     WHERE s.completedstory = 1`;
 
-  await client.query(query, (err, result) => {
-    if (!err) {
-      res.send(result.rows);
-    } else {
-      console.log(err);
-    }
-  });
+  const result = await client.query(query)
+  if (!result) {
+    console.log(err);
+  }
+
+  const readstory = result.rows
+  
+  const response = await Promise.all(readstory.map(async (story) => {
+    let classifier = await pipeline('sentiment-analysis');
+    let result = await classifier(story.sentides);
+    return story = { ...story, sentiment: result[0].label };
+  }));
+  // for(let i = 0; i < readstory.length; i++){
+  //   let classifier =  await pipeline('sentiment-analysis');
+  //   let result =  await classifier(readstory[i].sentides);
+  //   readstory[i] = {...readstory[i], sentiment : result[0].label}
+  // }
+  console.log(response);
+  res.send(response);
 });
 
 //get uncompleted stories
