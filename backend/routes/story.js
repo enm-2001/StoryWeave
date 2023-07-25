@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const client = require("../config/connection");
 const { authenticateToken } = require("../middlewares/checkAuth");
+// import {sentimentAnalysis} = require('./sentiment.mjs')
+
+// router.post("/getSentiment", sentimentAnalysis)
 
 router.post("/story/create", authenticateToken, async (req, res) => {
   try {
@@ -290,5 +293,6 @@ router.get("/readstory/:storyId", async (req, res) => {
 
   res.send(response);
 });
+
 
 module.exports = router;

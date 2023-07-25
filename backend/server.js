@@ -12,6 +12,7 @@ app.use(express.json());
 app.use("/api", require("./routes/users.js"));
 app.use("/api", require("./routes/story.js"));
 
+
 app.listen(5000, () => {
   console.log("Server running on port 5000....");
 });
