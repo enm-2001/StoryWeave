@@ -2,7 +2,7 @@
   <div v-if="this.completedStories.length == 0" class="spinner-border" role="status">
   <span class="visually-hidden"></span>
 </div>
-  <ReadComponent1 v-else :completedStories = "this.completedStories"/>
+  <ReadComponent1 v-else :completedStories = "this.completedStories" style="width: 100%;"/>
 </template>
 
 
@@ -45,7 +45,10 @@ export default {
 
 <style scoped>
 .spinner-border{
-  /* height: 5rem; */
-  /* width: 0.1rem; */
+    display: flex;
+    margin: auto;
+    height: 5rem;
+    width: 5rem;
+    color: #537188;
 }
 </style>

@@ -19,7 +19,7 @@
                         <div class="date"> {{ contribution.date_contributed }}</div>
                     </div>
                     <div class="senti-badge">
-                    <span class="badge" style="background-color: {{ contribution.sentiment === 'POSITIVE' ? #5F7161 : 'red' }}">{{ contribution.sentiment  }}</span>
+                    <span class="badge" :style=" {'color': contribution.sentiment === 'POSITIVE' ? 'green' : '#cd4646' }">{{ contribution.sentiment  }}</span>
                 </div>
                 </div>
                 <hr class="horizontal-line">
@@ -43,21 +43,8 @@ export default {
         return {
             story_details: {},
             story_others: [],
-            // sentiment : true,
         };
     },
-    // computed: {
-    //     async sentiment(des) {
-    //         console.log(des);
-    //         let senti;
-    //         const res = await axios.post("http://localhost:5000/api/getSentiment", des)
-    //             console.log(res);
-    //         senti = res.data.label
-
-    //         return senti
-
-    //     }
-    // },
     mounted() {
 
         const storyId = this.$route.params.storyId;
@@ -99,6 +86,7 @@ export default {
     margin: auto;
     height: 5rem;
     width: 5rem;
+    color: #537188;
 }
 .heading {
   display: flex;
@@ -115,7 +103,7 @@ margin-right: 0;
 .badge{
  border-radius: 13px;
  padding:9px;
- background: #5F7161;
+ background: #ccc;
 }
 .details {
   display: flex;
@@ -212,6 +200,7 @@ margin-right: 0;
 .date {
   font-size: 14px;
   color: gray;
+  width: 6.5rem;
 }
 
 .storyline p {
