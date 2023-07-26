@@ -21,14 +21,11 @@
                     <div class="senti-badge">
                     <span class="badge" style="background-color: {{ contribution.sentiment === 'POSITIVE' ? #5F7161 : 'red' }}">{{ contribution.sentiment  }}</span>
                 </div>
-                    
                 </div>
                 <hr class="horizontal-line">
                 <div class="storyline">
-                    
                     <p> {{ contribution.description }}
                     </p>
-
                 </div>
 
             </div>
