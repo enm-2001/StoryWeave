@@ -71,8 +71,12 @@
           <a href="#">Forgot your password?</a>
         </button>
         <button type="submit">Sign In</button>
+        or
       </form>
-      <GoogleLogin :callback="callback" style="z-index: 200; position: absolute;"/>
+         <div class="glogin">
+         <GoogleLogin :callback="callback" style="border-radius: 15px;"/>
+   </div>
+   
     </div>
   </div>
 </template>
@@ -214,6 +218,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.glogin{
+  z-index: 2; 
+    text-align:center;
+                position: relative;
+                width: 350px;
+           top:400px;
+           border-radius: 15px;
+           transition: all 0.5s ease-in-out;
+           
+}
 .main-bg {
   display: flex;
   justify-content: center;
