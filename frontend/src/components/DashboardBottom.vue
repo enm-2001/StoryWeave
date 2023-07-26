@@ -4,7 +4,7 @@
         <div class="col-6">
             <div class="col-text"> Read Story</div>
             <div>
-            <ReadComponent style="width: 100%" />
+            <ReadComponent />
             </div>
         </div>
         <div class="col-6">
