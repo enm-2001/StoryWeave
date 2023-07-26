@@ -1,7 +1,7 @@
 <template>
   <div class="main">
     <!-- Story Title -->
-    <div class="spinner-border" v-if="story_others.length == 0" role="status">
+    <div class="spinner-border" role="status" v-if="story_others.length == 0">
   <span class="visually-hidden"></span>
 </div>
     <div class="story-heading" v-else>
@@ -20,14 +20,11 @@
                     <div class="senti-badge">
                     <span class="badge" style="background-color: {{ contribution.sentiment === 'POSITIVE' ? #5F7161 : 'red' }}">{{ contribution.sentiment  }}</span>
                 </div>
-                    
                 </div>
                 <hr class="horizontal-line">
                 <div class="storyline">
-                    
                     <p> {{ contribution.description }}
                     </p>
-
                 </div>
 
             </div>
