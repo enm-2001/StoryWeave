@@ -49,7 +49,6 @@ export default {
       font-family: Avenir, Helvetica;
       color: #2C3E50;
       border-radius: 15px;
-      /*  margin:12px; */
       padding: 0px;
       cursor: pointer;
   }
@@ -115,7 +114,6 @@ export default {
 
 <!-- <template>
 <div class="writestory" v-if="this.incompleteStories.length != 0">
-
     <div class="storycards" v-for="story in incompleteStories" :key="story.story_id">
         <div class="card" v-if="story.completedstory != 1">
             <div id="write-section">

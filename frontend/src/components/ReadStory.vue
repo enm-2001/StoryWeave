@@ -21,14 +21,11 @@
                     <div class="senti-badge">
                     <span class="badge" :style=" {'color': contribution.sentiment === 'POSITIVE' ? 'green' : '#cd4646' }">{{ contribution.sentiment  }}</span>
                 </div>
-                    
                 </div>
                 <hr class="horizontal-line">
                 <div class="storyline">
-                    
                     <p> {{ contribution.description }}
                     </p>
-
                 </div>
 
             </div>
@@ -63,11 +60,23 @@ export default {
 </script>
 
 <style scoped>
+.senti-badge {
+    margin-left: auto;
+    margin-right: 0;
+    float: right;
+    font-size: 19px;
+}
+
+.badge {
+    border-radius: 13px;
+    padding: 9px;
+    background: #5F7161;
+}
+
 .main {
     background-image: url("../assets/back1.jpeg");
     background-repeat: no-repeat, repeat;
     background-position: center;
-    /* Center the image */
     background-size: cover;
     height: 100vh;
 }
