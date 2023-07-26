@@ -73,10 +73,9 @@
         <button type="submit">Sign In</button>
         or
       </form>
-         <div class="glogin">
-         <GoogleLogin :callback="callback" style="border-radius: 15px;"/>
-   </div>
-   
+      <div class="glogin">
+        <GoogleLogin :callback="callback" style="border-radius: 15px;" />
+      </div>
     </div>
   </div>
 </template>
@@ -84,7 +83,7 @@
 <script>
 import router from "@/router/routes";
 import axios from "axios";
-import jwt_decode from 'jwt-decode'
+import jwt_decode from "jwt-decode";
 
 export default {
   data: () => {
@@ -178,21 +177,20 @@ export default {
         .catch((err) => console.log(err));
     },
     callback: (response) => {
-
-      const token = jwt_decode(response.credential)
+      const token = jwt_decode(response.credential);
 
       const data = {
         name: token.given_name + " " + token.family_name,
         username: token.given_name + token.family_name,
         email: token.email,
-      }
-      axios.post("http://localhost:5000/api/googleLogin", data)
-      .then(res => {
-        localStorage.setItem("token", res.data.token);
-        router.push("/dashboard")
-      })
-      .catch(err => console.log(err))
-
+      };
+      axios
+        .post("http://localhost:5000/api/googleLogin", data)
+        .then((res) => {
+          localStorage.setItem("token", res.data.token);
+          router.push("/dashboard");
+        })
+        .catch((err) => console.log(err));
     },
     async forgotPassword(username) {
       if (username) {
@@ -208,26 +206,24 @@ export default {
       }
     },
   },
-  created(){
-    const token = localStorage.getItem("token")
-    if(token != null){
-      router.push("/dashboard")
+  created() {
+    const token = localStorage.getItem("token");
+    if (token != null) {
+      router.push("/dashboard");
     }
-  }
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-
-.glogin{
-  z-index: 2; 
-    text-align:center;
-                position: relative;
-                width: 350px;
-           top:400px;
-           border-radius: 15px;
-           transition: all 0.5s ease-in-out;
-           
+.glogin {
+  z-index: 2;
+  text-align: center;
+  position: relative;
+  width: 350px;
+  top: 400px;
+  border-radius: 15px;
+  transition: all 0.5s ease-in-out;
 }
 .main-bg {
   display: flex;
