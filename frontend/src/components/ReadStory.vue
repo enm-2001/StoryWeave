@@ -1,10 +1,11 @@
 <template>
   <div class="main">
-    <!-- Story Title -->
-    <div class="spinner-border" role="status" v-if="story_others.length == 0">
+
+    <div class="spinner-border" v-if="story_others.length == 0" role="status">
   <span class="visually-hidden"></span>
 </div>
-    <div class="story-heading" v-else>
+<div v-else>
+    <div class="story-heading" >
       <p>{{ story_details.title }}</p>
     </div>
     <p class="started-by">Started by: {{ story_details.username }}</p>
@@ -30,7 +31,7 @@
             </div>
         </div>
     </div>
-
+</div>
 </div>
 </template>
 
@@ -96,6 +97,8 @@ export default {
 .spinner-border{
     display: flex;
     margin: auto;
+    height: 5rem;
+    width: 5rem;
 }
 .heading {
   display: flex;
