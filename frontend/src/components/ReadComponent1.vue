@@ -48,6 +48,185 @@ export default {
 };
 </script>
 <style scoped>
+@media only screen and (max-width: 600px) {
+ .senti-badge {
+  margin: auto;
+  margin-right: 0;
+  float: right;
+  font-size: 9px;
+}
+.badge {
+  border-radius: 10px;
+  padding: 5px;
+  /* background: #5f7161; */
+  background: #ccc;
+}
+
+  .heading {
+  display: flex;
+  justify-content: space-between;
+  justify-content: center;
+  width: 100%;
+}
+
+.readstory {
+  width: 100vh;
+}
+
+.cardc {
+  width: 80%;
+  margin: 20px auto;
+  background-color: F9F5F6;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  font-family: Avenir, Helvetica;
+  color: #2c3e50;
+  border-radius: 15px;
+  /*  margin:12px; */
+  padding: 0px;
+  cursor: pointer;
+}
+
+h2 {
+  margin-top: 20px;
+  color: #537188;
+  font-size: 25px;
+  font-family: Belanosima;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bolder;
+}
+
+.storycards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heading .story-title {
+  color: #537188;
+  font-weight: bolder;
+  font-size: 19px;
+  text-transform: uppercase;
+}
+
+#write-section {
+  padding: 15px;
+  /* font-family: Avenir, Helvetica; */
+  font-family: Belanosima;
+}
+
+.horizontal-line {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+}
+
+.previous-line p {
+  font-family: Belanosima;
+  font-size: 17px;
+  padding: 0px;
+}
+
+.created-by {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: gray;
+  font-weight: bolder;
+}
+}
+
+@media only screen and (min-width: 600px) {
+  .senti-badge {
+  margin: auto;
+  margin-right: 0;
+  float: right;
+  font-size: 13px;
+}
+.badge {
+  border-radius: 13px;
+  padding: 9px;
+  /* background: #5f7161; */
+  background: #ccc;
+}
+
+  .heading {
+  display: flex;
+  justify-content: space-between;
+  justify-content: center;
+  width: 100%;
+}
+
+.readstory {
+  width: 100vh;
+}
+
+.cardc {
+  width: 80%;
+  margin: 20px auto;
+  background-color: F9F5F6;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  font-family: Avenir, Helvetica;
+  color: #2c3e50;
+  border-radius: 15px;
+  /*  margin:12px; */
+  padding: 0px;
+  cursor: pointer;
+}
+
+h2 {
+  margin-top: 20px;
+  color: #537188;
+  font-size: 25px;
+  font-family: Belanosima;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bolder;
+}
+
+.storycards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heading .story-title {
+  color: #537188;
+  font-weight: bolder;
+  font-size: 19px;
+  text-transform: uppercase;
+}
+
+#write-section {
+  padding: 15px;
+  /* font-family: Avenir, Helvetica; */
+  font-family: Belanosima;
+}
+
+.horizontal-line {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+}
+
+.previous-line p {
+  font-family: Belanosima;
+  font-size: 17px;
+  padding: 0px;
+}
+
+.created-by {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: gray;
+  font-weight: bolder;
+}
+}
+
+@media only screen and (min-width: 992px) {
 .heading {
   display: flex;
   justify-content: space-between;
@@ -131,5 +310,95 @@ h2 {
   margin-bottom: 5px;
   color: gray;
   font-weight: bolder;
+}
+
+}
+
+@media only screen and (min-width: 768px) {
+  .heading {
+  display: flex;
+  justify-content: space-between;
+  justify-content: center;
+  width: 100%;
+}
+.senti-badge {
+  margin: auto;
+  margin-right: 0;
+  float: right;
+  font-size: 19px;
+}
+.badge {
+  border-radius: 13px;
+  padding: 9px;
+  /* background: #5f7161; */
+  background: #ccc;
+}
+.readstory {
+  width: 100vh;
+}
+
+.cardc {
+  width: 80%;
+  margin: 20px auto;
+  background-color: F9F5F6;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  font-family: Avenir, Helvetica;
+  color: #2c3e50;
+  border-radius: 15px;
+  /*  margin:12px; */
+  padding: 0px;
+  cursor: pointer;
+}
+
+h2 {
+  margin-top: 20px;
+  color: #537188;
+  font-size: 25px;
+  font-family: Belanosima;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bolder;
+}
+
+.storycards {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heading .story-title {
+  color: #537188;
+  font-weight: bolder;
+  font-size: 19px;
+  text-transform: uppercase;
+}
+
+#write-section {
+  padding: 15px;
+  /* font-family: Avenir, Helvetica; */
+  font-family: Belanosima;
+}
+
+.horizontal-line {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 10px 0;
+}
+
+.previous-line p {
+  font-family: Belanosima;
+  font-size: 17px;
+  padding: 0px;
+}
+
+.created-by {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: gray;
+  font-weight: bolder;
+}
+
 }
 </style>
