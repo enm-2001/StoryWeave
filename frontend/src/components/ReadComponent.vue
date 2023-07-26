@@ -28,11 +28,15 @@ export default {
 //     },
 //   },
   mounted() {
-    console.log("oooooooooooooooo");
+    // console.log("oooooooooooooooo");
     axios
       .get("http://localhost:5000/api/story/completed/readstory")
       .then((res) => {
-        this.completedStories = res.data; 
+        console.log(res.data);
+        this.completedStories = res.data
+        // this.completedStories = res.data.map((item) => item.value);
+
+        // console.log("commm",this.completedStories);
       })
       .catch((err) => console.log(err));
   },
@@ -40,5 +44,8 @@ export default {
 </script>
 
 <style scoped>
-
+.spinner-border{
+  /* height: 5rem; */
+  /* width: 0.1rem; */
+}
 </style>

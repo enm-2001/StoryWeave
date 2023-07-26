@@ -218,7 +218,7 @@ router.get("/story/contributions/:user_id", authenticateToken, (req, res) => {
 
 //get completed stories
 router.get("/story/completed/readstory", async (req, res) => {
-
+  
   const query = `SELECT s.story_id, s.title, s.description as sentides, u.username as creator, c.description as des
     FROM story s
     JOIN users u ON u.user_id = s.creator
@@ -236,23 +236,27 @@ router.get("/story/completed/readstory", async (req, res) => {
   }
 
   const readstory = result.rows
-  
-  const response = await Promise.all(readstory.map(async (story) => {
+
+  const response = readstory.map(async (story) => {
     let classifier = await pipeline('sentiment-analysis');
     let result = await classifier(story.sentides);
     return story = { ...story, sentiment: result[0].label };
-  }));
+  });
+ 
   // for(let i = 0; i < readstory.length; i++){
   //   let classifier =  await pipeline('sentiment-analysis');
   //   let result =  await classifier(readstory[i].sentides);
   //   readstory[i] = {...readstory[i], sentiment : result[0].label}
   // }
-  console.log(response);
-  res.send(response);
+
+  const readstory_rows = await Promise.all(response)
+
+  res.send(readstory_rows)
 });
 
 //get uncompleted stories
 router.get("/story/uncompleted/writestory", async (req, res) => {
+ 
   const query = `SELECT s.story_id, s.title, u.username as creator, c.description as des, u2.username as last_line_contributor
     FROM story s
     JOIN users u ON u.user_id = s.creator
@@ -267,6 +271,7 @@ router.get("/story/uncompleted/writestory", async (req, res) => {
 
   await client.query(query, (err, result) => {
     if (!err) {
+
       res.send(result.rows);
     } else {
       console.log(err);
