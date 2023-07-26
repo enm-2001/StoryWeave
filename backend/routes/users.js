@@ -1,14 +1,14 @@
 import express from "express";
 const router = express.Router();
 import client from "../config/connection.js";
-import jwt  from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
-import { pipeline } from '@xenova/transformers'
-import { authenticateToken }  from "../middlewares/checkAuth.js";
-import nodemailer  from "nodemailer";
-import Mailgen  from "mailgen";
-import crypto  from "crypto";
+import { pipeline } from "@xenova/transformers";
+import { authenticateToken } from "../middlewares/checkAuth.js";
+import nodemailer from "nodemailer";
+import Mailgen from "mailgen";
+import crypto from "crypto";
 
 dotenv.config();
 // function generateAccessToken(user) {
@@ -56,7 +56,12 @@ router.post("/signup", async (req, res) => {
 
   await client.query(query, values, (err, result1) => {
     if (result1) {
-      const user = { username: username, user_id: result1.rows[0].user_id };
+      const user = {
+        username: username,
+        name: name,
+        email: email,
+        user_id: result1.rows[0].user_id,
+      };
       const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "1d",
       });
@@ -68,13 +73,54 @@ router.post("/signup", async (req, res) => {
   });
 });
 
+router.post("/googleLogin", async (req, res) => {
+  const { name, email, username } = req.body;
+
+  const query = `select * from users where email = '${email}'`;
+  const result = await client.query(query);
+  let user;
+  if (!result) {
+    console.log("error in query");
+    return;
+  } 
+  else if (result.rows.length == 0) {
+    const query1 = `INSERT INTO users (name, username, email, coins)
+    VALUES ($1, $2, $3, $4) returning user_id`;
+    const values1 = [name, username, email, 0];
+    const result1 = await client.query(query1, values1);
+    if (!result1) {
+      console.log("error in query1: ");
+      return;
+    }
+    user = {
+      name: name,
+      username: username,
+      email: email,
+      user_id: result1.rows[0].user_id,
+    };
+  }
+  else{
+    user = {
+      name: result.rows[0].name,
+      username: result.rows[0].username,
+      email: result.rows[0].email,
+      user_id: result.rows[0].user_id
+    }
+  }
+  
+  const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+    expiresIn: "1d",
+  });
+  res.json({ token: token });
+});
+
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
   const query = `select * from users where username = '${username}'`;
   const result = await client.query(query);
   if (!result) {
-    console.log("Error: ", err);
+    console.log("Error: ");
     return;
   }
   console.log(result.rows[0]);
@@ -93,7 +139,7 @@ router.post("/login", async (req, res) => {
     };
     console.log(user);
     const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-      expiresIn: "1d",
+      // expiresIn: "1d",
     });
     // console.log("login generate", token)
     res.json({ token: token });
@@ -135,7 +181,7 @@ router.get("/users/:user_id", authenticateToken, async (req, res) => {
 
   //const query3 = `select count(distinct(story_id)) as contributions from contributions where user_id = ${user_id} group by user_id`;
   const query3 = `select count(distinct(c.story_id)) as contributions from contributions c
-  join story s on s.story_id = c.story_id where c.user_id = ${user_id} and s.creator != ${user_id}`
+  join story s on s.story_id = c.story_id where c.user_id = ${user_id} and s.creator != ${user_id}`;
   const result3 = await client.query(query3);
   if (!result3) {
     console.log("Error in query3:", err);

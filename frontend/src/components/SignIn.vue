@@ -72,6 +72,7 @@
         </button>
         <button type="submit">Sign In</button>
       </form>
+      <GoogleLogin :callback="callback" style="z-index: 200; position: absolute;"/>
     </div>
   </div>
 </template>
@@ -79,6 +80,7 @@
 <script>
 import router from "@/router/routes";
 import axios from "axios";
+import jwt_decode from 'jwt-decode'
 
 export default {
   data: () => {
@@ -170,6 +172,23 @@ export default {
           }
         })
         .catch((err) => console.log(err));
+    },
+    callback: (response) => {
+
+      const token = jwt_decode(response.credential)
+
+      const data = {
+        name: token.given_name + " " + token.family_name,
+        username: token.given_name + token.family_name,
+        email: token.email,
+      }
+      axios.post("http://localhost:5000/api/googleLogin", data)
+      .then(res => {
+        localStorage.setItem("token", res.data.token);
+        router.push("/dashboard")
+      })
+      .catch(err => console.log(err))
+
     },
     async forgotPassword(username) {
       if (username) {
