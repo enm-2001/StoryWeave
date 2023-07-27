@@ -74,7 +74,7 @@
         or
       </form>
       <div class="glogin">
-        <GoogleLogin :callback="callback" style="border-radius: 15px;" />
+        <GoogleLogin :callback="callback" />
       </div>
     </div>
   </div>
@@ -114,12 +114,12 @@ export default {
       }
     },
     signup() {
-      console.log(this.formData);
+      // console.log(this.formData);
       if (!this.userExists && this.validEmail) {
         axios
           .post("http://localhost:5000/api/signup", this.formData)
           .then((res) => {
-            console.log(res);
+            // console.log(res);
             localStorage.setItem("token", res.data.token);
             router.push("/dashboard");
           })
@@ -414,7 +414,9 @@ form {
     z-index: 5;
     animation: show 0.5s;
   }
-
+  .glogin{
+    transform: translateX(100%);
+  }
   .overlay-container {
     transform: translateX(-100%);
   }

@@ -129,6 +129,7 @@ button {
 
 .logo {
   font-size: 32px;
+  flex-grow: 1;
 }
 
 .menu {

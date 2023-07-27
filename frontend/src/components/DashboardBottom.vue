@@ -54,8 +54,9 @@
         font-weight: bolder;
         display: flex;
         align-items: center;
-        justify-content: center;}
+        justify-content: center;
+    }
         .col-6 {
-            padding-left: 20px;
+            padding: 2px;
     }
     </style>
