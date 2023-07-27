@@ -32,7 +32,7 @@ export default {
     axios
       .get("http://localhost:5000/api/story/completed/readstory")
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         this.completedStories = res.data
         // this.completedStories = res.data.map((item) => item.value);
 

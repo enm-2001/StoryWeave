@@ -157,7 +157,7 @@ export default {
       } catch (error) {
         const status = error.response.status 
         if (status === 403) {
-          alert("Token expired...Please login again")
+          alert("Invalid token...Please login again")
           localStorage.clear("token")
           router.push("/login")
         }

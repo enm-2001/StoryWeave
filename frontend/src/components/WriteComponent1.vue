@@ -50,7 +50,7 @@ export default {
       color: #2C3E50;
       border-radius: 15px;
       padding: 0px;
-      cursor: pointer;
+      /* cursor: pointer; */
   }
 
   h2 {

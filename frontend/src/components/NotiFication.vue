@@ -44,7 +44,7 @@
             <li v-for="notification in accepted_stories" :key="notification.contr_id">
                 <div class="approval">
                     <div class="left-side">
-                        Your contribution for story titled as "{{ notification.title }}" and you have been credited 5 coins for your contribution.
+                        Your contribution for story titled as "{{ notification.title }}" is accepted and you have been credited 5 coins for your contribution.
                     </div>
                 </div>
             </li>
@@ -119,7 +119,7 @@ export default {
         catch (error) {
         const status = error.response.status 
         if (status === 403) {
-          alert("Token expired...Please login again")
+          alert("Invalid token...Please login again")
           localStorage.clear("token")
           router.push("/login")
         }

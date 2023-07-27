@@ -48,12 +48,11 @@ export default {
     mounted() {
 
         const storyId = this.$route.params.storyId;
-        console.log(storyId);
+        // console.log(storyId);
         axios.get(`http://localhost:5000/api/readstory/${storyId}`)
             .then(res => {
                 this.story_details = res.data.story_details;
                 this.story_others = res.data.story_others;
-
             })
     }
 }
