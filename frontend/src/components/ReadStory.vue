@@ -1,4 +1,5 @@
 <template>
+
   <div class="main">
 
     <div class="spinner-border" v-if="story_others.length == 0" role="status">
@@ -77,7 +78,7 @@ export default {
     background-repeat: no-repeat, repeat;
     background-position: center;
     background-size: cover;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .spinner-border{

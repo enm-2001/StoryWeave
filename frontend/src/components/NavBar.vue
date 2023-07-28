@@ -128,6 +128,7 @@ button {
 }
 
 .logo {
+  padding-left: 20px;
   font-size: 32px;
   flex-grow: 1;
 }
@@ -180,6 +181,8 @@ button {
 
 .services:hover .dropdown {
   display: block;
+  position: absolute;
+  right: 0px;
 }
 
 input[type="checkbox"] {
@@ -221,9 +224,12 @@ input[type="checkbox"] {
   .hamburger {
     display: block;
   }
-
+  
   .dropdown {
-    left: 50%;
+   
+  position: absolute;
+  right: 40%;
+    /* left: 50%; */
     top: 30px;
     transform: translateX(35%);
   }
