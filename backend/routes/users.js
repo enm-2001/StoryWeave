@@ -4,7 +4,6 @@ import client from "../config/connection.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
-import { pipeline } from "@xenova/transformers";
 import { authenticateToken } from "../middlewares/checkAuth.js";
 import nodemailer from "nodemailer";
 import Mailgen from "mailgen";
