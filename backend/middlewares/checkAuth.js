@@ -5,9 +5,7 @@ dotenv.config();
 
 export const authenticateToken = (req, res, next) => {
   const authToken = req.headers.authorization;
-  console.log(("aaaa", authToken));
   const token = authToken && authToken.split(" ")[1];
-  console.log("tttt: ",token);
   // console.log(token);
 
   if (!token) {
