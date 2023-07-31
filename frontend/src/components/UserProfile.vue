@@ -80,7 +80,7 @@
           </div>
         </div>
         <div class="col-6" v-if="contributedStories.length != 0">
-          <div class="col-text">Stories Contributed</div>
+          <div class="col-text">Stories Contribution</div>
           <!-- <div  v-for="story in contributedStories" :key="story.story_id"> -->
           <div>
             <!-- <div v-if="story.completedstory == 1">  -->
