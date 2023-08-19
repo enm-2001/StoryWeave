@@ -20,33 +20,65 @@
             </div>
         </div>
 
-        <form class="sign-up" @submit.prevent="signup()">
-            <h2>Create Login</h2>
-            <div>Use your account</div>
-            <input type="text" placeholder="Name" v-model="formData.name" required />
-            <input type="text" placeholder="Username" v-model="formData.username" v-on:blur="checkUserforSignup(formData.username)" required />
-            <span v-if="userExists">Username already exists</span>
-            <input type="email" placeholder="Email" v-model="formData.email" v-on:blur="validateEmail(formData.email)" required />
-            <span v-if="!validEmail">Enter a valid email</span>
-            <input type="password" placeholder="Password" v-model="formData.password" />
-            <button type="submit">Sign Up</button>
-        </form>
-        <form class="sign-in" @submit.prevent="checkUserforLogin">
-            <h2>Sign In</h2>
-            <div>Use your account</div>
-            <span v-if="!userExistsforLogin">User does not exist</span>
-            <span v-if="incorrect">Incorrect Password</span>
-            <input type="text" placeholder="Username" v-model="loginData.username" />
-            <input type="password" placeholder="Password" v-model="loginData.password" />
-            <button class="forgotpass" @click="forgotPassword(loginData.username)">
-                <a href="#">Forgot your password?</a>
-            </button>
-            <button type="submit">Sign In</button>
-            or
-        </form>
-        <div class="glogin">
-            <GoogleLogin :callback="callback" />
-        </div>
+      <form class="sign-up" @submit.prevent="validatePassword(formData.password)">
+        <h2>Create Login</h2>
+        <div>Use your account</div>
+        <input
+          type="text"
+          placeholder="Name"
+          v-model="formData.name"
+          required
+        />
+        <input
+          type="text"
+          placeholder="Username"
+          v-model="formData.username"
+          v-on:blur="checkUserforSignup(formData.username)"
+          required
+        />
+        <span v-if="userExists">Username already exists</span>
+        <input
+          type="email"
+          placeholder="Email"
+          v-model="formData.email"
+          v-on:blur="validateEmail(formData.email)"
+          required
+        />
+        <span v-if="!validEmail">Enter a valid email</span>
+        <input
+          type="password"
+          placeholder="Password"
+          v-model="formData.password"
+        />
+        <span v-if="containsSpecial">Password should not contain special characters</span>
+        <span v-if="passwordNot8">Password should be at least 8 characters long</span>
+        <span v-if="containsSpace">Password should not contain space</span>
+        <button type="submit">Sign Up</button>
+      </form>
+      <form class="sign-in" @submit.prevent="checkUserforLogin">
+        <h2>Sign In</h2>
+        <div>Use your account</div>
+        <span v-if="!userExistsforLogin">User does not exist</span>
+        <span v-if="incorrect">Incorrect Password</span>
+        <input
+          type="text"
+          placeholder="Username"
+          v-model="loginData.username"
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          v-model="loginData.password"
+        />
+        <button class="forgotpass" @click="forgotPassword(loginData.username)">
+          <a href="#">Forgot your password?</a>
+        </button>
+        <button type="submit">Sign In</button>
+        or
+      </form>
+      <div class="glogin">
+        <GoogleLogin :callback="callback" />
+      </div>
     </div>
 </div>
 </template>
@@ -57,98 +89,120 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 
 export default {
-    data: () => {
-        return {
-            signUp: false,
-            formData: {
-                name: "",
-                username: "",
-                email: "",
-                password: "",
-            },
-            loginData: {
-                username: "",
-                password: "",
-            },
-            incorrect: false,
-            userExists: false,
-            userExistsforLogin: true,
-            validEmail: true,
-        };
+  data: () => {
+    return {
+      signUp: false,
+      formData: {
+        name: "",
+        username: "",
+        email: "",
+        password: "",
+      },
+      loginData: {
+        username: "",
+        password: "",
+      },
+      incorrect: false,
+      userExists: false,
+      userExistsforLogin: true,
+      validEmail: true,
+      containsSpecial: false,
+      passwordNot8: false,
+      containsSpace: false
+    };
+  },
+  methods: {
+    validateEmail(email) {
+      if (/^[^@]+@\w+(\.\w+)+\w$/.test(email)) {
+        this.validEmail = true;
+      } else {
+        this.validEmail = false;
+      }
     },
-    methods: {
-        validateEmail(email) {
-            if (/^[^@]+@\w+(\.\w+)+\w$/.test(email)) {
-                this.validEmail = true;
-            } else {
-                this.validEmail = false;
-            }
-        },
-        signup() {
-            // console.log(this.formData);
-            if (!this.userExists && this.validEmail) {
-                axios
-                    .post("http://localhost:5000/api/signup", this.formData)
-                    .then((res) => {
-                        // console.log(res);
-                        localStorage.setItem("token", res.data.token);
-                        router.push("/dashboard");
-                    })
-                    .catch((err) => console.log(err));
-            }
-        },
-
-        checkUserforSignup(username) {
-            axios
-                .post("http://localhost:5000/api/checkUser", {
-                    username,
-                })
-                .then((response) => {
-                    if (response.data.exists) {
-                        this.userExists = true;
-                    } else {
-                        this.userExists = response.data.exists;
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
-        checkUserforLogin() {
-            axios
-                .post("http://localhost:5000/api/checkUser", {
-                    username: this.loginData.username,
-                })
-                .then((response) => {
-                    if (response.data.exists) {
-                        this.userExistsforLogin = response.data.exists;
-                        this.checkPassword();
-                    } else {
-                        this.userExistsforLogin = false;
-                    }
-                })
-                .catch((error) => {
-                    console.log(error);
-                });
-        },
-        checkPassword() {
-            axios
-                .post("http://localhost:5000/api/login", this.loginData)
-                .then((res) => {
-                    // console.log(res.data);
-                    if (!res.data.pcheck) {
-                        this.incorrect = res.data.pcheck;
-                        localStorage.setItem("token", res.data.token);
-                        router.push("/dashboard");
-                    } else {
-                        // console.log("incoreeer");
-                        this.incorrect = true;
-                    }
-                })
-                .catch((err) => console.log(err));
-        },
-        callback: (response) => {
-            const token = jwt_decode(response.credential);
+    validatePassword(password){
+      console.log(password);
+      var specialCharacters = "!#$%^&*()_+{}[]:;<>,.?~\\/`|-=";
+      for(let i=0; i< password.length; i++){
+        var char = password.charAt(i);
+        if (specialCharacters.indexOf(char) !== -1 && char !== "@") {
+          this.containsSpecial = true;
+        }
+      }
+      if(password.length < 8){
+        this.passwordNot8 = true
+      }
+      else if(password.includes(' ') != -1){
+        this.containsSpace = true
+      }
+      console.log(this.containsSpecial, this.passwordNot8, this.containsSpace);
+      this.signup();
+    },
+    signup() {
+      // console.log(this.formData);
+      console.log(this.containsSpecial, this.passwordNot8, this.containsSpace);
+      if (!this.userExists && this.validEmail && !this.containsSpecial && !this.passwordNot8 && !this.containsSpace) {
+        axios
+          .post("http://localhost:5000/api/signup", this.formData)
+          .then((res) => {
+            // console.log(res);
+            localStorage.setItem("token", res.data.token);
+            router.push("/dashboard");
+          })
+          .catch((err) => console.log(err));
+      }
+    },
+    
+    checkUserforSignup(username) {
+      axios
+        .post("http://localhost:5000/api/checkUser", {
+          username,
+        })
+        .then((response) => {
+          if (response.data.exists) {
+            this.userExists = true;
+          } else {
+            this.userExists = response.data.exists;
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    checkUserforLogin() {
+      axios
+        .post("http://localhost:5000/api/checkUser", {
+          username: this.loginData.username,
+        })
+        .then((response) => {
+          if (response.data.exists) {
+            this.userExistsforLogin = response.data.exists;
+            this.checkPassword();
+          } else {
+            this.userExistsforLogin = false;
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    checkPassword() {
+      axios
+        .post("http://localhost:5000/api/login", this.loginData)
+        .then((res) => {
+          // console.log(res.data);
+          if (!res.data.pcheck) {
+            this.incorrect = res.data.pcheck;
+            localStorage.setItem("token", res.data.token);
+            router.push("/dashboard");
+          } else {
+            // console.log("incoreeer");
+            this.incorrect = true;
+          }
+        })
+        .catch((err) => console.log(err));
+    },
+    callback: (response) => {
+      const token = jwt_decode(response.credential);
 
             const data = {
                 name: token.given_name + " " + token.family_name,
