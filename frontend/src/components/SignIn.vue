@@ -20,7 +20,7 @@
         </div>
       </div>
 
-      <form class="sign-up" @submit.prevent="signup()">
+      <form class="sign-up" @submit.prevent="validatePassword(formData.password)">
         <h2>Create Login</h2>
         <div>Use your account</div>
         <input
@@ -50,6 +50,9 @@
           placeholder="Password"
           v-model="formData.password"
         />
+        <span v-if="containsSpecial">Password should not contain special characters</span>
+        <span v-if="passwordNot8">Password should be at least 8 characters long</span>
+        <span v-if="containsSpace">Password should not contain space</span>
         <button type="submit">Sign Up</button>
       </form>
       <form class="sign-in" @submit.prevent="checkUserforLogin">
@@ -103,6 +106,9 @@ export default {
       userExists: false,
       userExistsforLogin: true,
       validEmail: true,
+      containsSpecial: false,
+      passwordNot8: false,
+      containsSpace: false
     };
   },
   methods: {
@@ -113,9 +119,28 @@ export default {
         this.validEmail = false;
       }
     },
+    validatePassword(password){
+      console.log(password);
+      var specialCharacters = "!#$%^&*()_+{}[]:;<>,.?~\\/`|-=";
+      for(let i=0; i< password.length; i++){
+        var char = password.charAt(i);
+        if (specialCharacters.indexOf(char) !== -1 && char !== "@") {
+          this.containsSpecial = true;
+        }
+      }
+      if(password.length < 8){
+        this.passwordNot8 = true
+      }
+      else if(password.includes(' ') != -1){
+        this.containsSpace = true
+      }
+      console.log(this.containsSpecial, this.passwordNot8, this.containsSpace);
+      this.signup();
+    },
     signup() {
       // console.log(this.formData);
-      if (!this.userExists && this.validEmail) {
+      console.log(this.containsSpecial, this.passwordNot8, this.containsSpace);
+      if (!this.userExists && this.validEmail && !this.containsSpecial && !this.passwordNot8 && !this.containsSpace) {
         axios
           .post("http://localhost:5000/api/signup", this.formData)
           .then((res) => {
@@ -126,7 +151,7 @@ export default {
           .catch((err) => console.log(err));
       }
     },
-
+    
     checkUserforSignup(username) {
       axios
         .post("http://localhost:5000/api/checkUser", {
