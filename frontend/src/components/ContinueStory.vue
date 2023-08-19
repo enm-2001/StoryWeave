@@ -131,7 +131,6 @@ export default {
   },
   methods: {
     postStory() {
-      // console.log(completed);
       if(this.des == ""){
         alert("Enter the description")
       }
@@ -167,7 +166,6 @@ export default {
         }
         else {
           console.error('Unexpected Error:', error);
-          // Handle other unexpected errors here, if necessary
         }
       }
       }
@@ -405,7 +403,6 @@ $line-height: 40px;
   background: #9fbe5a;
 }
 @media (max-width: 600px) {
-  /* Adjust the max-width and padding for smaller screens */
   form__contact {
     max-width: 100%;
     padding: 0 10px;
@@ -504,16 +501,9 @@ h1 {
     color: #7db665;
   }
   textarea {
-    /* height: 50%;
-  width: 100%;
-  overflow-y: scroll; */
     resize: vertical;
     overflow: auto;
   }
-  /*span {
-    position: relative;
-    line-height: $line-height;
-  }*/
   button {
     margin-top: $line-height;
     float: right;
@@ -529,7 +519,7 @@ h1 {
   }
 }
 .form__field::placeholder {
-  color: silver; /* Replace with your desired color */
+  color: silver;
 }
 .form__field {
   display: inline;
@@ -538,14 +528,14 @@ h1 {
   &:empty {
     display: inline-block;
     color: #7db665;
-  } // Use a data-attr to replicate a placeholder
+  }
   &:empty,
   &:empty:focus {
     &:before {
       content: attr(placeholder);
     }
   }
-} /*Hide blur defs*/
+} 
 svg {
   display: none;
 }
@@ -585,7 +575,6 @@ svg {
   font-size: 18px;
   height: 80px;
   margin: 0px;
-  /*justify-items:start;*/
 }
 .navbar-logo {
   left: 20px;
