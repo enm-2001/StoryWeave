@@ -23,10 +23,12 @@
                         <h3 style="text-transform: capitalize;">{{story.title}}</h3>
                         {{story.des}}
                     </div>
-                    <div v-if="story.completedstory">
+                    <div class="approval-story" v-if="story.completedstory && !calledStoryComplete">
                         User wants to end this story..
-                        <stronger><button @click="storyComplete(1)">Allow</button></stronger>
-                        <stronger> <button @click="storyComplete(0)">Reject</button></stronger>
+                        <stronger><button @click="storyComplete(1)"><i class="fa fa-check" style="font-size:15px;color:green;padding-left:15px"></i>Allow</button></stronger>&nbsp;&nbsp;
+                        <stronger> <button @click="storyComplete(0)"><i class="fa fa-close" style="font-size:15px; color:red;padding-left:15px"></i>&nbsp;Reject</button></stronger>
+           
+
                     </div>
                     <div class="right-side" v-if="calledStoryComplete">
                         <stronger><button @click="accept(story)"><i class="fa fa-check" style="font-size:35px;color:green;padding-right:15px;padding-top:10px;"></i></button></stronger>
@@ -149,6 +151,12 @@ export default {
     margin-right: auto;
     width: 50%;
     padding-top: 20px;
+}
+
+.approval-story{
+display: flex;
+    margin: auto;
+    justify-content: center;
 }
 
 @media only screen and (max-width: 767.98px) {
