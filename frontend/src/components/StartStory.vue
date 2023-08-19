@@ -1,20 +1,19 @@
 <template>
-    <div class="main-bg">
-<div class="wrapper">
-<h1>Start your story!!</h1>
+<div class="main-bg">
+    <div class="wrapper">
+        <h1>Start your story!!</h1>
 
-  
-  <form class="form__contact" @submit.prevent="postStory">
-    <fieldset>
-      <p>Title of the story is -><textarea class="form__field field--name" cols="40" placeholder="storytitle" tabindex="1" v-model="story.title" ></textarea></p>
-      <p>Story starts like this -><textarea rows="9" cols="40" class="form__field field--story" placeholder="story" tabindex="3" v-model="story.description"></textarea>.</p>
-       <span v-if="titleNotExist" style="color: red;">Please enter the details of your story..</span>
-      <button type="submit" class="button button--xlarge" tabindex="4">
-      Post it! &#187;
-      </button>
-    </fieldset>
-  </form>
-</div>
+        <form class="form__contact" @submit.prevent="postStory">
+            <fieldset>
+                <p>Title of the story is -><textarea class="form__field field--name" cols="40" placeholder="storytitle" tabindex="1" v-model="story.title"></textarea></p>
+                <p>Story starts like this -><textarea rows="9" cols="40" class="form__field field--story" placeholder="story" tabindex="3" v-model="story.description"></textarea>.</p>
+                <span v-if="titleNotExist" style="color: red;">Please enter the details of your story..</span>
+                <button type="submit" class="button button--xlarge" tabindex="4">
+                    Post it! &#187;
+                </button>
+            </fieldset>
+        </form>
+    </div>
 
     <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
         <defs>
@@ -58,11 +57,11 @@ export default {
         };
     },
 
-  methods: {
-    postStory() {
-      // console.log(this.story);
-      if (this.story.title != "" || this.story.description != "") {
-        console.log("----------");
+    methods: {
+        postStory() {
+            // console.log(this.story);
+            if (this.story.title != "" || this.story.description != "") {
+                console.log("----------");
 
                 const token = localStorage.getItem("token");
                 try {
@@ -92,21 +91,19 @@ export default {
                             }
                         });
                 } catch (error) {
-        const status = error.response.status 
-        if (status === 403) {
-          alert("Invalid token...Please login again")
-          localStorage.clear("token")
-          router.push("/login")
-        }
-        else if(status === 401){
-          alert("No token provided... Please login")
-          router.push("login")
-        }
-        else {
-          console.error('Unexpected Error:', error);
-          // Handle other unexpected errors here, if necessary
-        }
-      }
+                    const status = error.response.status
+                    if (status === 403) {
+                        alert("Invalid token...Please login again")
+                        localStorage.clear("token")
+                        router.push("/login")
+                    } else if (status === 401) {
+                        alert("No token provided... Please login")
+                        router.push("login")
+                    } else {
+                        console.error('Unexpected Error:', error);
+                        // Handle other unexpected errors here, if necessary
+                    }
+                }
 
             } else {
                 this.titleNotExist = true;
