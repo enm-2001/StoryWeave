@@ -21,96 +21,88 @@
 </div>
 </template>
 
- 
 <script>
-import router from "@/router/routes";
-export default {
-    name: "WriteComponent1",
-     props: ['incompleteStories', 'profile'],
-    methods: {
-     continueStory(story_id) {
-            router.push(`/continuestory/${story_id}`)
-        }
-    },
-};
-</script>  
+    import router from "@/router/routes";
+    export default {
+        name: "WriteComponent1",
+        props: ['incompleteStories', 'profile'],
+        methods: {
+            continueStory(story_id) {
+                router.push(`/continuestory/${story_id}`)
+            }
+        },
+    };
+</script>
 
 <style scoped>
-  .writestory {
-      width: 100vh;
-  }
+    .writestory {
+        width: 100vh;
+    }
 
-  .cardc {
-      width: 80%;
-      margin: 20px auto;
-      background-color: F9F5F6;
-      border-radius: 5px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-      font-family: Avenir, Helvetica;
-      color: #2C3E50;
-      border-radius: 15px;
-      padding: 0px;
-      /* cursor: pointer; */
-  }
+    .cardc {
+        width: 80%;
+        margin: 20px auto;
+        background-color: F9F5F6;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        font-family: Avenir, Helvetica;
+        color: #2C3E50;
+        border-radius: 15px;
+        padding: 0px;
+        /* cursor: pointer; */
+    }
 
-  h2 {
-      margin-top: 20px;
-      color: #537188;
-      font-size: 25px;
-      font-family: Belanosima;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bolder;
-  }
+    h2 {
+        margin-top: 20px;
+        color: #537188;
+        font-size: 25px;
+        font-family: Belanosima;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bolder;
+    }
 
-  .storycards {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-  }
+    .storycards {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-  .heading .story-title {
-      color: #537188;
-      font-weight: bolder;
-      font-size: 19px;
-      text-transform: uppercase;
-  }
+    .heading .story-title {
+        color: #537188;
+        font-weight: bolder;
+        font-size: 19px;
+        text-transform: uppercase;
+    }
 
-  #write-section {
-      padding: 15px;
-      /* font-family: Avenir, Helvetica; */
-      font-family: Belanosima;
-  }
+    #write-section {
+        padding: 15px;
+        /* font-family: Avenir, Helvetica; */
+        font-family: Belanosima;
+    }
 
-  .horizontal-line {
-      border: none;
-      border-top: 1px solid #ccc;
-      margin: 10px 0;
-  }
+    .horizontal-line {
+        border: none;
+        border-top: 1px solid #ccc;
+        margin: 10px 0;
+    }
 
-  .previous-line p {
-      font-family: Belanosima;
-      font-size: 17px;
-      padding: 0px;
-  }
+    .previous-line p {
+        font-family: Belanosima;
+        font-size: 17px;
+        padding: 0px;
+    }
 
-  .created-by {
-      margin-top: 5px;
-      margin-bottom: 5px;
-      color: gray;
-      font-weight: bolder;
-  }
+    .created-by {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        color: gray;
+        font-weight: bolder;
+    }
 </style>
 
-
-
-
-
-
-
 <!-- old code -->
-
 
 <!-- <template>
 <div class="writestory" v-if="this.incompleteStories.length != 0">
@@ -133,7 +125,10 @@ export default {
         </div>
     </div>
 </div>
-</template> -->
+ 
+</template>
+
+-->
 
 <!--
 <script>
@@ -147,8 +142,6 @@ export default {
     },
 }
 </script>
-
-
 
 <style>
 .writestory {

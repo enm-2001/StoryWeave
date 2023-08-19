@@ -52,33 +52,30 @@ export default {
     },
     mounted() {
         const token = localStorage.getItem("token");
-        try{
-         
-        const user = jwt_decode(token);
-        const user_id = user.user_id;
-        axios
-            .get(`http://localhost:5000/api/users/startedstories/${user_id}`)
-            .then((res) => {
-                this.startedStories = res.data;
-            })
-            .catch((err) => console.log(err));
+        try {
+
+            const user = jwt_decode(token);
+            const user_id = user.user_id;
+            axios
+                .get(`http://localhost:5000/api/users/startedstories/${user_id}`)
+                .then((res) => {
+                    this.startedStories = res.data;
+                })
+                .catch((err) => console.log(err));
+        } catch (error) {
+            const status = error.response.status
+            if (status === 403) {
+                alert("Invalid token...Please login again")
+                localStorage.clear("token")
+                router.push("/login")
+            } else if (status === 401) {
+                alert("No token provided... Please login")
+                router.push("login")
+            } else {
+                console.error('Unexpected Error:', error);
+                // Handle other unexpected errors here, if necessary
+            }
         }
-        catch (error) {
-        const status = error.response.status 
-        if (status === 403) {
-          alert("Invalid token...Please login again")
-          localStorage.clear("token")
-          router.push("/login")
-        }
-        else if(status === 401){
-          alert("No token provided... Please login")
-          router.push("login")
-        }
-        else {
-          console.error('Unexpected Error:', error);
-          // Handle other unexpected errors here, if necessary
-        }
-      }
     },
 };
 </script>
