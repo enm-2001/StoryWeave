@@ -23,14 +23,15 @@ export default {
     //     }
     // },    
     async mounted() {
-    await axios.get("http://localhost:5000/api/story/uncompleted/writestory")
-    .then(res => {
-        this.incompleteStories = res.data;
-    })
-    .catch(err => console.log(err));
-},
+        await axios.get("http://localhost:5000/api/story/uncompleted/writestory")
+            .then(res => {
+                this.incompleteStories = res.data;
+            })
+            .catch(err => console.log(err));
+    },
 }
 </script>
+
 <style>
 .writestory {
     width: 100vh;

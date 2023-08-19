@@ -5,12 +5,11 @@
     </div>
 
     <div class="image-row" v-if="updated_stories.length == 0 && accepted_stories.length == 0">
-    <div class="col-12">
-        <img src="../assets/noti.png" alt="Company Logo" style="width:50%" class="center" />
+        <div class="col-12">
+            <img src="../assets/noti.png" alt="Company Logo" style="width:50%" class="center" />
+        </div>
+
     </div>
-
-</div> 
-
 
     <div class="notification-sub" v-if="updated_stories.length != 0">
         Your stories
@@ -99,39 +98,36 @@ export default {
     },
     async mounted() {
         const token = localStorage.getItem("token")
-        try{
-           
-        const user = jwt_decode(token)
-        const user_id = user.user_id;
-        await axios.get(`http://localhost:5000/api/story/pstory/${user_id}`)
-            .then((res) => {
-                console.log(res.data);
-                this.updated_stories = res.data
-            })
-            .catch(err => console.log(err))
-        await axios.get(`http://localhost:5000/api/story/acceptedStories/${user_id}`)
-        .then((res1) => {
-            console.log("res1",res1);
-            this.accepted_stories = res1.data
-        })
-        .catch(err1 => console.log(err1))
+        try {
+
+            const user = jwt_decode(token)
+            const user_id = user.user_id;
+            await axios.get(`http://localhost:5000/api/story/pstory/${user_id}`)
+                .then((res) => {
+                    console.log(res.data);
+                    this.updated_stories = res.data
+                })
+                .catch(err => console.log(err))
+            await axios.get(`http://localhost:5000/api/story/acceptedStories/${user_id}`)
+                .then((res1) => {
+                    console.log("res1", res1);
+                    this.accepted_stories = res1.data
+                })
+                .catch(err1 => console.log(err1))
+        } catch (error) {
+            const status = error.response.status
+            if (status === 403) {
+                alert("Invalid token...Please login again")
+                localStorage.clear("token")
+                router.push("/login")
+            } else if (status === 401) {
+                alert("No token provided... Please login")
+                router.push("login")
+            } else {
+                console.error('Unexpected Error:', error);
+                // Handle other unexpected errors here, if necessary
+            }
         }
-        catch (error) {
-        const status = error.response.status 
-        if (status === 403) {
-          alert("Invalid token...Please login again")
-          localStorage.clear("token")
-          router.push("/login")
-        }
-        else if(status === 401){
-          alert("No token provided... Please login")
-          router.push("login")
-        }
-        else {
-          console.error('Unexpected Error:', error);
-          // Handle other unexpected errors here, if necessary
-        }
-      }
     },
 
 }
@@ -139,11 +135,11 @@ export default {
 
 <style lang="scss" scoped>
 .center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-  padding-top:20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    padding-top: 20px;
 }
 
 @media only screen and (max-width: 767.98px) {
