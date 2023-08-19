@@ -70,14 +70,13 @@ button {
     padding-top: 70px;
 }
 
-.mainbg {
-    background-image: url("../assets/back1.jpeg");
-    background-repeat: no-repeat, repeat;
-    background-position: center;
-    /* Center the image */
-    background-size: cover;
-    height: 100vh;
-    font-family: Belanosima;
+.mainbg{
+       background-image: url("../assets/back1.jpeg");
+      background-repeat: no-repeat, repeat;
+       background-position: center; 
+  background-size: cover;
+  height:100vh;
+   font-family: Belanosima;
 }
 
 .container {

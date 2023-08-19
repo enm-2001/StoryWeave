@@ -216,18 +216,17 @@ input[type="checkbox"] {
         display: block;
     }
 
-    .hamburger {
-        display: block;
-    }
-
-    .dropdown {
-
-        position: absolute;
-        right: 40%;
-        /* left: 50%; */
-        top: 30px;
-        transform: translateX(35%);
-    }
+  .hamburger {
+    display: block;
+  }
+  
+  .dropdown {
+   
+  position: absolute;
+  right: 40%;
+    top: 30px;
+    transform: translateX(35%);
+  }
 
     .dropdown li:hover {
         background-color: #537188;

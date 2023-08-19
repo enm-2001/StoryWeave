@@ -56,32 +56,46 @@
             </div>
         </div>
 
-        <div class="stories" style="padding-top: 10px">
-            <div class="col-6" v-if="startedStories.length != 0">
-                <div class="col-text">Stories Started</div>
-                <!-- <div  v-for="story in startedStories" :key="story.story_id"> -->
-                <div>
-                    <!-- <div v-if="story.completedstory == 1">  -->
-                    <ReadComponent1 :completedStories="this.startedStories" style="width: 100%" />
-                    <!-- </div> -->
-                    <!-- <div> -->
-                    <WriteComponent1 :incompleteStories="this.startedStories" :profile="true" style="width: 100%" />
-                    <!-- </div> -->
-                </div>
-            </div>
-            <div class="col-6" v-if="contributedStories.length != 0">
-                <div class="col-text">Stories Contributed</div>
-                <!-- <div  v-for="story in contributedStories" :key="story.story_id"> -->
-                <div>
-                    <!-- <div v-if="story.completedstory == 1">  -->
-                    <ReadComponent1 :completedStories="this.contributedStories" style="width: 100%" />
-                    <!-- </div> -->
-                    <!-- <div> -->
-                    <WriteComponent1 :incompleteStories="this.contributedStories" :profile="true" style="width: 100%" />
-                    <!-- </div> -->
-                </div>
-            </div>
+      <div class="stories" style="padding-top: 10px">
+        <div class="col-6" v-if="startedStories.length != 0">
+          <div class="col-text">Stories Started</div>
+          <!-- <div  v-for="story in startedStories" :key="story.story_id"> -->
+          <div>
+            <!-- <div v-if="story.completedstory == 1">  -->
+            <ReadComponent1
+              :completedStories="this.startedStories"
+              style="width: 100%"
+            />
+            <!-- </div> -->
+            <!-- <div> -->
+            <WriteComponent1
+              :incompleteStories="this.startedStories"
+              :profile="true"
+              style="width: 100%"
+            />
+            <!-- </div> -->
+          </div>
         </div>
+        <div class="col-6" v-if="contributedStories.length != 0">
+          <div class="col-text">Stories Contribution</div>
+          <!-- <div  v-for="story in contributedStories" :key="story.story_id"> -->
+          <div>
+            <!-- <div v-if="story.completedstory == 1">  -->
+            <ReadComponent1
+              :completedStories="this.contributedStories"
+              style="width: 100%"
+            />
+            <!-- </div> -->
+            <!-- <div> -->
+            <WriteComponent1
+              :incompleteStories="this.contributedStories"
+              :profile="true"
+              style="width: 100%"
+            />
+            <!-- </div> -->
+          </div>
+        </div>
+      </div>
     </div>
 </div>
 </template>

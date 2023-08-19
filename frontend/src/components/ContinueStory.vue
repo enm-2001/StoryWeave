@@ -63,71 +63,72 @@ import router from "@/router/routes";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 export default {
-    name: "ContinueStory",
-    data() {
-        return {
-            story: {},
-            storyId: false,
-            titleNotExist: false,
-            des: "",
-            isModalBtnClicked: false,
-            displaySubmit: false,
-        };
-    },
-    methods: {
-        postStory() {
-            // console.log(completed);
-            if (this.des == "") {
-                alert("Enter the description")
-            } else {
-                console.log(this.story);
-                const token = localStorage.getItem("token");
-                try {
-
-                    const user = jwt_decode(token);
-                    const user_id = user.user_id;
-                    axios
-                        .post("http://localhost:5000/api/story/add", {
-                            story_id: this.story.story_id,
-                            des: this.des,
-                            user_id,
-                            completedstory: this.story.completedstory,
-                        })
-                        .then((res) => {
-                            console.log("Story posted..", res);
-                            router.push("/profile");
-                        })
-                        .catch((err) => console.log(err));
-                } catch (error) {
-                    const status = error.response.status
-                    if (status === 403) {
-                        alert("Invalid token...Please login again")
-                        localStorage.clear("token")
-                        router.push("/login")
-                    } else if (status === 401) {
-                        alert("No token provided... Please login")
-                        router.push("login")
-                    } else {
-                        console.error('Unexpected Error:', error);
-                        // Handle other unexpected errors here, if necessary
-                    }
-                }
-            }
-
-        },
-        completedButton(story, completed) {
-            story.completedstory = completed;
-            const element = document.querySelector(".modal");
-            element.style.display = "none";
-            this.displaySubmit = true;
-        },
-    },
-    mounted() {
-        const story_id = this.$route.params.story_id;
+  name: "ContinueStory",
+  data() {
+    return {
+      story: {},
+      storyId: false,
+      titleNotExist: false,
+      des: "",
+      isModalBtnClicked: false,
+      displaySubmit: false,
+    };
+  },
+  methods: {
+    postStory() {
+      if(this.des == ""){
+        alert("Enter the description")
+      }
+      else{
+        console.log(this.story);
+      const token = localStorage.getItem("token");
+      try {
+        
+        const user = jwt_decode(token);
+        const user_id = user.user_id;
         axios
-            .get(`http://localhost:5000/api/story/${story_id}`)
-            .then((res) => (this.story = res.data));
+          .post("http://localhost:5000/api/story/add", {
+            story_id: this.story.story_id,
+            des: this.des,
+            user_id,
+            completedstory: this.story.completedstory,
+          })
+          .then((res) => {
+            console.log("Story posted..", res);
+            router.push("/profile");
+          })
+          .catch((err) => console.log(err));
+      } catch (error) {
+        const status = error.response.status 
+        if (status === 403) {
+          alert("Invalid token...Please login again")
+          localStorage.clear("token")
+          router.push("/login")
+        }
+        else if(status === 401){
+          alert("No token provided... Please login")
+          router.push("login")
+        }
+        else {
+          console.error('Unexpected Error:', error);
+        }
+      }
+      }
+      
     },
+    completedButton(story, completed) {
+      story.completedstory = completed;
+      const element = document.querySelector(".modal");
+      element.style.display = "none";
+      this.displaySubmit = true;
+    },
+  },
+  mounted() {
+    const story_id = this.$route.params.story_id;
+    axios
+      .get(`http://localhost:5000/api/story/${story_id}`)
+      .then((res) => (this.story = res.data));
+  },
 };
 </script>
 
@@ -373,16 +374,13 @@ $line-height: 40px;
 }
 
 @media (max-width: 600px) {
-
-    /* Adjust the max-width and padding for smaller screens */
-    form__contact {
-        max-width: 100%;
-        padding: 0 10px;
-    }
-
-    form__contact fieldset {
-        font-size: 18px;
-    }
+  form__contact {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+  form__contact fieldset {
+    font-size: 18px;
+  }
 }
 
 @media only screen and (min-width: 600px) {
@@ -468,71 +466,55 @@ h1 {
         color: #333;
     }
 
-    input,
-    textarea {
-        position: relative;
-        line-height: $line-height;
-        border: none;
-        outline: none;
-        background: none;
-        padding: 0;
-        margin: 0;
-        color: #7db665;
-    }
-
-    textarea {
-        /* height: 50%;
-  width: 100%;
-  overflow-y: scroll; */
-        resize: vertical;
-        overflow: auto;
-    }
-
-    /*span {
+  input,
+  textarea {
     position: relative;
     line-height: $line-height;
-  }*/
-    button {
-        margin-top: $line-height;
-        float: right;
-        border: none;
-        font-family: "Shadows Into Light", cursive;
-        color: #e08183;
-        background: transparent;
-        cursor: pointer;
-        transition: transform 0.25s ease;
-
-        &:hover {
-            transform: translateX(10px);
-        }
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    color: #7db665;
+  }
+  textarea {
+    resize: vertical;
+    overflow: auto;
+  }
+  button {
+    margin-top: $line-height;
+    float: right;
+    border: none;
+    font-family: "Shadows Into Light", cursive;
+    color: #e08183;
+    background: transparent;
+    cursor: pointer;
+    transition: transform 0.25s ease;
+    &:hover {
+      transform: translateX(10px);
     }
+  }
 }
 
 .form__field::placeholder {
-    color: silver;
-    /* Replace with your desired color */
+  color: silver;
 }
 
 .form__field {
-    display: inline;
+  display: inline;
+  color: #7db665;
+  outline: none;
+  &:empty {
+    display: inline-block;
     color: #7db665;
-    outline: none;
-
-    &:empty {
-        display: inline-block;
-        color: #7db665;
+  }
+  &:empty,
+  &:empty:focus {
+    &:before {
+      content: attr(placeholder);
     }
-
-    // Use a data-attr to replicate a placeholder
-    &:empty,
-    &:empty:focus {
-        &:before {
-            content: attr(placeholder);
-        }
-    }
-}
-
-/*Hide blur defs*/
+  }
+} 
 svg {
     display: none;
 }
@@ -570,17 +552,16 @@ svg {
 }
 
 .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #537188;
-    font-family: Belanosima;
-    color: #fff;
-    padding: 20px;
-    font-size: 18px;
-    height: 80px;
-    margin: 0px;
-    /*justify-items:start;*/
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #537188;
+  font-family: Belanosima;
+  color: #fff;
+  padding: 20px;
+  font-size: 18px;
+  height: 80px;
+  margin: 0px;
 }
 
 .navbar-logo {

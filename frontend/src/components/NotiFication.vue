@@ -15,7 +15,6 @@
         Your stories
     </div>
 
-    <!-- Notification for your stories -->
     <main>
         <ol class="gradient-list">
             <li v-for="story in updated_stories" :key="story.story_id">
@@ -24,7 +23,12 @@
                         <h3 style="text-transform: capitalize;">{{story.title}}</h3>
                         {{story.des}}
                     </div>
-                    <div class="right-side">
+                    <div v-if="story.completedstory">
+                        User wants to end this story..
+                        <stronger><button @click="storyComplete(1)">Allow</button></stronger>
+                        <stronger> <button @click="storyComplete(0)">Reject</button></stronger>
+                    </div>
+                    <div class="right-side" v-if="calledStoryComplete">
                         <stronger><button @click="accept(story)"><i class="fa fa-check" style="font-size:35px;color:green;padding-right:15px;padding-top:10px;"></i></button></stronger>
                         <stronger> <button @click="reject(story.id)"><i class="fa fa-close" style="font-size:35px; color:red; padding-left:15px;padding-top:10px;"></i></button></stronger>
                     </div>
@@ -37,7 +41,6 @@
         Your contributed Stories
     </div>
 
-    <!-- Notification for contributed Story -->
     <div class="notifications-2">
         <ol class="gradient-list">
             <li v-for="notification in accepted_stories" :key="notification.contr_id">
@@ -63,16 +66,22 @@ export default {
     data() {
         return {
             updated_stories: [],
-            accepted_stories: []
+            accepted_stories: [],
+            completeStory: 0,
+            calledStoryComplete: false
         }
     },
     methods: {
+        storyComplete(complete){
+            this.completeStory = complete
+            this.calledStoryComplete = true
+        },
         accept(pstory) {
 
             axios.put("http://localhost:5000/api/story/update", {
                     story_id: pstory.story_id,
                     des: pstory.des,
-                    completedstory: pstory.completedstory,
+                    completedstory: this.completeStory,
                     user_id: pstory.user_id,
                     pstory_id: pstory.id
                 })

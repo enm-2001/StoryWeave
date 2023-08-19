@@ -96,7 +96,6 @@
             object-fit: cover;
         }
     }
-    /* Medium devices (landscape tablets, 768px and up) */
     @media only screen and (min-width: 768px) {
         .header {
             background-image: url("../assets/2.jpeg");
@@ -166,7 +165,6 @@
             object-fit: cover;
         }
     }
-    /* Small devices (portrait tablets and large phones, 600px and up) */
     @media only screen and (min-width: 600px) {
         .header {
             background-image: url("../assets/2.jpeg");
@@ -236,7 +234,7 @@
             object-fit: cover;
         }
     }
-    /* Extra small devices (phones, 600px and down) */
+
     @media only screen and (max-width: 600px) {
         .header {
             background-image: url("../assets/2.jpeg");
