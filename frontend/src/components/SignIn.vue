@@ -128,10 +128,12 @@ export default {
           this.containsSpecial = true;
         }
       }
+      console.log(password.includes(' '));
       if(password.length < 8){
         this.passwordNot8 = true
       }
-      else if(password.includes(' ') != -1){
+      
+      else if(password.includes(' ')){
         this.containsSpace = true
       }
       console.log(this.containsSpecial, this.passwordNot8, this.containsSpace);
