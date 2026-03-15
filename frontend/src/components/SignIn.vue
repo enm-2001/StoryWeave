@@ -226,6 +226,7 @@ export default {
                         username: username,
                     }
                 );
+                alert(response.data.msg);
                 console.log(response);
             } else {
                 alert("Enter username");

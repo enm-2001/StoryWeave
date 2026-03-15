@@ -19,23 +19,11 @@ export default {
     components: {
         ReadComponent1
     },
-
-    //   props: ['username'],
-    //   methods: {
-    //     readStory(story_id) {
-    //       router.push(`/readstory/${story_id}`);
-    //     },
-    //   },
     mounted() {
-        // console.log("oooooooooooooooo");
         axios
             .get("http://localhost:5000/api/story/completed/readstory")
             .then((res) => {
-                // console.log(res.data);
                 this.completedStories = res.data
-                // this.completedStories = res.data.map((item) => item.value);
-
-                // console.log("commm",this.completedStories);
             })
             .catch((err) => console.log(err));
     },

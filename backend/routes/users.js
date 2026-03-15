@@ -292,7 +292,7 @@ router.post("/forgotpassword", async (req, res) => {
   const resetLink = `http://localhost:8080/reset?token=${resetToken}`;
   let response = {
     body: {
-      intro: `${username}, you are receiving this email because you requested that your password be reset on StoryWeave. If you do not reset your password please ignore.`,
+      intro: `${username}, you are receiving this email because you requested that your password be reset on StoryWeave. If its not you please ignore.`,
       action: {
         instructions: "To reset your password, click the button below:",
         button: {
